@@ -400,7 +400,7 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '10px 14px',  // 👈 más ancho y alto
+  padding: '8px 16px',  // 👈 más ancho y alto
   fontSize: 16,          // 👈 icono más grande
   borderRadius: 0,
 }
