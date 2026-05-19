@@ -82,17 +82,46 @@ export default function Home() {
 
           <button
             onClick={() => setMenuOpen(true)}
-            style={btnTopLeft}
+            style={{
+              position: 'absolute',
+              top: 10,
+              left: 10,
+              padding: 8,
+              borderRadius: 10,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+            }}
           >
             ☰
           </button>
         </div>
       )}
 
+      {/* OVERLAY (ARREGLA EL PROBLEMA) */}
+      {menuOpen && !selected && (
+        <div
+          onClick={() => setMenuOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.5)',
+            zIndex: 9998,
+          }}
+        />
+      )}
+
       {/* SIDEBAR */}
       {menuOpen && !selected && (
         <div style={sidebar}>
-          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+          <button
+            onClick={() => setMenuOpen(false)}
+            style={sideBtn}
+          >
             ✕ Cerrar
           </button>
 
@@ -125,7 +154,6 @@ export default function Home() {
               onClick={() => setSelected(s)}
             >
 
-              {/* ❤️ FAVORITO */}
               <div
                 onClick={(e) => {
                   e.stopPropagation()
@@ -146,10 +174,9 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL (ARREGLADO) */}
+      {/* DETAIL */}
       {selected && (
         <div style={detail}>
-
           <button
             onClick={() => setSelected(null)}
             style={backBtn}
@@ -171,7 +198,6 @@ export default function Home() {
           >
             🛒 Comprar
           </button>
-
         </div>
       )}
     </main>
@@ -260,6 +286,8 @@ const sidebar = {
   height: '100%',
   background: '#111',
   padding: 20,
+  zIndex: 9999,
+  boxShadow: '2px 0 20px rgba(0,0,0,0.5)',
 }
 
 const sideBtn = {
@@ -277,16 +305,6 @@ const input = {
   padding: 10,
   marginTop: 10,
   borderRadius: 8,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
-}
-
-const btnTopLeft = {
-  position: 'absolute' as const,
-  top: 10,
-  left: 10,
-  padding: 8,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
