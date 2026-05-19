@@ -56,6 +56,19 @@ export default function Home() {
     setCart(prev => [...prev, item])
   }
 
+  const badgeColor = (badge?: string) => {
+    switch (badge) {
+      case 'BESTSELLER':
+        return '#ffd600'
+      case 'HOT':
+        return '#ff3d00'
+      case 'NEW':
+        return '#00c853'
+      default:
+        return 'transparent'
+    }
+  }
+
   return (
     <main
       style={{
@@ -71,10 +84,9 @@ export default function Home() {
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>
-            Tu marketplace de zapatillas
-          </p>
+          <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
 
+          {/* MENU */}
           <button
             onClick={() => setMenuOpen(true)}
             style={{
@@ -86,16 +98,22 @@ export default function Home() {
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
+              cursor: 'pointer',
             }}
           >
             ☰
           </button>
 
+          {/* CART BUTTON (RESTORED) */}
           <div
             style={{
               position: 'absolute',
               top: 15,
               right: 15,
+              padding: '6px 10px',
+              borderRadius: 10,
+              border: '1px solid white',
+              cursor: 'pointer',
             }}
           >
             🛒 {cart.length}
@@ -117,10 +135,7 @@ export default function Home() {
             zIndex: 2000,
           }}
         >
-          <button
-            onClick={() => setMenuOpen(false)}
-            style={sideBtn}
-          >
+          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
             ✕ Cerrar
           </button>
 
@@ -161,20 +176,30 @@ export default function Home() {
               onClick={() => setSelected(s)}
               style={cardStyle}
             >
+              {/* BADGE FIXED */}
               {s.badge && (
-                <div style={badgeStyle}>{s.badge}</div>
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: 10,
+                    padding: '4px 8px',
+                    fontSize: 10,
+                    borderRadius: 6,
+                    fontWeight: 'bold',
+                    background: badgeColor(s.badge),
+                    color: 'black',
+                  }}
+                >
+                  {s.badge}
+                </div>
               )}
 
-              <img
-                src={s.image}
-                style={imgStyle}
-              />
+              <img src={s.image} style={imgStyle} />
 
-              <div style={{ flex: 1 }}>
-                <h3 style={titleStyle}>{s.name}</h3>
-                <p style={brandStyle}>{s.brand}</p>
-                <p style={priceStyle}>{s.price}</p>
-              </div>
+              <h3 style={{ fontSize: 14 }}>{s.name}</h3>
+              <p style={{ opacity: 0.7 }}>{s.brand}</p>
+              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
 
               <button
                 onClick={e => {
@@ -192,37 +217,21 @@ export default function Home() {
 
       {/* DETAIL */}
       {selected && (
-        <div
-          style={{
-            maxWidth: 520,
-            margin: '0 auto',
-            textAlign: 'center',
-            paddingTop: 60,
-          }}
-        >
+        <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center', paddingTop: 60 }}>
           <button onClick={() => setSelected(null)} style={backBtn}>
             ← Volver
           </button>
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold', fontSize: 18 }}>
-            {selected.price}
-          </p>
+          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
           <img
             src={selected.image}
-            style={{
-              width: 320,
-              borderRadius: 14,
-              marginTop: 20,
-            }}
+            style={{ width: 320, borderRadius: 14, marginTop: 20 }}
           />
 
-          <button
-            onClick={() => addToCart(selected)}
-            style={btn}
-          >
+          <button onClick={() => addToCart(selected)} style={btn}>
             🛒 Añadir al carrito
           </button>
         </div>
@@ -231,41 +240,21 @@ export default function Home() {
   )
 }
 
-/* ================= ESTILOS ================= */
-
+/* STYLES */
 const cardStyle = {
+  position: 'relative' as const,
   background: 'rgba(255,255,255,0.05)',
   borderRadius: 14,
   padding: 14,
   cursor: 'pointer',
-  border: '1px solid rgba(255,255,255,0.1)',
-  display: 'flex',
-  flexDirection: 'column' as const,
-  height: 320, // 🔥 TODAS IGUALES
 }
 
 const imgStyle = {
   width: '100%',
-  height: 140, // 🔥 MISMA ALTURA
+  height: 140,
   objectFit: 'cover' as const,
   borderRadius: 12,
   marginBottom: 10,
-}
-
-const titleStyle = { fontSize: 14, margin: 0 }
-const brandStyle = { opacity: 0.7, margin: 0 }
-const priceStyle = { fontWeight: 'bold', margin: 0 }
-
-const badgeStyle = {
-  position: 'absolute' as const,
-  top: 10,
-  left: 10,
-  fontSize: 10,
-  padding: '4px 8px',
-  borderRadius: 6,
-  background: '#ffd600',
-  color: 'black',
-  fontWeight: 'bold',
 }
 
 const btn = {
