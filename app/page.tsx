@@ -124,11 +124,10 @@ export default function Home() {
         </div>
       )}
 
-      {/* 🏠 HOME */}
+      {/* HOME */}
       {!selected && (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
           <h1 style={{ fontSize: 34 }}>SNEAKERS</h1>
-
           <p style={{ opacity: 0.7 }}>
             ¡Las mejores zapatillas al mejor precio!
           </p>
@@ -160,12 +159,9 @@ export default function Home() {
               }}
               onMouseOver={e => {
                 e.currentTarget.style.transform = 'scale(1.03)'
-                e.currentTarget.style.boxShadow =
-                  '0 10px 30px rgba(0,0,0,0.5)'
               }}
               onMouseOut={e => {
                 e.currentTarget.style.transform = 'scale(1)'
-                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               {/* BADGE */}
@@ -202,16 +198,14 @@ export default function Home() {
               />
 
               <h3 style={{ fontSize: 14 }}>{s.name}</h3>
-
               <p style={{ opacity: 0.7 }}>{s.brand}</p>
-
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
             </div>
           ))}
         </div>
       )}
 
-      {/* 👟 DETAIL */}
+      {/* DETAIL */}
       {selected && (
         <div
           style={{
@@ -222,7 +216,7 @@ export default function Home() {
             position: 'relative',
           }}
         >
-          {/* ← VOLVER */}
+          {/* VOLVER */}
           <button
             onClick={() => setSelected(null)}
             style={{
@@ -240,43 +234,59 @@ export default function Home() {
             ← Volver
           </button>
 
-          {/* TITULO */}
-          <h2 style={{ fontSize: 32, marginBottom: 5 }}>
-            {selected.name}
-          </h2>
-
+          <h2 style={{ fontSize: 32 }}>{selected.name}</h2>
           <p style={{ opacity: 0.7 }}>{selected.brand}</p>
 
-          <p
-            style={{
-              fontWeight: 'bold',
-              fontSize: 22,
-              marginTop: 10,
-            }}
-          >
+          <p style={{ fontWeight: 'bold', fontSize: 22 }}>
             {selected.price}
           </p>
 
-          {/* ⭐ INFO EXTRA */}
-          <div style={{ marginTop: 10 }}>
+          {/* IMAGEN */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: 25,
+            }}
+          >
+            <img
+              src={selected.image}
+              style={{
+                width: 300,
+                borderRadius: 12,
+                objectFit: 'contain',
+              }}
+            />
+          </div>
+
+          {/* BOTÓN COMPRAR */}
+          <button
+            onClick={() => window.open(selected.link, '_blank')}
+            style={{
+              marginTop: 30,
+              padding: 14,
+              borderRadius: 12,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+              width: 220,
+              fontWeight: 'bold',
+            }}
+          >
+            🛒 Comprar ahora
+          </button>
+
+          {/* INFO DEBAJO */}
+          <div style={{ marginTop: 25 }}>
             <p style={{ color: '#ffd600', fontSize: 18 }}>
               ★★★★★{' '}
-              <span
-                style={{
-                  color: 'white',
-                  fontSize: 14,
-                }}
-              >
+              <span style={{ color: 'white', fontSize: 14 }}>
                 (184 reviews)
               </span>
             </p>
 
-            <p
-              style={{
-                color: '#00e676',
-                fontWeight: 'bold',
-              }}
-            >
+            <p style={{ color: '#00e676', fontWeight: 'bold' }}>
               ✅ En stock
             </p>
 
@@ -292,55 +302,9 @@ export default function Home() {
                 padding: '0 20px',
               }}
             >
-              Zapatilla premium con diseño urbano y máxima comodidad
-              para uso diario.
+              Zapatilla premium con diseño urbano y máxima comodidad para uso diario.
             </p>
           </div>
-
-          {/* 🖼️ IMAGEN */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 25,
-              width: '100%',
-            }}
-          >
-            <img
-              src={selected.image}
-              style={{
-                width: 300,
-                borderRadius: 12,
-                objectFit: 'contain',
-              }}
-            />
-          </div>
-
-          {/* 🛒 COMPRAR */}
-          <button
-            onClick={() => window.open(selected.link, '_blank')}
-            style={{
-              marginTop: 30,
-              padding: 14,
-              borderRadius: 12,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
-              width: 220,
-              fontWeight: 'bold',
-              transition: '0.2s',
-            }}
-            onMouseOver={e => {
-              e.currentTarget.style.transform = 'scale(1.05)'
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.transform = 'scale(1)'
-            }}
-          >
-            🛒 Comprar ahora
-          </button>
         </div>
       )}
     </main>
