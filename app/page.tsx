@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { supabase } from '@/lib/supabase'
 
 type Sneaker = {
   id: number
@@ -35,13 +36,52 @@ const sneakers: Sneaker[] = [
   },
 ]
 
+const USER_ID = 'demo-user'
+
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
-  const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
+  const [favorites, setFavorites] = useState<number[]>([])
+
+  // 🧠 CARGAR FAVORITOS DESDE BD
+  useEffect(() => {
+    const loadFavorites = async () => {
+      const { data } = await supabase
+        .from('favorites')
+        .select('sneaker_id')
+        .eq('user_id', USER_ID)
+
+      if (data) {
+        setFavorites(data.map((f: any) => f.sneaker_id))
+      }
+    }
+
+    loadFavorites()
+  }, [])
+
+  // ❤️ TOGGLE FAVORITO (BD + UI)
+  const toggleFavorite = async (id: number) => {
+    const isFav = favorites.includes(id)
+
+    if (isFav) {
+      await supabase
+        .from('favorites')
+        .delete()
+        .eq('user_id', USER_ID)
+        .eq('sneaker_id', id)
+
+      setFavorites(prev => prev.filter(f => f !== id))
+    } else {
+      await supabase.from('favorites').insert({
+        user_id: USER_ID,
+        sneaker_id: id,
+      })
+
+      setFavorites(prev => [...prev, id])
+    }
+  }
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -52,10 +92,6 @@ export default function Home() {
       return matchBrand && matchSearch
     })
   }, [brand, search])
-
-  const addToCart = (item: Sneaker) => {
-    setCart(prev => [...prev, item])
-  }
 
   return (
     <main
@@ -69,63 +105,24 @@ export default function Home() {
       }}
     >
 
-      {/* TOP BAR */}
+      {/* TOP */}
       {!selected && (
-        <>
+        <div style={{ textAlign: 'center' }}>
+          <h1>👟 SNEAKERS</h1>
+          <p style={{ opacity: 0.7 }}>Marketplace real con favoritos</p>
+
           <button
             onClick={() => setMenuOpen(true)}
-            style={{
-              position: 'absolute',
-              top: 10,
-              left: 10,
-              padding: 15,
-              borderRadius: 10,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
-            }}
+            style={btnTopLeft}
           >
             ☰
           </button>
-
-          {/* CART BUTTON */}
-          <div
-            onClick={() => setCartOpen(true)}
-            style={{
-              position: 'absolute',
-              top: 10,
-              right: 10,
-              padding: '4px 8px',
-              borderRadius: 10,
-              border: '1px solid white',
-              cursor: 'pointer',
-            }}
-          >
-            🛒:{cart.length}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
-            <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
-          </div>
-        </>
+        </div>
       )}
 
       {/* SIDEBAR */}
-      {menuOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: 280,
-            height: '100%',
-            background: '#111',
-            padding: 20,
-            zIndex: 2000,
-          }}
-        >
+      {menuOpen && !selected && (
+        <div style={sidebar}>
           <button onClick={() => setMenuOpen(false)} style={sideBtn}>
             ✕ Cerrar
           </button>
@@ -134,82 +131,43 @@ export default function Home() {
             placeholder="Buscar..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            style={inputStyle}
+            style={input}
           />
 
-          <button style={sideBtn} onClick={() => setBrand('all')}>
+          <button onClick={() => setBrand('all')} style={sideBtn}>
             Todas
           </button>
-          <button style={sideBtn} onClick={() => setBrand('Nike')}>
+          <button onClick={() => setBrand('Nike')} style={sideBtn}>
             Nike
           </button>
-          <button style={sideBtn} onClick={() => setBrand('Adidas')}>
+          <button onClick={() => setBrand('Adidas')} style={sideBtn}>
             Adidas
           </button>
         </div>
       )}
 
-      {/* CART */}
-      {cartOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            width: 300,
-            height: '100%',
-            background: '#111',
-            padding: 20,
-            zIndex: 3000,
-          }}
-        >
-          <button onClick={() => setCartOpen(false)} style={sideBtn}>
-            ✕ Cerrar carrito
-          </button>
-
-          {cart.length === 0 ? (
-            <p style={{ opacity: 0.6 }}>Carrito vacío</p>
-          ) : (
-            cart.map((item, i) => (
-              <div key={i} style={cartItem}>
-                <p style={{ fontSize: 12 }}>{item.name}</p>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
       {/* GRID */}
       {!selected && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-            marginTop: 30,
-          }}
-        >
+        <div style={grid}>
           {filtered.map(s => (
-            <div
-              key={s.id}
-              onClick={() => setSelected(s)}
-              style={cardStyle}
-            >
-              <img src={s.image} style={imgStyle} />
+            <div key={s.id} style={card} onClick={() => setSelected(s)}>
 
-              <h3 style={{ fontSize: 14 }}>{s.name}</h3>
-              <p style={{ opacity: 0.7 }}>{s.brand}</p>
-              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
-
-              <button
+              {/* ❤️ FAVORITOS */}
+              <div
                 onClick={e => {
                   e.stopPropagation()
-                  addToCart(s)
+                  toggleFavorite(s.id)
                 }}
-                style={btn}
+                style={heart}
               >
-                🛒 Añadir
-              </button>
+                {favorites.includes(s.id) ? '❤️' : '🤍'}
+              </div>
+
+              <img src={s.image} style={img} />
+
+              <h3>{s.name}</h3>
+              <p>{s.brand}</p>
+              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
             </div>
           ))}
         </div>
@@ -217,67 +175,37 @@ export default function Home() {
 
       {/* DETAIL */}
       {selected && (
-        <div
-          style={{
-            maxWidth: 520,
-            margin: '0 auto',
-            textAlign: 'center',
-            paddingTop: 70,
-            position: 'relative',
-          }}
-        >
+        <div style={detail}>
 
-          {/* BACK BUTTON FIXED */}
+          {/* BACK BUTTON PRO */}
           <button
             onClick={() => setSelected(null)}
-            style={{
-              position: 'absolute',
-              top: 7,
-              left: 7,
-              padding: '6px 12px',
-              borderRadius: 999,
-              border: '1px solid rgba(255,255,255,0.3)',
-              background: 'rgba(255,255,255,0.05)',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: 13,
-            }}
+            style={backBtn}
           >
             ← Volver
           </button>
 
-          <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
+          <h2>{selected.name}</h2>
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          {/* IMAGE CENTERED */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img
-              src={selected.image}
-              style={{
-                width: 340,
-                borderRadius: 14,
-              }}
-            />
+            <img src={selected.image} style={imgDetail} />
           </div>
 
-          {/* AMAZON BUTTON */}
-          <div style={{ marginTop: 25 }}>
-            <button
-              onClick={() => window.open(selected.link, '_blank')}
-              style={{
-                padding: 14,
-                width: 220,
-                borderRadius: 12,
-                border: '1px solid #00c853',
-                background: 'transparent',
-                color: '#00c853',
-                fontWeight: 'bold',
-              }}
-            >
-              🌐 Comprar en Amazon
-            </button>
-          </div>
+          <button
+            onClick={() => window.open(selected.link, '_blank')}
+            style={buyBtn}
+          >
+            🌐 Comprar en Amazon
+          </button>
+
+          <button
+            onClick={() => toggleFavorite(selected.id)}
+            style={favBtn}
+          >
+            {favorites.includes(selected.id) ? '❤️ Guardado' : '🤍 Guardar favorito'}
+          </button>
         </div>
       )}
     </main>
@@ -285,55 +213,105 @@ export default function Home() {
 }
 
 /* STYLES */
-const cardStyle = {
+const grid = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2,1fr)',
+  gap: 16,
+  marginTop: 40,
+}
+
+const card = {
   background: 'rgba(255,255,255,0.05)',
+  padding: 12,
   borderRadius: 14,
-  padding: 14,
+  position: 'relative' as const,
   cursor: 'pointer',
 }
 
-const imgStyle = {
+const img = {
   width: '100%',
   height: 140,
   objectFit: 'cover' as const,
   borderRadius: 12,
-  marginBottom: 10,
 }
 
-const btn = {
+const imgDetail = {
+  width: 340,
+  borderRadius: 14,
+}
+
+const heart = {
+  position: 'absolute' as const,
+  top: 10,
+  right: 10,
+  cursor: 'pointer',
+}
+
+const backBtn = {
+  position: 'absolute' as const,
+  top: 10,
+  left: 10,
+  padding: '6px 12px',
+  borderRadius: 999,
+  border: '1px solid white',
+  background: 'rgba(255,255,255,0.05)',
+  color: 'white',
+}
+
+const buyBtn = {
+  marginTop: 20,
+  padding: 14,
+  borderRadius: 12,
+  border: '1px solid #00c853',
+  color: '#00c853',
+  background: 'transparent',
+}
+
+const favBtn = {
   marginTop: 10,
-  width: '100%',
-  padding: 10,
-  borderRadius: 10,
+  padding: 12,
+  borderRadius: 12,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
+}
+
+const sidebar = {
+  position: 'fixed' as const,
+  top: 0,
+  left: 0,
+  width: 280,
+  height: '100%',
+  background: '#111',
+  padding: 20,
 }
 
 const sideBtn = {
-  display: 'block',
-  marginTop: 12,
-  padding: 10,
   width: '100%',
-  borderRadius: 10,
+  marginTop: 10,
+  padding: 10,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
+  borderRadius: 10,
 }
 
-const inputStyle = {
+const input = {
   width: '100%',
   padding: 10,
+  marginTop: 10,
   borderRadius: 8,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  marginBottom: 20,
 }
 
-const cartItem = {
-  padding: 10,
-  border: '1px solid rgba(255,255,255,0.2)',
-  borderRadius: 10,
-  marginTop: 10,
+const btnTopLeft = {
+  position: 'absolute' as const,
+  top: 10,
+  left: 10,
+  padding: 8,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
 }
