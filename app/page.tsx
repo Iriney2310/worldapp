@@ -15,7 +15,7 @@ const sneakers: Sneaker[] = [
   name: 'Nike Air Force 1',
   brand: 'Nike',
   price: 'Amazon',
-  image: 'https://m.media-amazon.com/images/I/81A-mvlo+QL._AC_UL1500_.jpg',
+  image: 'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
   link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21'
 },
   {
