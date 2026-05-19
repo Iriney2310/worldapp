@@ -195,10 +195,10 @@ export default function Home() {
             onClick={() => setSelected(null)}
             style={{
               position: 'absolute',
-              top: -20,
+              top: -10,
               left: 0,
-              padding: 8,
-              borderRadius: 10,
+              padding: -6,
+              borderRadius: 6,
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
