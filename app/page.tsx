@@ -62,15 +62,15 @@ export default function Home() {
           onClick={() => setMenuOpen(true)}
           style={{
             position: 'absolute',
-            top: 20,
-            left: 20,
-            padding: 10,
+            top: 10,
+            left: 80,
+            padding: 5,
             borderRadius: 10,
             border: '1px solid white',
             background: 'transparent',
             color: 'white',
             cursor: 'pointer',
-            fontSize: 18,
+            fontSize: 15,
           }}
         >
           ☰
