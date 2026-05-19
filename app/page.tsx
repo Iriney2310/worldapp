@@ -33,23 +33,12 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
   },
-  {
-    id: 3,
-    name: 'Nike Jordan 1 Retro',
-    brand: 'Nike',
-    price: '180€',
-    image:
-      'https://static.nike.com/a/images/t_PDP_1728_v1/jordan-1.jpg',
-    link: 'https://www.amazon.es/s?k=jordan+1+retro',
-    badge: 'NEW',
-  },
 ]
 
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [favorites, setFavorites] = useState<number[]>([])
-  const [view, setView] = useState<'shop' | 'fav'>('shop')
-  const [search, setSearch] = useState('')
+  const [menuOpen, setMenuOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
 
   const toggleFav = (id: number) => {
@@ -61,27 +50,9 @@ export default function Home() {
   }
 
   const filtered = useMemo(() => {
-    let data = sneakers
-
-    // filtro favoritos
-    if (view === 'fav') {
-      data = data.filter(s => favorites.includes(s.id))
-    }
-
-    // filtro marca
-    if (brand !== 'all') {
-      data = data.filter(s => s.brand === brand)
-    }
-
-    // buscador
-    if (search.trim()) {
-      data = data.filter(s =>
-        s.name.toLowerCase().includes(search.toLowerCase())
-      )
-    }
-
-    return data
-  }, [view, brand, search, favorites])
+    if (brand === 'all') return sneakers
+    return sneakers.filter(s => s.brand === brand)
+  }, [brand])
 
   return (
     <main
@@ -91,51 +62,72 @@ export default function Home() {
         color: 'white',
         fontFamily: 'sans-serif',
         padding: 20,
+        position: 'relative',
       }}
     >
-      {/* HEADER */}
+      {/* ☰ BUTTON */}
       {!selected && (
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS STORE</h1>
+        <button
+          onClick={() => setMenuOpen(true)}
+          style={{
+            position: 'absolute',
+            top: 20,
+            left: 20,
+            padding: 10,
+            borderRadius: 10,
+            border: '1px solid white',
+            background: 'transparent',
+            color: 'white',
+            cursor: 'pointer',
+            fontSize: 18,
+          }}
+        >
+          ☰
+        </button>
+      )}
 
-          {/* SEARCH */}
-          <input
-            placeholder="Buscar zapatillas..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
+      {/* SIDEBAR */}
+      {!selected && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: menuOpen ? 0 : '-260px',
+            width: 260,
+            height: '100%',
+            background: '#111',
+            padding: 20,
+            transition: '0.3s',
+            zIndex: 1000,
+            borderRight: '1px solid rgba(255,255,255,0.1)',
+          }}
+        >
+          <button
+            onClick={() => setMenuOpen(false)}
             style={{
-              marginTop: 10,
-              padding: 10,
-              width: 250,
-              borderRadius: 10,
+              marginBottom: 20,
+              padding: 8,
+              borderRadius: 8,
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
+              cursor: 'pointer',
             }}
-          />
+          >
+            ✕ Cerrar
+          </button>
 
-          {/* FILTERS */}
-          <div style={{ marginTop: 10 }}>
-            <button onClick={() => setBrand('all')} style={btnStyle}>
-              Todas
-            </button>
-            <button onClick={() => setBrand('Nike')} style={btnStyle}>
-              Nike
-            </button>
-            <button onClick={() => setBrand('Adidas')} style={btnStyle}>
-              Adidas
-            </button>
-          </div>
+          <h3>Filtros</h3>
 
-          {/* VIEW */}
-          <div style={{ marginTop: 10 }}>
-            <button onClick={() => setView('shop')} style={btnStyle}>
-              Tienda
-            </button>
-            <button onClick={() => setView('fav')} style={btnStyle}>
-              ❤️ Favoritos ({favorites.length})
-            </button>
-          </div>
+          <button onClick={() => setBrand('all')} style={sideBtn}>
+            Todas
+          </button>
+          <button onClick={() => setBrand('Nike')} style={sideBtn}>
+            Nike
+          </button>
+          <button onClick={() => setBrand('Adidas')} style={sideBtn}>
+            Adidas
+          </button>
         </div>
       )}
 
@@ -146,7 +138,7 @@ export default function Home() {
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: 16,
-            marginTop: 30,
+            marginTop: 60,
           }}
         >
           {filtered.map(s => (
@@ -154,21 +146,12 @@ export default function Home() {
               key={s.id}
               onClick={() => setSelected(s)}
               style={{
-                position: 'relative',
                 background: 'rgba(255,255,255,0.05)',
-                borderRadius: 16,
+                borderRadius: 14,
                 padding: 12,
                 cursor: 'pointer',
                 border: '1px solid rgba(255,255,255,0.1)',
-                transition: '0.2s',
-              }}
-              onMouseOver={e => {
-                e.currentTarget.style.transform = 'scale(1.03)'
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)'
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.transform = 'scale(1)'
-                e.currentTarget.style.boxShadow = 'none'
+                position: 'relative',
               }}
             >
               {/* BADGE */}
@@ -195,22 +178,6 @@ export default function Home() {
                 </div>
               )}
 
-              {/* FAVORITO */}
-              <div
-                onClick={e => {
-                  e.stopPropagation()
-                  toggleFav(s.id)
-                }}
-                style={{
-                  position: 'absolute',
-                  top: 8,
-                  right: 8,
-                  cursor: 'pointer',
-                }}
-              >
-                {favorites.includes(s.id) ? '❤️' : '🤍'}
-              </div>
-
               <img
                 src={s.image}
                 style={{
@@ -221,7 +188,7 @@ export default function Home() {
               />
 
               <h3 style={{ fontSize: 14 }}>{s.name}</h3>
-              <p style={{ opacity: 0.7, fontSize: 12 }}>{s.brand}</p>
+              <p style={{ opacity: 0.7 }}>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
             </div>
           ))}
@@ -238,20 +205,26 @@ export default function Home() {
             paddingTop: 60,
           }}
         >
-          <button onClick={() => setSelected(null)} style={btnStyle}>
+          <button
+            onClick={() => setSelected(null)}
+            style={{
+              padding: 10,
+              borderRadius: 10,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          >
             ← Volver
           </button>
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
-          <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <img
-              src={selected.image}
-              style={{ width: 300, borderRadius: 12 }}
-            />
-          </div>
+          <img
+            src={selected.image}
+            style={{ width: 300, borderRadius: 12 }}
+          />
 
           <button
             onClick={() => window.open(selected.link, '_blank')}
@@ -274,9 +247,11 @@ export default function Home() {
   )
 }
 
-const btnStyle = {
-  margin: 5,
-  padding: 8,
+const sideBtn = {
+  display: 'block',
+  marginTop: 10,
+  padding: 10,
+  width: '100%',
   borderRadius: 10,
   border: '1px solid white',
   background: 'transparent',
