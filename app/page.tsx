@@ -32,7 +32,6 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
   },
-  
 ]
 
 export default function Home() {
@@ -65,7 +64,7 @@ export default function Home() {
         padding: 20,
       }}
     >
-      {/* 🏠 TOP NAV */}
+      {/* 🏠 HEADER */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS! 👟</h1>
@@ -180,46 +179,56 @@ export default function Home() {
         </div>
       )}
 
-      {/* 👟 DETAIL FIXED */}
+      {/* 👟 DETALLE PERFECTO */}
       {selected && (
         <div
           style={{
             maxWidth: 500,
             margin: '0 auto',
             textAlign: 'center',
+            paddingTop: 60,
             position: 'relative',
           }}
         >
-          {/* BACK FIX */}
-          <button
-            onClick={() => setSelected(null)}
+          {/* BOTÓN VOLVER LIMPIO */}
+          <div
             style={{
               position: 'absolute',
-              top: -10,
-              left: 0,
-              padding: -6,
-              borderRadius: 6,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
+              top: 10,
+              left: 10,
             }}
           >
-            ← Volver
-          </button>
+            <button
+              onClick={() => setSelected(null)}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 10,
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
+                cursor: 'pointer',
+              }}
+            >
+              ← Volver
+            </button>
+          </div>
 
-          <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
+          {/* TÍTULO */}
+          <h2 style={{ fontSize: 30, marginTop: 10 }}>
+            {selected.name}
+          </h2>
+
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold', fontSize: 18 }}>
             {selected.price}
           </p>
 
-          {/* IMAGE CENTER FIX */}
+          {/* IMAGEN CENTRADA PERFECTA */}
           <div
             style={{
               display: 'flex',
               justifyContent: 'center',
-              marginTop: 20,
+              marginTop: 25,
             }}
           >
             <img
@@ -231,12 +240,13 @@ export default function Home() {
             />
           </div>
 
+          {/* BOTÓN COMPRAR */}
           <div style={{ marginTop: 30 }}>
             <button
               onClick={() => window.open(selected.link, '_blank')}
               style={{
                 padding: 14,
-                borderRadius: 10,
+                borderRadius: 12,
                 border: '1px solid white',
                 background: 'transparent',
                 color: 'white',
