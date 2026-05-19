@@ -435,9 +435,9 @@ const input: CSSProperties = {
 }
 const banner: CSSProperties = {
   width: '100%',
-  padding: '6px 10px',
-  marginBottom: 10,
-  borderRadius: 12,
+  padding: '4px 8px',
+  marginBottom: 6,
+  borderRadius: 10,
   textAlign: 'center',
   fontSize: 16,
   fontWeight: 'bold',
