@@ -12,6 +12,14 @@ type Sneaker = {
 
 const sneakers: Sneaker[] = [
   {
+  name: 'Nike Air Force 1',
+  brand: 'Nike',
+  price: 'Amazon',
+  image: 'https://m.media-amazon.com/images/I/81A-mvlo+QL._AC_UL1500_.jpg',
+  link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21'
+},
+  {
+    
     name: 'Nike Air Force 1',
     brand: 'Nike',
     price: '110€',
