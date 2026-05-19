@@ -82,9 +82,9 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h3>¡SNEAKERS!</h3>
+          <h5>¡SNEAKERS!</h5>
           <p style={{ opacity: 0.7 }}>
-            Tus Sneakers Favoritas A Un Solo Click👟
+            Tus Sneakers Favoritas A Un Solo Click
           </p>
 
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
