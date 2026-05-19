@@ -37,17 +37,8 @@ const sneakers: Sneaker[] = [
 
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
-  const [favorites, setFavorites] = useState<number[]>([])
   const [menuOpen, setMenuOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
-
-  const toggleFav = (id: number) => {
-    setFavorites(prev =>
-      prev.includes(id)
-        ? prev.filter(f => f !== id)
-        : [...prev, id]
-    )
-  }
 
   const filtered = useMemo(() => {
     if (brand === 'all') return sneakers
@@ -65,7 +56,7 @@ export default function Home() {
         position: 'relative',
       }}
     >
-      {/* ☰ BUTTON */}
+      {/* ☰ MENU BUTTON */}
       {!selected && (
         <button
           onClick={() => setMenuOpen(true)}
@@ -131,6 +122,16 @@ export default function Home() {
         </div>
       )}
 
+      {/* 🏠 HOME */}
+      {!selected && (
+        <div style={{ textAlign: 'center', marginTop: 10 }}>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS STORE</h1>
+          <p style={{ opacity: 0.7 }}>
+            Las mejores zapatillas al mejor precio
+          </p>
+        </div>
+      )}
+
       {/* GRID */}
       {!selected && (
         <div
@@ -138,7 +139,7 @@ export default function Home() {
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: 16,
-            marginTop: 60,
+            marginTop: 30,
           }}
         >
           {filtered.map(s => (
@@ -195,19 +196,24 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL */}
+      {/* 👟 DETAIL */}
       {selected && (
         <div
           style={{
             maxWidth: 500,
             margin: '0 auto',
             textAlign: 'center',
-            paddingTop: 60,
+            paddingTop: 80,
+            position: 'relative',
           }}
         >
+          {/* ← BOTÓN VOLVER ARRIBA IZQUIERDA */}
           <button
             onClick={() => setSelected(null)}
             style={{
+              position: 'absolute',
+              top: 20,
+              left: 20,
               padding: 10,
               borderRadius: 10,
               border: '1px solid white',
@@ -220,16 +226,30 @@ export default function Home() {
           </button>
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
+          <p>{selected.brand}</p>
+          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <img
-            src={selected.image}
-            style={{ width: 300, borderRadius: 12 }}
-          />
+          {/* 🖼️ IMAGEN PERFECTAMENTE CENTRADA */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: 20,
+            }}
+          >
+            <img
+              src={selected.image}
+              style={{
+                width: 300,
+                borderRadius: 12,
+              }}
+            />
+          </div>
 
           <button
             onClick={() => window.open(selected.link, '_blank')}
             style={{
-              marginTop: 20,
+              marginTop: 25,
               padding: 14,
               borderRadius: 12,
               border: '1px solid white',
