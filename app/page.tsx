@@ -82,7 +82,7 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1>¡SNEAKERS!</h1>
+          <h3>¡SNEAKERS!</h3>
           <p style={{ opacity: 0.7 }}>
             Tus Sneakers Favoritas A Un Solo Click👟
           </p>
