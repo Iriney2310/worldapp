@@ -52,8 +52,10 @@ export default function Home() {
       {!selected && (
         <>
           <div style={{ textAlign: 'center', marginTop: 10 }}>
-            <h1>👟 ¡SNEAKERS! 👟</h1>
-            <p style={{ opacity: 0.7 }}>Las mejores zapatillas al mejor precio</p>
+            <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS! 👟</h1>
+            <p style={{ opacity: 0.7 }}>
+              Las mejores zapatillas al mejor precio
+            </p>
           </div>
 
           <div
@@ -73,7 +75,15 @@ export default function Home() {
                   borderRadius: 12,
                   padding: 15,
                   cursor: 'pointer',
+                  transition: '0.2s',
+                  border: '1px solid rgba(255,255,255,0.1)',
                 }}
+                onMouseOver={(e) =>
+                  (e.currentTarget.style.transform = 'scale(1.03)')
+                }
+                onMouseOut={(e) =>
+                  (e.currentTarget.style.transform = 'scale(1)')
+                }
               >
                 <img
                   src={s.image}
@@ -83,9 +93,11 @@ export default function Home() {
                   }}
                 />
 
-                <h3>{s.name}</h3>
-                <p>{s.brand}</p>
-                <p style={{ opacity: 0.7 }}>{s.price}</p>
+                <h3 style={{ margin: '10px 0 5px', fontSize: 18 }}>
+                  {s.name}
+                </h3>
+                <p style={{ opacity: 0.8 }}>{s.brand}</p>
+                <p style={{ opacity: 0.7, fontWeight: 'bold' }}>{s.price}</p>
               </div>
             ))}
           </div>
@@ -103,7 +115,7 @@ export default function Home() {
             paddingTop: 10,
           }}
         >
-          {/* ← BOTÓN VOLVER MEJOR POSICIONADO */}
+          {/* ← BOTÓN VOLVER (CON BORDE) */}
           <button
             onClick={() => setSelected(null)}
             style={{
@@ -112,7 +124,9 @@ export default function Home() {
               left: 0,
               padding: 10,
               borderRadius: 10,
-              border: 'none',
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
               cursor: 'pointer',
               fontWeight: 'bold',
             }}
@@ -120,11 +134,17 @@ export default function Home() {
             ← Volver
           </button>
 
-          <h2>{selected.name}</h2>
-          <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
+          {/* 🧠 TÍTULO MÁS GRANDE */}
+          <h2 style={{ fontSize: 28, marginBottom: 5 }}>
+            {selected.name}
+          </h2>
 
-          {/* 🖼️ IMAGEN CENTRADA PERFECTAMENTE */}
+          <p>{selected.brand}</p>
+          <p style={{ fontWeight: 'bold', fontSize: 18 }}>
+            {selected.price}
+          </p>
+
+          {/* 🖼️ IMAGEN CENTRADA */}
           <div
             style={{
               display: 'flex',
@@ -141,7 +161,7 @@ export default function Home() {
             />
           </div>
 
-          {/* 🛒 BOTÓN COMPRAR CENTRADO */}
+          {/* 🛒 BOTÓN COMPRAR CON BORDE */}
           <div
             style={{
               marginTop: 30,
@@ -154,11 +174,20 @@ export default function Home() {
               style={{
                 padding: 14,
                 borderRadius: 10,
-                border: 'none',
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
                 cursor: 'pointer',
                 fontWeight: 'bold',
                 width: 200,
+                transition: '0.2s',
               }}
+              onMouseOver={(e) =>
+                (e.currentTarget.style.transform = 'scale(1.05)')
+              }
+              onMouseOut={(e) =>
+                (e.currentTarget.style.transform = 'scale(1)')
+              }
             >
               🛒 Comprar ahora
             </button>
