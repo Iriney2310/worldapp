@@ -28,9 +28,20 @@ const sneakers: Sneaker[] = [
     name: 'Adidas Grand Court',
     brand: 'Adidas',
     price: '39,99€-54,99€',
-    image: 'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
+    image:
+      'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
+  },
+  {
+    id: 3,
+    name: 'Nike Jordan 1 Retro',
+    brand: 'Nike',
+    price: '180€',
+    image:
+      'https://static.nike.com/a/images/t_PDP_1728_v1/jordan-1.jpg',
+    link: 'https://www.amazon.es/s?k=jordan+1+retro',
+    badge: 'NEW',
   },
 ]
 
@@ -38,6 +49,8 @@ export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [favorites, setFavorites] = useState<number[]>([])
   const [view, setView] = useState<'shop' | 'fav'>('shop')
+  const [search, setSearch] = useState('')
+  const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
 
   const toggleFav = (id: number) => {
     setFavorites(prev =>
@@ -47,12 +60,28 @@ export default function Home() {
     )
   }
 
-  const dataToShow = useMemo(() => {
+  const filtered = useMemo(() => {
+    let data = sneakers
+
+    // filtro favoritos
     if (view === 'fav') {
-      return sneakers.filter(s => favorites.includes(s.id))
+      data = data.filter(s => favorites.includes(s.id))
     }
-    return sneakers
-  }, [view, favorites])
+
+    // filtro marca
+    if (brand !== 'all') {
+      data = data.filter(s => s.brand === brand)
+    }
+
+    // buscador
+    if (search.trim()) {
+      data = data.filter(s =>
+        s.name.toLowerCase().includes(search.toLowerCase())
+      )
+    }
+
+    return data
+  }, [view, brand, search, favorites])
 
   return (
     <main
@@ -64,45 +93,53 @@ export default function Home() {
         padding: 20,
       }}
     >
-      {/* 🏠 HEADER */}
+      {/* HEADER */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS! 👟</h1>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS STORE</h1>
 
+          {/* SEARCH */}
+          <input
+            placeholder="Buscar zapatillas..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{
+              marginTop: 10,
+              padding: 10,
+              width: 250,
+              borderRadius: 10,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+            }}
+          />
+
+          {/* FILTERS */}
           <div style={{ marginTop: 10 }}>
-            <button
-              onClick={() => setView('shop')}
-              style={{
-                marginRight: 10,
-                padding: 10,
-                borderRadius: 10,
-                border: '1px solid white',
-                background: 'transparent',
-                color: 'white',
-                cursor: 'pointer',
-              }}
-            >
+            <button onClick={() => setBrand('all')} style={btnStyle}>
+              Todas
+            </button>
+            <button onClick={() => setBrand('Nike')} style={btnStyle}>
+              Nike
+            </button>
+            <button onClick={() => setBrand('Adidas')} style={btnStyle}>
+              Adidas
+            </button>
+          </div>
+
+          {/* VIEW */}
+          <div style={{ marginTop: 10 }}>
+            <button onClick={() => setView('shop')} style={btnStyle}>
               Tienda
             </button>
-
-            <button
-              onClick={() => setView('fav')}
-              style={{
-                padding: 10,
-                borderRadius: 10,
-                border: '1px solid white',
-                background: 'transparent',
-                color: 'white',
-                cursor: 'pointer',
-              }}
-            >
+            <button onClick={() => setView('fav')} style={btnStyle}>
               ❤️ Favoritos ({favorites.length})
             </button>
           </div>
         </div>
       )}
 
-      {/* 🏪 GRID */}
+      {/* GRID */}
       {!selected && (
         <div
           style={{
@@ -112,17 +149,26 @@ export default function Home() {
             marginTop: 30,
           }}
         >
-          {dataToShow.map(s => (
+          {filtered.map(s => (
             <div
               key={s.id}
               onClick={() => setSelected(s)}
               style={{
                 position: 'relative',
                 background: 'rgba(255,255,255,0.05)',
-                borderRadius: 14,
-                padding: 15,
+                borderRadius: 16,
+                padding: 12,
                 cursor: 'pointer',
                 border: '1px solid rgba(255,255,255,0.1)',
+                transition: '0.2s',
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.transform = 'scale(1.03)'
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.transform = 'scale(1)'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               {/* BADGE */}
@@ -130,12 +176,11 @@ export default function Home() {
                 <div
                   style={{
                     position: 'absolute',
-                    top: 10,
-                    left: 10,
-                    padding: '5px 10px',
-                    borderRadius: 8,
-                    fontSize: 12,
-                    fontWeight: 'bold',
+                    top: 8,
+                    left: 8,
+                    fontSize: 10,
+                    padding: '4px 8px',
+                    borderRadius: 6,
                     background:
                       s.badge === 'NEW'
                         ? '#00c853'
@@ -143,6 +188,7 @@ export default function Home() {
                         ? '#ff3d00'
                         : '#ffd600',
                     color: 'black',
+                    fontWeight: 'bold',
                   }}
                 >
                   {s.badge}
@@ -157,9 +203,8 @@ export default function Home() {
                 }}
                 style={{
                   position: 'absolute',
-                  top: 10,
-                  right: 10,
-                  fontSize: 18,
+                  top: 8,
+                  right: 8,
                   cursor: 'pointer',
                 }}
               >
@@ -168,18 +213,22 @@ export default function Home() {
 
               <img
                 src={s.image}
-                style={{ width: '100%', borderRadius: 10 }}
+                style={{
+                  width: '100%',
+                  borderRadius: 12,
+                  marginBottom: 8,
+                }}
               />
 
-              <h3 style={{ marginTop: 10 }}>{s.name}</h3>
-              <p style={{ opacity: 0.8 }}>{s.brand}</p>
+              <h3 style={{ fontSize: 14 }}>{s.name}</h3>
+              <p style={{ opacity: 0.7, fontSize: 12 }}>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
             </div>
           ))}
         </div>
       )}
 
-      {/* 👟 DETALLE PERFECTO */}
+      {/* DETAIL */}
       {selected && (
         <div
           style={{
@@ -187,78 +236,50 @@ export default function Home() {
             margin: '0 auto',
             textAlign: 'center',
             paddingTop: 60,
-            position: 'relative',
           }}
         >
-          {/* BOTÓN VOLVER LIMPIO */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 10,
-              left: 10,
-            }}
-          >
-            <button
-              onClick={() => setSelected(null)}
-              style={{
-                padding: '8px 12px',
-                borderRadius: 10,
-                border: '1px solid white',
-                background: 'transparent',
-                color: 'white',
-                cursor: 'pointer',
-              }}
-            >
-              ← Volver
-            </button>
-          </div>
+          <button onClick={() => setSelected(null)} style={btnStyle}>
+            ← Volver
+          </button>
 
-          {/* TÍTULO */}
-          <h2 style={{ fontSize: 30, marginTop: 10 }}>
-            {selected.name}
-          </h2>
-
+          <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold', fontSize: 18 }}>
-            {selected.price}
-          </p>
+          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          {/* IMAGEN CENTRADA PERFECTA */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: 25,
-            }}
-          >
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img
               src={selected.image}
-              style={{
-                width: 300,
-                borderRadius: 12,
-              }}
+              style={{ width: 300, borderRadius: 12 }}
             />
           </div>
 
-          {/* BOTÓN COMPRAR */}
-          <div style={{ marginTop: 30 }}>
-            <button
-              onClick={() => window.open(selected.link, '_blank')}
-              style={{
-                padding: 14,
-                borderRadius: 12,
-                border: '1px solid white',
-                background: 'transparent',
-                color: 'white',
-                cursor: 'pointer',
-                width: 200,
-              }}
-            >
-              🛒 Comprar ahora
-            </button>
-          </div>
+          <button
+            onClick={() => window.open(selected.link, '_blank')}
+            style={{
+              marginTop: 20,
+              padding: 14,
+              borderRadius: 12,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+              width: 200,
+            }}
+          >
+            🛒 Comprar
+          </button>
         </div>
       )}
     </main>
   )
+}
+
+const btnStyle = {
+  margin: 5,
+  padding: 8,
+  borderRadius: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  cursor: 'pointer',
 }
