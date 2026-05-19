@@ -343,7 +343,7 @@ const sidebar: CSSProperties = {
   position: 'fixed',
   top: 0,
   left: 0,
-  width: 400,
+  width: 340,
   height: '100%',
   background: '#111',
   padding: 20,
@@ -400,7 +400,9 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: 6,
+  padding: '10px 14px',  // 👈 más ancho y alto
+  fontSize: 18,          // 👈 icono más grande
+  borderRadius: 8,
 }
 
 const topRightBtn: CSSProperties = {
