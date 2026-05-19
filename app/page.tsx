@@ -81,7 +81,7 @@ export default function Home() {
 {/* BANNER */}
 {!selected && (
   <div style={banner}>
-    👟 ¡NUEVAS SNEAKERS CON ENVÍO RÁPIDO!🚚
+    👟 ¡LOS MEJORES PRECIOS!🚚
   </div>
 )}
       {/* TOP BAR */}
