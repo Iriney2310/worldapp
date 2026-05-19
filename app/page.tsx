@@ -1,10 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import WorldIDLogin from './components/WorldIDLogin'
 
 export default function Home() {
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<string | null>(null)
 
   return (
     <main
@@ -16,47 +15,51 @@ export default function Home() {
         justifyContent: 'center',
         alignItems: 'center',
         fontFamily: 'sans-serif',
-        padding: 40,
       }}
     >
       <div
         style={{
           width: 320,
           background: 'rgba(255,255,255,0.05)',
-          padding: 30,
-          borderRadius: 16,
+          padding: 20,
+          borderRadius: 12,
           textAlign: 'center',
         }}
       >
-        <h1>🔥 Mi Mini App</h1>
+        <h1>🔥 Mi App</h1>
 
         {!user ? (
           <>
-            <p style={{ opacity: 0.7 }}>Login con World ID</p>
+            <p>Login demo</p>
 
-            <WorldIDLogin onSuccess={(result: any) => setUser(result)} />
+            <button
+              onClick={() => setUser('user_' + Math.random().toString(36).slice(2, 8))}
+              style={{
+                padding: 12,
+                borderRadius: 10,
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Entrar
+            </button>
           </>
         ) : (
           <>
-            <p style={{ color: 'lightgreen' }}>
-              ✔ Usuario logueado
-            </p>
-
-            <p style={{ fontSize: 12, opacity: 0.7 }}>
-              ID: {user?.nullifier_hash || 'sin id'}
-            </p>
+            <p>✔ Logueado</p>
+            <p style={{ fontSize: 12 }}>{user}</p>
 
             <button
               onClick={() => setUser(null)}
               style={{
-                marginTop: 15,
+                marginTop: 10,
                 padding: 10,
                 borderRadius: 10,
                 border: 'none',
                 cursor: 'pointer',
               }}
             >
-              Logout
+              Salir
             </button>
           </>
         )}
