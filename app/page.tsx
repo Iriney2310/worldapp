@@ -113,7 +113,7 @@ export default function Home() {
             left: menuOpen ? 0 : '-280px',
             width: 280,
             height: '100%',
-            background: '#b51818',
+            background: '#a82c2c',
             padding: 20,
             transition: '0.3s',
             zIndex: 1000,
