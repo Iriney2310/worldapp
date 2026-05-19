@@ -92,7 +92,7 @@ export default function Home() {
               position: 'absolute',
               top: 15,
               left: 15,
-              padding: 8,
+              padding: 10,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
@@ -223,11 +223,32 @@ export default function Home() {
         >
           {/* BACK */}
           <button
-            onClick={() => setSelected(null)}
-            style={backBtn}
-          >
-            ← Volver
-          </button>
+  onClick={() => setSelected(null)}
+  style={{
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    padding: '6px 12px',
+    borderRadius: 999,
+    border: '1px solid rgba(255,255,255,0.25)',
+    background: 'rgba(255,255,255,0.05)',
+    color: 'white',
+    cursor: 'pointer',
+    fontSize: 13,
+    backdropFilter: 'blur(6px)',
+    transition: '0.2s',
+  }}
+  onMouseOver={e => {
+    e.currentTarget.style.transform = 'scale(1.05)'
+    e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
+  }}
+  onMouseOut={e => {
+    e.currentTarget.style.transform = 'scale(1)'
+    e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+  }}
+>
+  ← Volver
+</button>
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
