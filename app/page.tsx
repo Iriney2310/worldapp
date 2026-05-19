@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 type Sneaker = {
   id: number
@@ -38,12 +38,10 @@ const sneakers: Sneaker[] = [
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
+  const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
-  const [cart, setCart] = useState<Sneaker[]>([])
-
-  const cartRef = useRef<HTMLDivElement | null>(null)
+  const [cartOpen, setCartOpen] = useState(false)
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -63,10 +61,9 @@ export default function Home() {
     <main
       style={{
         minHeight: '100vh',
-        backgroundImage: "url('/fondo.jpg')", // 👈 TU IMAGEN AQUÍ
+        backgroundImage: "url('/fondo.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         color: 'white',
         fontFamily: 'sans-serif',
         padding: 20,
@@ -87,10 +84,12 @@ export default function Home() {
         {/* TOP BAR */}
         {!selected && (
           <div style={{ textAlign: 'center' }}>
-            <h1>👟 SNEAKERS</h1>
-            <p style={{ opacity: 0.7 }}>Tu tienda de zapatillas</p>
+            <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
+            <p style={{ opacity: 0.7 }}>
+              Tu marketplace de zapatillas
+            </p>
 
-            {/* CART ICON */}
+            {/* CART */}
             <div
               onClick={() => setCartOpen(true)}
               style={{
@@ -142,7 +141,7 @@ export default function Home() {
             </button>
 
             <input
-              placeholder="Buscar..."
+              placeholder="Buscar zapatillas..."
               value={search}
               onChange={e => setSearch(e.target.value)}
               style={{
@@ -211,8 +210,32 @@ export default function Home() {
                   padding: 12,
                   borderRadius: 14,
                   cursor: 'pointer',
+                  position: 'relative',
                 }}
               >
+                {s.badge && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      left: 8,
+                      fontSize: 10,
+                      padding: '4px 8px',
+                      borderRadius: 6,
+                      background:
+                        s.badge === 'NEW'
+                          ? '#00c853'
+                          : s.badge === 'HOT'
+                          ? '#ff3d00'
+                          : '#ffd600',
+                      color: 'black',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {s.badge}
+                  </div>
+                )}
+
                 <img
                   src={s.image}
                   style={{ width: '100%', borderRadius: 12 }}
@@ -227,6 +250,15 @@ export default function Home() {
                     e.stopPropagation()
                     addToCart(s)
                   }}
+                  style={{
+                    marginTop: 10,
+                    width: '100%',
+                    padding: 10,
+                    border: '1px solid white',
+                    background: 'transparent',
+                    color: 'white',
+                    borderRadius: 10,
+                  }}
                 >
                   🛒 Añadir
                 </button>
@@ -235,21 +267,46 @@ export default function Home() {
           </div>
         )}
 
-        {/* DETAIL */}
+        {/* DETAIL VIEW COMPLETO */}
         {selected && (
-          <div style={{ textAlign: 'center', paddingTop: 60 }}>
+          <div
+            style={{
+              maxWidth: 500,
+              margin: '0 auto',
+              textAlign: 'center',
+              paddingTop: 60,
+            }}
+          >
             <button onClick={() => setSelected(null)}>
               ← Volver
             </button>
 
-            <h2>{selected.name}</h2>
+            <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
+            <p>{selected.brand}</p>
+            <p style={{ fontWeight: 'bold', fontSize: 18 }}>
+              {selected.price}
+            </p>
 
             <img
               src={selected.image}
-              style={{ width: 320, borderRadius: 12 }}
+              style={{
+                width: 320,
+                borderRadius: 12,
+                marginTop: 20,
+              }}
             />
 
-            <button onClick={() => addToCart(selected)}>
+            <button
+              onClick={() => addToCart(selected)}
+              style={{
+                marginTop: 25,
+                padding: 14,
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
+                borderRadius: 10,
+              }}
+            >
               🛒 Añadir al carrito
             </button>
           </div>
