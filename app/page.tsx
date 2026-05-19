@@ -33,13 +33,7 @@ const sneakers: Sneaker[] = [
     image: 'https://static.nike.com/a/images/t_PDP_1728_v1/jordan-1.jpg',
     link: 'https://www.amazon.es/s?k=jordan+1+retro'
   },
-  {
-    name: 'Adidas Samba',
-    brand: 'Adidas',
-    price: '100€',
-    image: 'https://assets.adidas.com/images/w_600/samba.jpg',
-    link: 'https://www.amazon.es/s?k=adidas+samba'
-  },
+  
   
 ]
 
@@ -57,7 +51,7 @@ export default function Home() {
       }}
     >
       <h1>👟 ¡NOVEDADES! 👟</h1>
-      <p>                 TUS ZAPATILLAS AL MEJOR PRECIO</p>
+      <p>TUS ZAPATILLAS AL MEJOR PRECIO</p>
 
       {!selected ? (
         <div
@@ -133,7 +127,7 @@ export default function Home() {
           </div>
 
           <p style={{ marginTop: 10, opacity: 0.5, fontSize: 12 }}>
-            Enlace de afiliado (Amazon)
+            *Los precios pueden variar según la disponibilidad y promociones.
           </p>
         </div>
       )}
