@@ -203,7 +203,7 @@ export default function Home() {
             maxWidth: 500,
             margin: '0 auto',
             textAlign: 'center',
-            paddingTop: 80,
+            paddingTop: 50,
             position: 'relative',
           }}
         >
@@ -212,9 +212,9 @@ export default function Home() {
             onClick={() => setSelected(null)}
             style={{
               position: 'absolute',
-              top: 20,
-              left: 20,
-              padding: 10,
+              top: 10,
+              left: 10,
+              padding: 5,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
