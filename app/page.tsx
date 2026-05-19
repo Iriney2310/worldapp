@@ -81,7 +81,7 @@ export default function Home() {
 {/* BANNER */}
 {!selected && (
   <div style={banner}>
-    👟 ¡NUEVAS SNEAKERS CON ENVÍO RÁPIDO!
+    👟 ¡NUEVAS SNEAKERS CON ENVÍO RÁPIDO!🚚
   </div>
 )}
       {/* TOP BAR */}
@@ -435,11 +435,11 @@ const input: CSSProperties = {
 }
 const banner: CSSProperties = {
   width: '100%',
-  padding: '12px 14px',
+  padding: '6px 10px',
   marginBottom: 15,
   borderRadius: 12,
   textAlign: 'center',
-  fontSize: 12,
+  fontSize: 20,
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
