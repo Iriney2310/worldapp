@@ -14,7 +14,7 @@ const sneakers: Sneaker[] = [
   {
   name: 'Nike Air Force 1',
   brand: 'Nike',
-  price: 'Amazon',
+  price: '95,95€',
   image: 'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
   link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21'
 },
@@ -40,13 +40,7 @@ const sneakers: Sneaker[] = [
     image: 'https://assets.adidas.com/images/w_600/samba.jpg',
     link: 'https://www.amazon.es/s?k=adidas+samba'
   },
-  {
-    name: 'Nike Air Max 270',
-    brand: 'Nike',
-    price: '150€',
-    image: 'https://static.nike.com/a/images/air-max-270.jpg',
-    link: 'https://www.amazon.es/s?k=air+max+270'
-  }
+  
 ]
 
 export default function Home() {
