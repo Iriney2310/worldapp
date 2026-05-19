@@ -1,18 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import WorldIDLogin from './components/WorldIDLogin'
 
 export default function Home() {
   const [user, setUser] = useState<any>(null)
-
-  const login = () => {
-    // Simulación temporal del login World ID
-    const fakeUser = {
-      nullifier_hash: 'demo_user_123456789',
-    }
-
-    setUser(fakeUser)
-  }
 
   return (
     <main style={{ padding: 40, color: 'white', background: '#111', minHeight: '100vh' }}>
@@ -20,26 +12,14 @@ export default function Home() {
 
       {!user ? (
         <>
-          <p>Login con World ID (modo demo)</p>
+          <p>Login con World ID real</p>
 
-          <button
-            onClick={login}
-            style={{
-              padding: 14,
-              borderRadius: 10,
-              border: 'none',
-              background: 'white',
-              color: 'black',
-              fontWeight: 'bold',
-            }}
-          >
-            Entrar
-          </button>
+          <WorldIDLogin onSuccess={(result: any) => setUser(result)} />
         </>
       ) : (
         <>
-          <p>✔ Usuario logueado</p>
-          <p>ID: {user.nullifier_hash}</p>
+          <p>✔ Usuario verificado con World ID</p>
+          <p>ID: {user?.nullifier_hash?.slice(0, 12)}</p>
         </>
       )}
     </main>
