@@ -37,310 +37,234 @@ const sneakers: Sneaker[] = [
 
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
-  const [search, setSearch] = useState('')
   const [cart, setCart] = useState<Sneaker[]>([])
-  const [cartOpen, setCartOpen] = useState(false)
   const [shake, setShake] = useState(false)
 
-  const filtered = useMemo(() => {
-    return sneakers.filter(s => {
-      const matchBrand = brand === 'all' || s.brand === brand
-      const matchSearch =
-        s.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.brand.toLowerCase().includes(search.toLowerCase())
-      return matchBrand && matchSearch
-    })
-  }, [brand, search])
-
-  const addToCart = (item: Sneaker) => {
-    setCart(prev => [...prev, item])
-
-    // 🔊 sonido
+  // 🔊 sonido sin delay
+  const popSound = useMemo(() => {
     const audio = new Audio(
       'https://actions.google.com/sounds/v1/cartoon/pop.ogg'
     )
     audio.volume = 0.3
-    audio.play()
+    return audio
+  }, [])
 
-    // 📳 shake
+  const addToCart = (item: Sneaker) => {
+    setCart(prev => [...prev, item])
+
+    popSound.currentTime = 0
+    popSound.play()
+
     setShake(true)
     setTimeout(() => setShake(false), 400)
-  }
-
-  const removeFromCart = (id: number) => {
-    setCart(prev => prev.filter(p => p.id !== id))
   }
 
   return (
     <main
       style={{
         minHeight: '100vh',
-        background: '#0b0b0b',
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         color: 'white',
         fontFamily: 'sans-serif',
         padding: 20,
         position: 'relative',
       }}
     >
-      {/* TOP BAR */}
-      {!selected && (
-        <>
-          <button
-            onClick={() => setMenuOpen(true)}
-            style={{
-              position: 'absolute',
-              top: 10,
-              left: 10,
-              padding: 10,
-              borderRadius: 10,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
-            }}
-          >
-            ☰
-          </button>
+      {/* 🌫️ OVERLAY */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0,0,0,0.65)',
+          zIndex: 0,
+        }}
+      />
 
-          {/* 🛒 CART ICON */}
-          <div
-            onClick={() => setCartOpen(true)}
-            style={{
-              position: 'absolute',
-              top: 10,
-              right: 10,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '6px 10px',
-              borderRadius: 20,
-              border: '1px solid rgba(255,255,255,0.2)',
-              background: 'rgba(0,0,0,0.4)',
-              cursor: 'pointer',
-              animation: shake ? 'shake 0.4s' : undefined,
-            }}
-          >
-            <span>🛒</span>
-            <span>:</span>
-            <span style={{ fontWeight: 'bold' }}>{cart.length}</span>
-          </div>
-
+      {/* CONTENIDO */}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* 🛒 TOP BAR */}
+        {!selected && (
           <div style={{ textAlign: 'center' }}>
-            <h1>SNEAKERS</h1>
-            <p style={{ opacity: 0.7 }}>
-              ¡Tu marketplace de zapatillas!
-            </p>
-          </div>
-        </>
-      )}
+            <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
 
-      {/* SIDEBAR FILTER */}
-      {!selected && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: menuOpen ? 0 : '-280px',
-            width: 280,
-            height: '100%',
-            background: '#111',
-            padding: 20,
-            transition: '0.3s',
-            zIndex: 1000,
-            borderRight: '1px solid #333',
-          }}
-        >
-          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
-            ✕ Cerrar
-          </button>
-
-          <input
-            placeholder="Buscar zapatillas..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            style={{
-              width: '100%',
-              padding: 10,
-              marginTop: 10,
-              borderRadius: 8,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-            }}
-          />
-
-          <button onClick={() => setBrand('all')} style={sideBtn}>
-            Todas
-          </button>
-          <button onClick={() => setBrand('Nike')} style={sideBtn}>
-            Nike
-          </button>
-          <button onClick={() => setBrand('Adidas')} style={sideBtn}>
-            Adidas
-          </button>
-        </div>
-      )}
-
-      {/* GRID */}
-      {!selected && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-            marginTop: 30,
-          }}
-        >
-          {filtered.map(s => (
             <div
-              key={s.id}
-              onClick={() => setSelected(s)}
               style={{
-                background: 'rgba(255,255,255,0.05)',
-                borderRadius: 14,
-                padding: 12,
+                marginTop: 10,
+                fontSize: 18,
+                display: 'flex',
+                justifyContent: 'center',
+                gap: 6,
+                transform: shake ? 'scale(1.1)' : 'scale(1)',
+                transition: '0.2s',
+              }}
+            >
+              🛒: {cart.length}
+            </div>
+          </div>
+        )}
+
+        {/* 🏪 GRID */}
+        {!selected && (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: 16,
+              marginTop: 30,
+            }}
+          >
+            {sneakers.map(s => (
+              <div
+                key={s.id}
+                onClick={() => setSelected(s)}
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  borderRadius: 14,
+                  padding: 12,
+                  cursor: 'pointer',
+                  position: 'relative',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+              >
+                {/* BADGE */}
+                {s.badge && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      left: 8,
+                      fontSize: 10,
+                      padding: '4px 8px',
+                      borderRadius: 6,
+                      background:
+                        s.badge === 'NEW'
+                          ? '#00c853'
+                          : s.badge === 'HOT'
+                          ? '#ff3d00'
+                          : '#ffd600',
+                      color: 'black',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {s.badge}
+                  </div>
+                )}
+
+                <img
+                  src={s.image}
+                  style={{
+                    width: '100%',
+                    borderRadius: 12,
+                    marginBottom: 8,
+                  }}
+                />
+
+                <h3 style={{ fontSize: 14 }}>{s.name}</h3>
+                <p style={{ opacity: 0.7 }}>{s.brand}</p>
+                <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+
+                <button
+                  onClick={e => {
+                    e.stopPropagation()
+                    addToCart(s)
+                  }}
+                  style={{
+                    marginTop: 10,
+                    padding: 8,
+                    width: '100%',
+                    border: '1px solid white',
+                    background: 'transparent',
+                    color: 'white',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                  }}
+                >
+                  🛒 Añadir
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 👟 DETAIL */}
+        {selected && (
+          <div
+            style={{
+              maxWidth: 500,
+              margin: '0 auto',
+              textAlign: 'center',
+              position: 'relative',
+              paddingTop: 60,
+            }}
+          >
+            {/* ← VOLVER */}
+            <button
+              onClick={() => setSelected(null)}
+              style={{
+                position: 'absolute',
+                top: 10,
+                left: 10,
+                padding: '8px 12px',
+                borderRadius: 10,
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
                 cursor: 'pointer',
+                zIndex: 10,
+              }}
+            >
+              ← Volver
+            </button>
+
+            <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
+            <p>{selected.brand}</p>
+            <p style={{ fontWeight: 'bold', fontSize: 18 }}>
+              {selected.price}
+            </p>
+
+            {/* 🖼️ IMAGEN CENTRADA */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: 30,
               }}
             >
               <img
-                src={s.image}
-                style={{ width: '100%', borderRadius: 12 }}
+                src={selected.image}
+                style={{
+                  width: 320,
+                  maxWidth: '90%',
+                  borderRadius: 12,
+                }}
               />
-
-              <h3>{s.name}</h3>
-              <p>{s.brand}</p>
-              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
-
-              <button
-                onClick={e => {
-                  e.stopPropagation()
-                  addToCart(s)
-                }}
-                style={{
-                  marginTop: 10,
-                  padding: 8,
-                  width: '100%',
-                  border: '1px solid white',
-                  background: 'transparent',
-                  color: 'white',
-                  borderRadius: 8,
-                }}
-              >
-                🛒 Añadir
-              </button>
             </div>
-          ))}
-        </div>
-      )}
 
-      {/* DETAIL */}
-      {selected && (
-        <div style={{ textAlign: 'center', paddingTop: 60 }}>
-          <button onClick={() => setSelected(null)}>
-            ← Volver
-          </button>
-
-          <h2>{selected.name}</h2>
-
-          <img
-            src={selected.image}
-            style={{ width: 300, borderRadius: 12 }}
-          />
-
-          <button
-            onClick={() => addToCart(selected)}
-            style={{
-              marginTop: 20,
-              padding: 14,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              borderRadius: 10,
-            }}
-          >
-            🛒 Añadir al carrito
-          </button>
-        </div>
-      )}
-
-      {/* CART DRAWER */}
-      {cartOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            width: 320,
-            height: '100%',
-            background: '#111',
-            borderLeft: '1px solid #333',
-            padding: 20,
-            zIndex: 2000,
-            overflowY: 'auto',
-          }}
-        >
-          <button onClick={() => setCartOpen(false)} style={sideBtn}>
-            ✕ Cerrar
-          </button>
-
-          <h2>🛒 Carrito</h2>
-
-          {cart.length === 0 ? (
-            <p style={{ opacity: 0.6 }}>Vacío</p>
-          ) : (
-            cart.map(item => (
-              <div
-                key={item.id}
-                style={{
-                  marginTop: 10,
-                  padding: 10,
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: 8,
-                }}
-              >
-                <img
-                  src={item.image}
-                  style={{ width: '100%', borderRadius: 8 }}
-                />
-                <p>{item.name}</p>
-                <p>{item.price}</p>
-
-                <button
-                  onClick={() => removeFromCart(item.id)}
-                  style={sideBtn}
-                >
-                  Quitar
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-      )}
-
-      {/* ANIMATION */}
-      <style>{`
-        @keyframes shake {
-          0% { transform: translateX(0); }
-          25% { transform: translateX(-3px); }
-          50% { transform: translateX(3px); }
-          75% { transform: translateX(-3px); }
-          100% { transform: translateX(0); }
-        }
-      `}</style>
+            <button
+              onClick={() => addToCart(selected)}
+              style={{
+                marginTop: 25,
+                padding: 14,
+                borderRadius: 12,
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
+                cursor: 'pointer',
+                width: 200,
+              }}
+            >
+              🛒 Añadir al carrito
+            </button>
+          </div>
+        )}
+      </div>
     </main>
   )
-}
-
-const sideBtn = {
-  display: 'block',
-  marginTop: 10,
-  padding: 10,
-  width: '100%',
-  borderRadius: 10,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
-  cursor: 'pointer',
 }
