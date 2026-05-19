@@ -78,7 +78,7 @@ export default function Home() {
               position: 'absolute',
               top: 10,
               left: 10,
-              padding: 18,
+              padding: 15,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
