@@ -70,7 +70,7 @@ export default function Home() {
             background: 'transparent',
             color: 'white',
             cursor: 'pointer',
-            fontSize: 16,
+            fontSize: 18,
           }}
         >
           ☰
