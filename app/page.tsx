@@ -435,8 +435,8 @@ const input: CSSProperties = {
 }
 const banner: CSSProperties = {
   width: 'fit-content',
-  maxWidth: '90%',
-  margin: '10px auto',
+  maxWidth: '100%',
+  margin: '5px auto',
   padding: '6px 14px',
   borderRadius: 12,
   textAlign: 'center',
@@ -444,5 +444,5 @@ const banner: CSSProperties = {
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 1,
+  lineHeight: 2,
 }
