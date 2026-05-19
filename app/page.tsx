@@ -83,10 +83,9 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
-          <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
+          <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
 
-          {/* MENU */}
           <button
             onClick={() => setMenuOpen(true)}
             style={{
@@ -98,22 +97,19 @@ export default function Home() {
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
-              cursor: 'pointer',
             }}
           >
             ☰
           </button>
 
-          {/* CART BUTTON (RESTORED) */}
           <div
             style={{
               position: 'absolute',
               top: 15,
               right: 15,
-              padding: '4px 8px',
+              padding: '6px 10px',
               borderRadius: 10,
               border: '1px solid white',
-              cursor: 'pointer',
             }}
           >
             🛒 {cart.length}
@@ -176,7 +172,7 @@ export default function Home() {
               onClick={() => setSelected(s)}
               style={cardStyle}
             >
-              {/* BADGE FIXED */}
+              {/* BADGE */}
               {s.badge && (
                 <div
                   style={{
@@ -201,6 +197,7 @@ export default function Home() {
               <p style={{ opacity: 0.7 }}>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
 
+              {/* 🛒 ADD TO CART */}
               <button
                 onClick={e => {
                   e.stopPropagation()
@@ -209,6 +206,27 @@ export default function Home() {
                 style={btn}
               >
                 🛒 Añadir
+              </button>
+
+              {/* 🌐 BUY BUTTON RESTORED */}
+              <button
+                onClick={e => {
+                  e.stopPropagation()
+                  window.open(s.link, '_blank')
+                }}
+                style={{
+                  marginTop: 8,
+                  width: '100%',
+                  padding: 10,
+                  borderRadius: 10,
+                  border: '1px solid #00c853',
+                  background: 'transparent',
+                  color: '#00c853',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                }}
+              >
+                🌐 Comprar
               </button>
             </div>
           ))}
@@ -231,8 +249,26 @@ export default function Home() {
             style={{ width: 320, borderRadius: 14, marginTop: 20 }}
           />
 
-          <button onClick={() => addToCart(selected)} style={btn}>
+          <button
+            onClick={() => addToCart(selected)}
+            style={btn}
+          >
             🛒 Añadir al carrito
+          </button>
+
+          <button
+            onClick={() => window.open(selected.link, '_blank')}
+            style={{
+              marginTop: 10,
+              width: 200,
+              padding: 10,
+              borderRadius: 10,
+              border: '1px solid #00c853',
+              background: 'transparent',
+              color: '#00c853',
+            }}
+          >
+            🌐 Comprar en Amazon
           </button>
         </div>
       )}
