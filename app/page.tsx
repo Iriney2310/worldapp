@@ -12,12 +12,6 @@ type Sneaker = {
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'
 }
 
-type Review = {
-  name: string
-  stars: number
-  text: string
-}
-
 const sneakers: Sneaker[] = [
   {
     id: 1,
@@ -41,20 +35,9 @@ const sneakers: Sneaker[] = [
   },
 ]
 
-const reviewsData: Record<number, Review[]> = {
-  1: [
-    { name: 'Alex', stars: 5, text: 'Muy cómodas, brutales 🔥' },
-    { name: 'Carlos', stars: 4, text: 'Calidad top, talla bien' },
-  ],
-  2: [
-    { name: 'María', stars: 5, text: 'Súper bonitas y ligeras' },
-  ],
-}
-
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
   const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
@@ -73,9 +56,6 @@ export default function Home() {
     setCart(prev => [...prev, item])
   }
 
-  const renderStars = (n: number) =>
-    '⭐'.repeat(n) + '☆'.repeat(5 - n)
-
   return (
     <main
       style={{
@@ -87,7 +67,7 @@ export default function Home() {
         position: 'relative',
       }}
     >
-      {/* ================= TOP BAR ================= */}
+      {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
@@ -95,7 +75,6 @@ export default function Home() {
             Tu marketplace de zapatillas
           </p>
 
-          {/* MENU */}
           <button
             onClick={() => setMenuOpen(true)}
             style={{
@@ -112,26 +91,19 @@ export default function Home() {
             ☰
           </button>
 
-          {/* CART BUTTON */}
           <div
-            onClick={() => setCartOpen(true)}
             style={{
               position: 'absolute',
               top: 15,
               right: 15,
-              cursor: 'pointer',
-              fontSize: 18,
-              border: '1px solid white',
-              padding: '6px 10px',
-              borderRadius: 10,
             }}
           >
-            🛒: {cart.length}
+            🛒 {cart.length}
           </div>
         </div>
       )}
 
-      {/* ================= SIDEBAR ================= */}
+      {/* SIDEBAR */}
       {menuOpen && (
         <div
           style={{
@@ -145,7 +117,10 @@ export default function Home() {
             zIndex: 2000,
           }}
         >
-          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+          <button
+            onClick={() => setMenuOpen(false)}
+            style={sideBtn}
+          >
             ✕ Cerrar
           </button>
 
@@ -170,46 +145,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= CART PANEL ================= */}
-      {cartOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: 320,
-            height: '100%',
-            background: '#111',
-            padding: 20,
-            zIndex: 3000,
-          }}
-        >
-          <button onClick={() => setCartOpen(false)} style={sideBtn}>
-            ✕ Cerrar carrito
-          </button>
-
-          <h3>🛒 Carrito</h3>
-
-          {cart.length === 0 && <p>Vacío</p>}
-
-          {cart.map((item, i) => (
-            <div
-              key={i}
-              style={{
-                marginTop: 12,
-                padding: 10,
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: 10,
-              }}
-            >
-              <p>{item.name}</p>
-              <p>{item.price}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ================= GRID ================= */}
+      {/* GRID */}
       {!selected && (
         <div
           style={{
@@ -223,21 +159,22 @@ export default function Home() {
             <div
               key={s.id}
               onClick={() => setSelected(s)}
-              style={{
-                background: 'rgba(255,255,255,0.05)',
-                borderRadius: 14,
-                padding: 14,
-                cursor: 'pointer',
-              }}
+              style={cardStyle}
             >
+              {s.badge && (
+                <div style={badgeStyle}>{s.badge}</div>
+              )}
+
               <img
                 src={s.image}
-                style={{ width: '100%', borderRadius: 12 }}
+                style={imgStyle}
               />
 
-              <h3>{s.name}</h3>
-              <p>{s.brand}</p>
-              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+              <div style={{ flex: 1 }}>
+                <h3 style={titleStyle}>{s.name}</h3>
+                <p style={brandStyle}>{s.brand}</p>
+                <p style={priceStyle}>{s.price}</p>
+              </div>
 
               <button
                 onClick={e => {
@@ -253,7 +190,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= DETAIL ================= */}
+      {/* DETAIL */}
       {selected && (
         <div
           style={{
@@ -269,7 +206,9 @@ export default function Home() {
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
+          <p style={{ fontWeight: 'bold', fontSize: 18 }}>
+            {selected.price}
+          </p>
 
           <img
             src={selected.image}
@@ -286,34 +225,59 @@ export default function Home() {
           >
             🛒 Añadir al carrito
           </button>
-
-          {/* ================= REVIEWS ================= */}
-          <div style={{ marginTop: 30, textAlign: 'left' }}>
-            <h3>⭐ Reseñas</h3>
-
-            {(reviewsData[selected.id] || []).map((r, i) => (
-              <div
-                key={i}
-                style={{
-                  marginTop: 10,
-                  padding: 10,
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  borderRadius: 10,
-                }}
-              >
-                <strong>{r.name}</strong>
-                <p>{renderStars(r.stars)}</p>
-                <p style={{ opacity: 0.8 }}>{r.text}</p>
-              </div>
-            ))}
-          </div>
         </div>
       )}
     </main>
   )
 }
 
-/* ================= STYLES ================= */
+/* ================= ESTILOS ================= */
+
+const cardStyle = {
+  background: 'rgba(255,255,255,0.05)',
+  borderRadius: 14,
+  padding: 14,
+  cursor: 'pointer',
+  border: '1px solid rgba(255,255,255,0.1)',
+  display: 'flex',
+  flexDirection: 'column' as const,
+  height: 320, // 🔥 TODAS IGUALES
+}
+
+const imgStyle = {
+  width: '100%',
+  height: 140, // 🔥 MISMA ALTURA
+  objectFit: 'cover' as const,
+  borderRadius: 12,
+  marginBottom: 10,
+}
+
+const titleStyle = { fontSize: 14, margin: 0 }
+const brandStyle = { opacity: 0.7, margin: 0 }
+const priceStyle = { fontWeight: 'bold', margin: 0 }
+
+const badgeStyle = {
+  position: 'absolute' as const,
+  top: 10,
+  left: 10,
+  fontSize: 10,
+  padding: '4px 8px',
+  borderRadius: 6,
+  background: '#ffd600',
+  color: 'black',
+  fontWeight: 'bold',
+}
+
+const btn = {
+  marginTop: 10,
+  width: '100%',
+  padding: 10,
+  borderRadius: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  cursor: 'pointer',
+}
 
 const sideBtn = {
   display: 'block',
@@ -327,14 +291,14 @@ const sideBtn = {
   cursor: 'pointer',
 }
 
-const btn = {
-  marginTop: 10,
+const inputStyle = {
   width: '100%',
   padding: 10,
-  borderRadius: 10,
+  borderRadius: 8,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
+  marginBottom: 20,
 }
 
 const backBtn = {
@@ -346,14 +310,4 @@ const backBtn = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-}
-
-const inputStyle = {
-  width: '100%',
-  padding: 10,
-  borderRadius: 8,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
-  marginBottom: 20,
 }
