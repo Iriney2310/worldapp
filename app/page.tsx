@@ -73,22 +73,14 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>Marketplace de zapatillas</p>
+          <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
+          <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
 
-          {/* MENU BUTTON */}
-          <button
-            onClick={() => setMenuOpen(true)}
-            style={topLeftBtn}
-          >
+          <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
             ☰
           </button>
 
-          {/* FAVORITOS BUTTON */}
-          <button
-            onClick={() => setFavOpen(true)}
-            style={topRightBtn}
-          >
+          <button onClick={() => setFavOpen(true)} style={topRightBtn}>
             ❤️ {favorites.length}
           </button>
         </div>
@@ -113,7 +105,7 @@ export default function Home() {
           </button>
 
           <input
-            placeholder="Buscar..."
+            placeholder="🔎Buscar..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             style={input}
@@ -135,7 +127,7 @@ export default function Home() {
       {favOpen && (
         <div style={favPanel}>
           <button onClick={() => setFavOpen(false)} style={sideBtn}>
-            ✕ Cerrar favoritos
+            ✕ Cerrar Favoritos
           </button>
 
           <h3>❤️ Favoritos</h3>
@@ -145,12 +137,29 @@ export default function Home() {
           )}
 
           {favItems.map(item => (
-            <div key={item.id} style={favCard}>
+            <div
+              key={item.id}
+              style={favCard}
+              onClick={() => {
+                setSelected(item)
+                setFavOpen(false)
+              }}
+            >
               <img src={item.image} style={favImg} />
-              <p style={{ fontSize: 12 }}>{item.name}</p>
+
+              <p style={{ fontSize: 12, marginTop: 6 }}>
+                {item.name}
+              </p>
+
+              <p style={{ opacity: 0.7, fontSize: 11 }}>
+                {item.brand}
+              </p>
 
               <button
-                onClick={() => toggleFavorite(item.id)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleFavorite(item.id)
+                }}
                 style={removeBtn}
               >
                 Quitar
@@ -207,7 +216,7 @@ export default function Home() {
             onClick={() => window.open(selected.link, '_blank')}
             style={buyBtn}
           >
-            🛒 Comprar
+            🛒 LINK DE AMAZON
           </button>
         </div>
       )}
@@ -313,6 +322,7 @@ const favCard: CSSProperties = {
   padding: 8,
   border: '1px solid rgba(255,255,255,0.2)',
   borderRadius: 10,
+  cursor: 'pointer',
 }
 
 const favImg: CSSProperties = {
