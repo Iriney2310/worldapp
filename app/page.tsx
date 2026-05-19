@@ -443,5 +443,5 @@ const banner: CSSProperties = {
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 0,         // 👈 clave para que no “estire” verticalmente
+  lineHeight: 2,         // 👈 clave para que no “estire” verticalmente
 }
