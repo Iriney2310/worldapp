@@ -41,6 +41,8 @@ export default function Home() {
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [cart, setCart] = useState<Sneaker[]>([])
+  const [cartOpen, setCartOpen] = useState(false)
+  const [shake, setShake] = useState(false)
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -54,6 +56,17 @@ export default function Home() {
 
   const addToCart = (item: Sneaker) => {
     setCart(prev => [...prev, item])
+
+    // 🔊 sonido
+    const audio = new Audio(
+      'https://actions.google.com/sounds/v1/cartoon/pop.ogg'
+    )
+    audio.volume = 0.3
+    audio.play()
+
+    // 📳 shake
+    setShake(true)
+    setTimeout(() => setShake(false), 400)
   }
 
   const removeFromCart = (id: number) => {
@@ -91,20 +104,39 @@ export default function Home() {
             ☰
           </button>
 
+          {/* 🛒 CART ICON */}
+          <div
+            onClick={() => setCartOpen(true)}
+            style={{
+              position: 'absolute',
+              top: 10,
+              right: 10,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '6px 10px',
+              borderRadius: 20,
+              border: '1px solid rgba(255,255,255,0.2)',
+              background: 'rgba(0,0,0,0.4)',
+              cursor: 'pointer',
+              animation: shake ? 'shake 0.4s' : undefined,
+            }}
+          >
+            <span>🛒</span>
+            <span>:</span>
+            <span style={{ fontWeight: 'bold' }}>{cart.length}</span>
+          </div>
+
           <div style={{ textAlign: 'center' }}>
             <h1>SNEAKERS</h1>
             <p style={{ opacity: 0.7 }}>
               ¡Tu marketplace de zapatillas!
             </p>
-
-            <p style={{ marginTop: 10 }}>
-              🛒 Carrito: {cart.length}
-            </p>
           </div>
         </>
       )}
 
-      {/* SIDEBAR */}
+      {/* SIDEBAR FILTER */}
       {!selected && (
         <div
           style={{
@@ -113,7 +145,7 @@ export default function Home() {
             left: menuOpen ? 0 : '-280px',
             width: 280,
             height: '100%',
-            background: '#c21414',
+            background: '#111',
             padding: 20,
             transition: '0.3s',
             zIndex: 1000,
@@ -124,7 +156,6 @@ export default function Home() {
             ✕ Cerrar
           </button>
 
-          {/* SEARCH */}
           <input
             placeholder="Buscar zapatillas..."
             value={search}
@@ -134,51 +165,21 @@ export default function Home() {
               padding: 10,
               marginTop: 10,
               borderRadius: 8,
-              border: '1px solid black',
+              border: '1px solid white',
               background: 'transparent',
-              color: 'black',
+              color: 'white',
             }}
           />
-
-          <h3 style={{ marginTop: 20 }}>Filtros</h3>
 
           <button onClick={() => setBrand('all')} style={sideBtn}>
             Todas
           </button>
-
           <button onClick={() => setBrand('Nike')} style={sideBtn}>
             Nike
           </button>
-
           <button onClick={() => setBrand('Adidas')} style={sideBtn}>
             Adidas
           </button>
-
-          <h3 style={{ marginTop: 20 }}>Carrito</h3>
-
-          {cart.length === 0 && (
-            <p style={{ opacity: 0.6 }}>Vacío</p>
-          )}
-
-          {cart.map(item => (
-            <div
-              key={item.id}
-              style={{
-                marginTop: 10,
-                padding: 8,
-                border: '1px solid rgba(255,255,255,0.2)',
-                borderRadius: 8,
-              }}
-            >
-              <p style={{ fontSize: 12 }}>{item.name}</p>
-              <button
-                onClick={() => removeFromCart(item.id)}
-                style={sideBtn}
-              >
-                Quitar
-              </button>
-            </div>
-          ))}
         </div>
       )}
 
@@ -225,7 +226,6 @@ export default function Home() {
                   background: 'transparent',
                   color: 'white',
                   borderRadius: 8,
-                  cursor: 'pointer',
                 }}
               >
                 🛒 Añadir
@@ -264,6 +264,71 @@ export default function Home() {
           </button>
         </div>
       )}
+
+      {/* CART DRAWER */}
+      {cartOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            width: 320,
+            height: '100%',
+            background: '#111',
+            borderLeft: '1px solid #333',
+            padding: 20,
+            zIndex: 2000,
+            overflowY: 'auto',
+          }}
+        >
+          <button onClick={() => setCartOpen(false)} style={sideBtn}>
+            ✕ Cerrar
+          </button>
+
+          <h2>🛒 Carrito</h2>
+
+          {cart.length === 0 ? (
+            <p style={{ opacity: 0.6 }}>Vacío</p>
+          ) : (
+            cart.map(item => (
+              <div
+                key={item.id}
+                style={{
+                  marginTop: 10,
+                  padding: 10,
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  borderRadius: 8,
+                }}
+              >
+                <img
+                  src={item.image}
+                  style={{ width: '100%', borderRadius: 8 }}
+                />
+                <p>{item.name}</p>
+                <p>{item.price}</p>
+
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  style={sideBtn}
+                >
+                  Quitar
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {/* ANIMATION */}
+      <style>{`
+        @keyframes shake {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(-3px); }
+          50% { transform: translateX(3px); }
+          75% { transform: translateX(-3px); }
+          100% { transform: translateX(0); }
+        }
+      `}</style>
     </main>
   )
 }
