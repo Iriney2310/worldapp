@@ -439,7 +439,7 @@ const banner: CSSProperties = {
   marginBottom: 10,
   borderRadius: 12,
   textAlign: 'center',
-  fontSize: 20,
+  fontSize: 16,
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
