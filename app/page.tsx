@@ -400,9 +400,9 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '12px 10px',  // 👈 más ancho y alto
+  padding: '10px 14px',  // 👈 más ancho y alto
   fontSize: 16,          // 👈 icono más grande
-  borderRadius: 8,
+  borderRadius: 0,
 }
 
 const topRightBtn: CSSProperties = {
