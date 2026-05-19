@@ -83,8 +83,8 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
+          <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
+          <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
 
           {/* MENU */}
           <button
@@ -110,7 +110,7 @@ export default function Home() {
               position: 'absolute',
               top: 15,
               right: 15,
-              padding: '6px 10px',
+              padding: '4px 8px',
               borderRadius: 10,
               border: '1px solid white',
               cursor: 'pointer',
