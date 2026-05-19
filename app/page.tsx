@@ -125,9 +125,9 @@ export default function Home() {
       {/* 🏠 HOME */}
       {!selected && (
         <div style={{ textAlign: 'center', marginTop: 10 }}>
-          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS STORE</h1>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS 👟</h1>
           <p style={{ opacity: 0.7 }}>
-            Las mejores zapatillas al mejor precio
+            ¡Las mejores zapatillas al mejor precio!
           </p>
         </div>
       )}
@@ -212,9 +212,9 @@ export default function Home() {
             onClick={() => setSelected(null)}
             style={{
               position: 'absolute',
-              top: 10,
-              left: 10,
-              padding: 5,
+              top: 5,
+              left: 5,
+              padding: 6,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
