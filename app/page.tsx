@@ -12,6 +12,12 @@ type Sneaker = {
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'
 }
 
+type Review = {
+  name: string
+  stars: number
+  text: string
+}
+
 const sneakers: Sneaker[] = [
   {
     id: 1,
@@ -35,9 +41,20 @@ const sneakers: Sneaker[] = [
   },
 ]
 
+const reviewsData: Record<number, Review[]> = {
+  1: [
+    { name: 'Alex', stars: 5, text: 'Muy cómodas, brutales 🔥' },
+    { name: 'Carlos', stars: 4, text: 'Calidad top, talla bien' },
+  ],
+  2: [
+    { name: 'María', stars: 5, text: 'Súper bonitas y ligeras' },
+  ],
+}
+
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
   const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
@@ -56,6 +73,9 @@ export default function Home() {
     setCart(prev => [...prev, item])
   }
 
+  const renderStars = (n: number) =>
+    '⭐'.repeat(n) + '☆'.repeat(5 - n)
+
   return (
     <main
       style={{
@@ -70,13 +90,12 @@ export default function Home() {
       {/* ================= TOP BAR ================= */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34, marginBottom: 5 }}>
-            👟 SNEAKERS
-          </h1>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
           <p style={{ opacity: 0.7 }}>
             Tu marketplace de zapatillas
           </p>
 
+          {/* MENU */}
           <button
             onClick={() => setMenuOpen(true)}
             style={{
@@ -88,20 +107,26 @@ export default function Home() {
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
-              cursor: 'pointer',
             }}
           >
             ☰
           </button>
 
+          {/* CART BUTTON */}
           <div
+            onClick={() => setCartOpen(true)}
             style={{
               position: 'absolute',
               top: 15,
               right: 15,
+              cursor: 'pointer',
+              fontSize: 18,
+              border: '1px solid white',
+              padding: '6px 10px',
+              borderRadius: 10,
             }}
           >
-            🛒 {cart.length}
+            🛒: {cart.length}
           </div>
         </div>
       )}
@@ -120,18 +145,7 @@ export default function Home() {
             zIndex: 2000,
           }}
         >
-          <button
-            onClick={() => setMenuOpen(false)}
-            style={{
-              marginBottom: 15,
-              padding: 10,
-              width: '100%',
-              borderRadius: 10,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-            }}
-          >
+          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
             ✕ Cerrar
           </button>
 
@@ -139,18 +153,10 @@ export default function Home() {
             placeholder="Buscar..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            style={{
-              width: '100%',
-              padding: 10,
-              borderRadius: 8,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              marginBottom: 20,
-            }}
+            style={inputStyle}
           />
 
-          <h3 style={{ marginBottom: 10 }}>Filtros</h3>
+          <h3>Filtros</h3>
 
           <button style={sideBtn} onClick={() => setBrand('all')}>
             Todas
@@ -161,12 +167,30 @@ export default function Home() {
           <button style={sideBtn} onClick={() => setBrand('Adidas')}>
             Adidas
           </button>
+        </div>
+      )}
 
-          <h3 style={{ marginTop: 25 }}>Carrito</h3>
+      {/* ================= CART PANEL ================= */}
+      {cartOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: 320,
+            height: '100%',
+            background: '#111',
+            padding: 20,
+            zIndex: 3000,
+          }}
+        >
+          <button onClick={() => setCartOpen(false)} style={sideBtn}>
+            ✕ Cerrar carrito
+          </button>
 
-          {cart.length === 0 && (
-            <p style={{ opacity: 0.6 }}>Vacío</p>
-          )}
+          <h3>🛒 Carrito</h3>
+
+          {cart.length === 0 && <p>Vacío</p>}
 
           {cart.map((item, i) => (
             <div
@@ -178,8 +202,8 @@ export default function Home() {
                 borderRadius: 10,
               }}
             >
-              <p style={{ marginBottom: 6 }}>{item.name}</p>
-              <button style={sideBtn}>Quitar</button>
+              <p>{item.name}</p>
+              <p>{item.price}</p>
             </div>
           ))}
         </div>
@@ -191,7 +215,7 @@ export default function Home() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 18,
+            gap: 16,
             marginTop: 40,
           }}
         >
@@ -208,15 +232,11 @@ export default function Home() {
             >
               <img
                 src={s.image}
-                style={{
-                  width: '100%',
-                  borderRadius: 12,
-                  marginBottom: 10,
-                }}
+                style={{ width: '100%', borderRadius: 12 }}
               />
 
-              <h3 style={{ marginBottom: 5 }}>{s.name}</h3>
-              <p style={{ opacity: 0.8 }}>{s.brand}</p>
+              <h3>{s.name}</h3>
+              <p>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
 
               <button
@@ -224,15 +244,7 @@ export default function Home() {
                   e.stopPropagation()
                   addToCart(s)
                 }}
-                style={{
-                  marginTop: 10,
-                  width: '100%',
-                  padding: 10,
-                  borderRadius: 10,
-                  border: '1px solid white',
-                  background: 'transparent',
-                  color: 'white',
-                }}
+                style={btn}
               >
                 🛒 Añadir
               </button>
@@ -241,77 +253,67 @@ export default function Home() {
         </div>
       )}
 
-      {/* ================= DETAIL FIXED ================= */}
+      {/* ================= DETAIL ================= */}
       {selected && (
         <div
           style={{
             maxWidth: 520,
             margin: '0 auto',
             textAlign: 'center',
-            paddingTop: 70,
+            paddingTop: 60,
           }}
         >
-          {/* BACK FIX */}
-          <button
-            onClick={() => setSelected(null)}
-            style={{
-              position: 'absolute',
-              top: 15,
-              left: 15,
-              padding: 10,
-              borderRadius: 10,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-            }}
-          >
+          <button onClick={() => setSelected(null)} style={backBtn}>
             ← Volver
           </button>
 
-          <h2 style={{ fontSize: 30, marginBottom: 5 }}>
-            {selected.name}
-          </h2>
+          <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
+          <p>{selected.brand}</p>
+          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <p style={{ opacity: 0.8 }}>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold', fontSize: 18 }}>
-            {selected.price}
-          </p>
-
-          <div
+          <img
+            src={selected.image}
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: 25,
+              width: 320,
+              borderRadius: 14,
+              marginTop: 20,
             }}
-          >
-            <img
-              src={selected.image}
-              style={{
-                width: 320,
-                borderRadius: 14,
-              }}
-            />
-          </div>
+          />
 
           <button
             onClick={() => addToCart(selected)}
-            style={{
-              marginTop: 25,
-              padding: 14,
-              borderRadius: 12,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              width: 200,
-            }}
+            style={btn}
           >
             🛒 Añadir al carrito
           </button>
+
+          {/* ================= REVIEWS ================= */}
+          <div style={{ marginTop: 30, textAlign: 'left' }}>
+            <h3>⭐ Reseñas</h3>
+
+            {(reviewsData[selected.id] || []).map((r, i) => (
+              <div
+                key={i}
+                style={{
+                  marginTop: 10,
+                  padding: 10,
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 10,
+                }}
+              >
+                <strong>{r.name}</strong>
+                <p>{renderStars(r.stars)}</p>
+                <p style={{ opacity: 0.8 }}>{r.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </main>
   )
 }
+
+/* ================= STYLES ================= */
 
 const sideBtn = {
   display: 'block',
@@ -323,4 +325,35 @@ const sideBtn = {
   background: 'transparent',
   color: 'white',
   cursor: 'pointer',
+}
+
+const btn = {
+  marginTop: 10,
+  width: '100%',
+  padding: 10,
+  borderRadius: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+
+const backBtn = {
+  position: 'absolute' as const,
+  top: 15,
+  left: 15,
+  padding: 10,
+  borderRadius: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+
+const inputStyle = {
+  width: '100%',
+  padding: 10,
+  borderRadius: 8,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  marginBottom: 20,
 }
