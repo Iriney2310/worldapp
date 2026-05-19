@@ -56,8 +56,8 @@ export default function Home() {
         padding: 30,
       }}
     >
-      <h1>👟 Sneaker Deals</h1>
-      <p>Compra zapatillas con enlaces afiliados</p>
+      <h1>👟 ¡NOVEDADES!</h1>
+      <p>TUS ZAPATILLAS AL MEJOR PRECIO</p>
 
       {!selected ? (
         <div
