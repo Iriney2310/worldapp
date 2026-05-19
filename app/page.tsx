@@ -57,7 +57,7 @@ export default function Home() {
       }}
     >
       <h1>👟 ¡NOVEDADES! 👟</h1>
-      <p>  TUS ZAPATILLAS AL MEJOR PRECIO</p>
+      <p>                 TUS ZAPATILLAS AL MEJOR PRECIO</p>
 
       {!selected ? (
         <div
