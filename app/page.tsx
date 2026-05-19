@@ -28,7 +28,7 @@ const sneakers: Sneaker[] = [
     name: 'Adidas Grand Court',
     brand: 'Adidas',
     price: '39,99€-54,99€',
-    image: 'https://m.media-amazon.com/images/I/61-3Bmcn-SL._AC_SY695_.jpg',
+    image: 'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
   },
@@ -68,7 +68,7 @@ export default function Home() {
       {/* 🏠 TOP NAV */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 Sneaker Market</h1>
+          <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS! 👟</h1>
 
           <div style={{ marginTop: 10 }}>
             <button
