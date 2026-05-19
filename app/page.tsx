@@ -435,13 +435,13 @@ const input: CSSProperties = {
 }
 const banner: CSSProperties = {
   width: '100%',
-  padding: '4px 10px',   // 👈 esto reduce la altura
+  padding: '6px 12px',   // 👈 esto reduce la altura
   marginBottom: 10,
   borderRadius: 10,
   textAlign: 'center',
-  fontSize: 15,
+  fontSize: 16,
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 1,         // 👈 clave para que no “estire” verticalmente
+  lineHeight: 0,         // 👈 clave para que no “estire” verticalmente
 }
