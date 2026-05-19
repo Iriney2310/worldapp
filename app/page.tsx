@@ -76,9 +76,9 @@ export default function Home() {
             onClick={() => setMenuOpen(true)}
             style={{
               position: 'absolute',
-              top: 12,
-              left: 12,
-              padding: 8,
+              top: 10,
+              left: 10,
+              padding: 18,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
@@ -94,9 +94,9 @@ export default function Home() {
             onClick={() => setCartOpen(true)}
             style={{
               position: 'absolute',
-              top: 12,
-              right: 12,
-              padding: '6px 10px',
+              top: 10,
+              right: 10,
+              padding: '4px 8px',
               borderRadius: 10,
               border: '1px solid white',
               cursor: 'pointer',
@@ -106,8 +106,8 @@ export default function Home() {
           </div>
 
           <div style={{ textAlign: 'center' }}>
-            <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
-            <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
+            <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
+            <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
           </div>
         </>
       )}
@@ -186,7 +186,7 @@ export default function Home() {
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: 16,
-            marginTop: 40,
+            marginTop: 30,
           }}
         >
           {filtered.map(s => (
@@ -232,8 +232,8 @@ export default function Home() {
             onClick={() => setSelected(null)}
             style={{
               position: 'absolute',
-              top: 10,
-              left: 10,
+              top: 7,
+              left: 7,
               padding: '6px 12px',
               borderRadius: 999,
               border: '1px solid rgba(255,255,255,0.3)',
