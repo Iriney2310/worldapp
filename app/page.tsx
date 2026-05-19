@@ -134,9 +134,9 @@ export default function Home() {
               padding: 10,
               marginTop: 10,
               borderRadius: 8,
-              border: '1px solid white',
+              border: '1px solid black',
               background: 'transparent',
-              color: 'white',
+              color: 'black',
             }}
           />
 
