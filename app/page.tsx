@@ -63,14 +63,14 @@ export default function Home() {
           style={{
             position: 'absolute',
             top: 10,
-            left: 80,
+            left: 10,
             padding: 5,
             borderRadius: 10,
             border: '1px solid white',
             background: 'transparent',
             color: 'white',
             cursor: 'pointer',
-            fontSize: 15,
+            fontSize: 16,
           }}
         >
           ☰
