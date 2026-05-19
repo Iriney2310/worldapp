@@ -43,6 +43,7 @@ export default function Home() {
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<number[]>([])
+  const [closing, setClosing] = useState(false)
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -67,14 +68,24 @@ export default function Home() {
     favorites.includes(s.id)
   )
 
+  const closeDetail = () => {
+    setClosing(true)
+    setTimeout(() => {
+      setSelected(null)
+      setClosing(false)
+    }, 200)
+  }
+
   return (
     <main style={main}>
 
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS!</h1>
-          <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
+          <h1>¡SNEAKERS!</h1>
+          <p style={{ opacity: 0.7 }}>
+            Tus Sneakers Favoritas A Un Solo Click👟
+          </p>
 
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
             ☰
@@ -93,81 +104,75 @@ export default function Home() {
             setMenuOpen(false)
             setFavOpen(false)
           }}
-          style={overlay}
+          style={{
+            ...overlay,
+            opacity: 1,
+            transition: '0.25s ease',
+          }}
         />
       )}
 
       {/* SIDEBAR */}
-      {menuOpen && (
-        <div style={sidebar}>
-          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
-            ✕ Cerrar
-          </button>
+      <div
+        style={{
+          ...sidebar,
+          transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
+        }}
+      >
+        <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+          ✕ Cerrar
+        </button>
 
-          <input
-            placeholder="🔎 Buscar..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            style={input}
-          />
+        <input
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="🔎 Buscar..."
+          style={input}
+        />
 
-          <button onClick={() => setBrand('all')} style={sideBtn}>
-            Todas
-          </button>
-          <button onClick={() => setBrand('Nike')} style={sideBtn}>
-            Nike
-          </button>
-          <button onClick={() => setBrand('Adidas')} style={sideBtn}>
-            Adidas
-          </button>
-        </div>
-      )}
+        <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
+        <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
+        <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
+      </div>
 
-      {/* FAVORITES PANEL */}
-      {favOpen && (
-        <div style={favPanel}>
-          <button onClick={() => setFavOpen(false)} style={sideBtn}>
-            ✕ Cerrar Favoritos
-          </button>
+      {/* FAVORITOS */}
+      <div
+        style={{
+          ...favPanel,
+          transform: favOpen ? 'translateX(0)' : 'translateX(110%)',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
+        }}
+      >
+        <button onClick={() => setFavOpen(false)} style={sideBtn}>
+          ✕ Cerrar Favoritos
+        </button>
 
-          <h3>❤️ Favoritos</h3>
+        {favItems.length === 0 && (
+          <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
+        )}
 
-          {favItems.length === 0 && (
-            <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
-          )}
+        {favItems.map(item => (
+          <div
+            key={item.id}
+            style={favCard}
+            onClick={() => setSelected(item)}
+          >
+            <img src={item.image} style={favImg} />
+            <p>{item.name}</p>
 
-          {favItems.map(item => (
-            <div
-              key={item.id}
-              style={favCard}
-              onClick={() => {
-                setSelected(item)
-                setFavOpen(false)
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleFavorite(item.id)
               }}
+              style={removeBtn}
             >
-              <img src={item.image} style={favImg} />
-
-              <p style={{ fontSize: 12, marginTop: 6 }}>
-                {item.name}
-              </p>
-
-              <p style={{ opacity: 0.7, fontSize: 11 }}>
-                {item.brand}
-              </p>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  toggleFavorite(item.id)
-                }}
-                style={removeBtn}
-              >
-                Quitar
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+              Quitar
+            </button>
+          </div>
+        ))}
+      </div>
 
       {/* GRID */}
       {!selected && (
@@ -176,15 +181,16 @@ export default function Home() {
             <div
               key={s.id}
               style={card}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'
+                e.currentTarget.style.transition = '0.2s ease'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+              }}
               onClick={() => setSelected(s)}
             >
-
-              {/* BADGE FIX */}
-              {s.badge && (
-                <div style={badge}>
-                  {s.badge}
-                </div>
-              )}
+              {s.badge && <div style={badge}>{s.badge}</div>}
 
               <div
                 onClick={(e) => {
@@ -206,17 +212,25 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL FIXED */}
+      {/* DETAIL */}
       {selected && (
-        <div style={detail}>
-          <button onClick={() => setSelected(null)} style={backBtn}>
+        <div
+          style={{
+            ...detail,
+            opacity: closing ? 0 : 1,
+            transform: closing
+              ? 'translateY(10px) scale(0.98)'
+              : 'translateY(0) scale(1)',
+            transition: '0.25s ease',
+          }}
+        >
+          <button onClick={closeDetail} style={backBtn}>
             ← Volver
           </button>
 
-          <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
+          <h2>{selected.name}</h2>
 
-          {/* IMAGE CENTER FIX */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img
               src={selected.image}
               style={{
@@ -227,7 +241,7 @@ export default function Home() {
             />
           </div>
 
-          <p style={{ marginTop: 10 }}>{selected.brand}</p>
+          <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
           <button
@@ -250,7 +264,6 @@ const main: CSSProperties = {
   color: 'white',
   fontFamily: 'sans-serif',
   padding: 20,
-  position: 'relative',
 }
 
 const grid: CSSProperties = {
@@ -266,6 +279,7 @@ const card: CSSProperties = {
   borderRadius: 14,
   position: 'relative',
   cursor: 'pointer',
+  transition: '0.2s ease',
 }
 
 const img: CSSProperties = {
