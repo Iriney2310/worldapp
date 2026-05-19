@@ -45,14 +45,15 @@ export default function Home() {
         background: '#0b0b0b',
         color: 'white',
         fontFamily: 'sans-serif',
-        padding: 30,
+        padding: 20,
       }}
     >
       {/* 🏠 HOME */}
       {!selected && (
         <>
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', marginTop: 10 }}>
             <h1>👟 ¡SNEAKERS! 👟</h1>
+            <p style={{ opacity: 0.7 }}>Las mejores zapatillas al mejor precio</p>
           </div>
 
           <div
@@ -95,17 +96,19 @@ export default function Home() {
       {selected && (
         <div
           style={{
+            maxWidth: 500,
+            margin: '0 auto',
             textAlign: 'center',
-            marginTop: 40,
             position: 'relative',
+            paddingTop: 10,
           }}
         >
-          {/* ← BOTÓN VOLVER ARRIBA IZQUIERDA */}
+          {/* ← BOTÓN VOLVER MEJOR POSICIONADO */}
           <button
             onClick={() => setSelected(null)}
             style={{
               position: 'absolute',
-              top: 0,
+              top: -10,
               left: 0,
               padding: 10,
               borderRadius: 10,
@@ -121,12 +124,24 @@ export default function Home() {
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <img
-            src={selected.image}
-            style={{ width: 300, borderRadius: 12 }}
-          />
+          {/* 🖼️ IMAGEN CENTRADA PERFECTAMENTE */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: 20,
+            }}
+          >
+            <img
+              src={selected.image}
+              style={{
+                width: 300,
+                borderRadius: 12,
+              }}
+            />
+          </div>
 
-          {/* 🛒 BOTÓN COMPRAR CENTRADO ABAJO */}
+          {/* 🛒 BOTÓN COMPRAR CENTRADO */}
           <div
             style={{
               marginTop: 30,
