@@ -4,159 +4,142 @@ import { useState } from 'react'
 
 type Sneaker = {
   name: string
-  rarity: 'common' | 'rare' | 'legendary'
+  brand: string
+  price: string
+  image: string
+  url: string
 }
 
 const sneakers: Sneaker[] = [
-  { name: 'Nike Air Force 1', rarity: 'common' },
-  { name: 'Adidas Samba', rarity: 'common' },
-  { name: 'Nike Dunk Low', rarity: 'rare' },
-  { name: 'Jordan 1 Retro', rarity: 'rare' },
-  { name: 'Yeezy Boost 350', rarity: 'legendary' },
+  {
+    name: 'Air Force 1',
+    brand: 'Nike',
+    price: '110€',
+    image: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/air-force-1.jpg',
+    url: 'https://www.nike.com/es/w/air-force-1-zapatillas-5sj3yzy7ok'
+  },
+  {
+    name: 'Jordan 1 Retro',
+    brand: 'Nike',
+    price: '180€',
+    image: 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto/jordan-1.jpg',
+    url: 'https://www.nike.com/es/w/jordan-zapatillas-37eefzy7ok'
+  },
+  {
+    name: 'Adidas Samba',
+    brand: 'Adidas',
+    price: '100€',
+    image: 'https://assets.adidas.com/images/w_600,f_auto,q_auto/samba.jpg',
+    url: 'https://www.adidas.es/samba'
+  },
+  {
+    name: 'Yeezy Boost 350',
+    brand: 'Adidas',
+    price: '220€',
+    image: 'https://assets.adidas.com/images/w_600/yeezy.jpg',
+    url: 'https://www.adidas.es/yeezy'
+  },
+  {
+    name: 'Air Max 270',
+    brand: 'Nike',
+    price: '150€',
+    image: 'https://static.nike.com/a/images/air-max-270.jpg',
+    url: 'https://www.nike.com/es/w/air-max-270'
+  }
 ]
 
-function getRandomSneaker(): Sneaker {
-  return sneakers[Math.floor(Math.random() * sneakers.length)]
-}
-
 export default function Home() {
-  const [user, setUser] = useState<string | null>(null)
-  const [points, setPoints] = useState(0)
-  const [current, setCurrent] = useState<Sneaker | null>(null)
-  const [collection, setCollection] = useState<Sneaker[]>([])
-
-  const login = () => {
-    setUser('user_' + Math.random().toString(36).slice(2, 8))
-    setCurrent(getRandomSneaker())
-  }
-
-  const newDrop = () => {
-    setCurrent(getRandomSneaker())
-  }
-
-  const claim = () => {
-    if (!current) return
-
-    setCollection([...collection, current])
-
-    let reward = 10
-    if (current.rarity === 'rare') reward = 25
-    if (current.rarity === 'legendary') reward = 100
-
-    setPoints(points + reward)
-
-    newDrop()
-  }
-
-  const rarityColor = (rarity: string) => {
-    if (rarity === 'rare') return 'orange'
-    if (rarity === 'legendary') return 'gold'
-    return 'white'
-  }
-
-  if (!user) {
-    return (
-      <main
-        style={{
-          minHeight: '100vh',
-          background: '#0f0f0f',
-          color: 'white',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontFamily: 'sans-serif',
-        }}
-      >
-        <button
-          onClick={login}
-          style={{
-            padding: 16,
-            borderRadius: 12,
-            border: 'none',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-          }}
-        >
-          👟 Entrar a Sneaker Drop
-        </button>
-      </main>
-    )
-  }
+  const [selected, setSelected] = useState<Sneaker | null>(null)
 
   return (
     <main
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #111, #222)',
+        background: '#0f0f0f',
         color: 'white',
         fontFamily: 'sans-serif',
         padding: 30,
       }}
     >
-      <h1>👟 Sneaker Drop</h1>
+      <h1>👟 Sneaker Store</h1>
+      <p>Haz click en una zapatilla para verla en tienda</p>
 
-      <p>Usuario: {user}</p>
-      <h2>🪙 Puntos: {points}</h2>
-
-      <hr style={{ margin: '20px 0', opacity: 0.2 }} />
-
-      {current && (
+      {!selected ? (
         <div
           style={{
-            padding: 20,
-            borderRadius: 12,
-            background: 'rgba(255,255,255,0.05)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gap: 20,
+            marginTop: 20,
           }}
         >
-          <h2>🔥 Drop actual</h2>
-
-          <h3 style={{ color: rarityColor(current.rarity) }}>
-            {current.name}
-          </h3>
-
-          <p>Rareza: {current.rarity}</p>
-
-          <button
-            onClick={claim}
-            style={{
-              marginTop: 10,
-              padding: 12,
-              borderRadius: 10,
-              border: 'none',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-            }}
-          >
-            🎁 Reclamar sneaker
-          </button>
-
-          <button
-            onClick={newDrop}
-            style={{
-              marginLeft: 10,
-              padding: 12,
-              borderRadius: 10,
-              border: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            🔄 Nuevo drop
-          </button>
+          {sneakers.map((s, i) => (
+            <div
+              key={i}
+              onClick={() => setSelected(s)}
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                padding: 15,
+                borderRadius: 12,
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              <img
+                src={s.image}
+                alt={s.name}
+                style={{ width: '100%', borderRadius: 10 }}
+              />
+              <h3>{s.name}</h3>
+              <p>{s.brand}</p>
+              <p>{s.price}</p>
+            </div>
+          ))}
         </div>
-      )}
-
-      <hr style={{ margin: '20px 0', opacity: 0.2 }} />
-
-      <h2>📦 Tu colección</h2>
-
-      {collection.length === 0 ? (
-        <p style={{ opacity: 0.6 }}>Aún no tienes sneakers</p>
       ) : (
-        collection.map((s, i) => (
-          <div key={i}>
-            👟 {s.name} ({s.rarity})
+        <div
+          style={{
+            marginTop: 40,
+            textAlign: 'center',
+          }}
+        >
+          <h2>{selected.name}</h2>
+          <p>{selected.brand}</p>
+          <p>{selected.price}</p>
+
+          <img
+            src={selected.image}
+            style={{ width: 300, borderRadius: 12 }}
+          />
+
+          <div style={{ marginTop: 20 }}>
+            <button
+              onClick={() => window.open(selected.url, '_blank')}
+              style={{
+                padding: 14,
+                borderRadius: 10,
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                marginRight: 10,
+              }}
+            >
+              🛒 Ver en tienda
+            </button>
+
+            <button
+              onClick={() => setSelected(null)}
+              style={{
+                padding: 14,
+                borderRadius: 10,
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              ← Volver
+            </button>
           </div>
-        ))
+        </div>
       )}
     </main>
   )
