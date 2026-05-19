@@ -78,7 +78,12 @@ export default function Home() {
 
   return (
     <main style={main}>
-
+{/* BANNER */}
+{!selected && (
+  <div style={banner}>
+    👟 NUEVAS SNEAKERS · OFERTAS LIMITADAS · ENVÍO RÁPIDO
+  </div>
+)}
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
@@ -427,4 +432,15 @@ const input: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
+}
+const banner: CSSProperties = {
+  width: '100%',
+  padding: '12px 14px',
+  marginBottom: 15,
+  borderRadius: 12,
+  textAlign: 'center',
+  fontSize: 12,
+  fontWeight: 'bold',
+  color: 'white',
+  background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
 }
