@@ -38,9 +38,9 @@ const sneakers: Sneaker[] = [
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
+  const [cart, setCart] = useState<Sneaker[]>([])
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -172,7 +172,6 @@ export default function Home() {
               onClick={() => setSelected(s)}
               style={cardStyle}
             >
-              {/* BADGE */}
               {s.badge && (
                 <div
                   style={{
@@ -197,7 +196,6 @@ export default function Home() {
               <p style={{ opacity: 0.7 }}>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
 
-              {/* 🛒 ADD TO CART */}
               <button
                 onClick={e => {
                   e.stopPropagation()
@@ -207,36 +205,27 @@ export default function Home() {
               >
                 🛒 Añadir
               </button>
-
-              {/* 🌐 BUY BUTTON RESTORED */}
-              <button
-                onClick={e => {
-                  e.stopPropagation()
-                  window.open(s.link, '_blank')
-                }}
-                style={{
-                  marginTop: 8,
-                  width: '100%',
-                  padding: 10,
-                  borderRadius: 10,
-                  border: '1px solid #00c853',
-                  background: 'transparent',
-                  color: '#00c853',
-                  cursor: 'pointer',
-                  fontWeight: 'bold',
-                }}
-              >
-                🌐 Comprar
-              </button>
             </div>
           ))}
         </div>
       )}
 
-      {/* DETAIL */}
+      {/* DETAIL (FIXED) */}
       {selected && (
-        <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center', paddingTop: 60 }}>
-          <button onClick={() => setSelected(null)} style={backBtn}>
+        <div
+          style={{
+            maxWidth: 520,
+            margin: '0 auto',
+            textAlign: 'center',
+            paddingTop: 60,
+            position: 'relative',
+          }}
+        >
+          {/* BACK */}
+          <button
+            onClick={() => setSelected(null)}
+            style={backBtn}
+          >
             ← Volver
           </button>
 
@@ -244,32 +233,48 @@ export default function Home() {
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <img
-            src={selected.image}
-            style={{ width: 320, borderRadius: 14, marginTop: 20 }}
-          />
-
-          <button
-            onClick={() => addToCart(selected)}
-            style={btn}
-          >
-            🛒 Añadir al carrito
-          </button>
-
-          <button
-            onClick={() => window.open(selected.link, '_blank')}
+          {/* IMAGE CENTERED PERFECTLY */}
+          <div
             style={{
-              marginTop: 10,
-              width: 200,
-              padding: 10,
-              borderRadius: 10,
-              border: '1px solid #00c853',
-              background: 'transparent',
-              color: '#00c853',
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: 25,
             }}
           >
-            🌐 Comprar en Amazon
-          </button>
+            <img
+              src={selected.image}
+              style={{
+                width: 340,
+                borderRadius: 14,
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+
+          {/* AMAZON BUTTON FIXED POSITION */}
+          <div
+            style={{
+              marginTop: 30,
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <button
+              onClick={() => window.open(selected.link, '_blank')}
+              style={{
+                padding: 14,
+                width: 220,
+                borderRadius: 12,
+                border: '1px solid #00c853',
+                background: 'transparent',
+                color: '#00c853',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+            >
+              🌐 Comprar en Amazon
+            </button>
+          </div>
         </div>
       )}
     </main>
