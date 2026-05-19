@@ -117,7 +117,7 @@ export default function Home() {
             padding: 20,
             transition: '0.3s',
             zIndex: 1000,
-            borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+            borderRight: '1px solid #333',
           }}
         >
           <button onClick={() => setMenuOpen(false)} style={sideBtn}>
