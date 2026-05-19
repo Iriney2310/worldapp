@@ -39,11 +39,26 @@ export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
+  const [search, setSearch] = useState('')
+  const [cart, setCart] = useState<Sneaker[]>([])
 
   const filtered = useMemo(() => {
-    if (brand === 'all') return sneakers
-    return sneakers.filter(s => s.brand === brand)
-  }, [brand])
+    return sneakers.filter(s => {
+      const matchBrand = brand === 'all' || s.brand === brand
+      const matchSearch =
+        s.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.brand.toLowerCase().includes(search.toLowerCase())
+      return matchBrand && matchSearch
+    })
+  }, [brand, search])
+
+  const addToCart = (item: Sneaker) => {
+    setCart(prev => [...prev, item])
+  }
+
+  const removeFromCart = (id: number) => {
+    setCart(prev => prev.filter(p => p.id !== id))
+  }
 
   return (
     <main
@@ -56,25 +71,37 @@ export default function Home() {
         position: 'relative',
       }}
     >
-      {/* ☰ MENU BUTTON */}
+      {/* TOP BAR */}
       {!selected && (
-        <button
-          onClick={() => setMenuOpen(true)}
-          style={{
-            position: 'absolute',
-            top: 15,
-            left: 15,
-            padding: 15,
-            borderRadius: 10,
-            border: '1px solid white',
-            background: 'transparent',
-            color: 'white',
-            cursor: 'pointer',
-            fontSize: 18,
-          }}
-        >
-          ☰
-        </button>
+        <>
+          <button
+            onClick={() => setMenuOpen(true)}
+            style={{
+              position: 'absolute',
+              top: 10,
+              left: 8,
+              padding: 5,
+              borderRadius: 8,
+              border: '1px solid white',
+              background: 'transparent',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          >
+            ☰
+          </button>
+
+          <div style={{ textAlign: 'center' }}>
+            <h1>SNEAKERS</h1>
+            <p style={{ opacity: 0.7 }}>
+              ¡Tu marketplace de zapatillas!
+            </p>
+
+            <p style={{ marginTop: 10 }}>
+              🛒 Carrito: {cart.length}
+            </p>
+          </div>
+        </>
       )}
 
       {/* SIDEBAR */}
@@ -83,8 +110,8 @@ export default function Home() {
           style={{
             position: 'fixed',
             top: 0,
-            left: menuOpen ? 0 : '-260px',
-            width: 260,
+            left: menuOpen ? 0 : '-280px',
+            width: 280,
             height: '100%',
             background: '#111',
             padding: 20,
@@ -93,22 +120,27 @@ export default function Home() {
             borderRight: '1px solid rgba(255,255,255,0.1)',
           }}
         >
-          <button
-            onClick={() => setMenuOpen(false)}
+          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+            ✕ Cerrar
+          </button>
+
+          {/* SEARCH */}
+          <input
+            placeholder="Buscar zapatillas..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
             style={{
-              marginBottom: 20,
-              padding: 8,
+              width: '100%',
+              padding: 10,
+              marginTop: 10,
               borderRadius: 8,
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
-              cursor: 'pointer',
             }}
-          >
-            ✕ Cerrar
-          </button>
+          />
 
-          <h3>Filtros</h3>
+          <h3 style={{ marginTop: 20 }}>Filtros</h3>
 
           <button onClick={() => setBrand('all')} style={sideBtn}>
             Todas
@@ -121,16 +153,32 @@ export default function Home() {
           <button onClick={() => setBrand('Adidas')} style={sideBtn}>
             Adidas
           </button>
-        </div>
-      )}
 
-      {/* HOME */}
-      {!selected && (
-        <div style={{ textAlign: 'center', marginTop: 10 }}>
-          <h1 style={{ fontSize: 34 }}>SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>
-            ¡Las mejores zapatillas al mejor precio!
-          </p>
+          <h3 style={{ marginTop: 20 }}>Carrito</h3>
+
+          {cart.length === 0 && (
+            <p style={{ opacity: 0.6 }}>Vacío</p>
+          )}
+
+          {cart.map(item => (
+            <div
+              key={item.id}
+              style={{
+                marginTop: 10,
+                padding: 8,
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 8,
+              }}
+            >
+              <p style={{ fontSize: 12 }}>{item.name}</p>
+              <button
+                onClick={() => removeFromCart(item.id)}
+                style={sideBtn}
+              >
+                Quitar
+              </button>
+            </div>
+          ))}
         </div>
       )}
 
@@ -153,53 +201,35 @@ export default function Home() {
                 borderRadius: 14,
                 padding: 12,
                 cursor: 'pointer',
-                border: '1px solid rgba(255,255,255,0.1)',
-                position: 'relative',
-                transition: '0.2s',
-              }}
-              onMouseOver={e => {
-                e.currentTarget.style.transform = 'scale(1.03)'
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.transform = 'scale(1)'
               }}
             >
-              {/* BADGE */}
-              {s.badge && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 8,
-                    left: 8,
-                    fontSize: 10,
-                    padding: '4px 8px',
-                    borderRadius: 6,
-                    background:
-                      s.badge === 'NEW'
-                        ? '#00c853'
-                        : s.badge === 'HOT'
-                        ? '#ff3d00'
-                        : '#ffd600',
-                    color: 'black',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {s.badge}
-                </div>
-              )}
-
               <img
                 src={s.image}
-                style={{
-                  width: '100%',
-                  borderRadius: 12,
-                  marginBottom: 8,
-                }}
+                style={{ width: '100%', borderRadius: 12 }}
               />
 
-              <h3 style={{ fontSize: 14 }}>{s.name}</h3>
-              <p style={{ opacity: 0.7 }}>{s.brand}</p>
+              <h3>{s.name}</h3>
+              <p>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+
+              <button
+                onClick={e => {
+                  e.stopPropagation()
+                  addToCart(s)
+                }}
+                style={{
+                  marginTop: 10,
+                  padding: 8,
+                  width: '100%',
+                  border: '1px solid white',
+                  background: 'transparent',
+                  color: 'white',
+                  borderRadius: 8,
+                  cursor: 'pointer',
+                }}
+              >
+                🛒 Añadir
+              </button>
             </div>
           ))}
         </div>
@@ -207,104 +237,31 @@ export default function Home() {
 
       {/* DETAIL */}
       {selected && (
-        <div
-          style={{
-            maxWidth: 500,
-            margin: '0 auto',
-            textAlign: 'center',
-            paddingTop: 70,
-            position: 'relative',
-          }}
-        >
-          {/* VOLVER */}
-          <button
-            onClick={() => setSelected(null)}
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              padding: 6,
-              borderRadius: 8,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
-            }}
-          >
+        <div style={{ textAlign: 'center', paddingTop: 60 }}>
+          <button onClick={() => setSelected(null)}>
             ← Volver
           </button>
 
-          <h2 style={{ fontSize: 32 }}>{selected.name}</h2>
-          <p style={{ opacity: 0.7 }}>{selected.brand}</p>
+          <h2>{selected.name}</h2>
 
-          <p style={{ fontWeight: 'bold', fontSize: 22 }}>
-            {selected.price}
-          </p>
+          <img
+            src={selected.image}
+            style={{ width: 300, borderRadius: 12 }}
+          />
 
-          {/* IMAGEN */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: 25,
-            }}
-          >
-            <img
-              src={selected.image}
-              style={{
-                width: 300,
-                borderRadius: 12,
-                objectFit: 'contain',
-              }}
-            />
-          </div>
-
-          {/* BOTÓN COMPRAR */}
           <button
-            onClick={() => window.open(selected.link, '_blank')}
+            onClick={() => addToCart(selected)}
             style={{
-              marginTop: 30,
+              marginTop: 20,
               padding: 14,
-              borderRadius: 12,
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
-              cursor: 'pointer',
-              width: 220,
-              fontWeight: 'bold',
+              borderRadius: 10,
             }}
           >
-            🛒 Comprar ahora
+            🛒 Añadir al carrito
           </button>
-
-          {/* INFO DEBAJO */}
-          <div style={{ marginTop: 25 }}>
-            <p style={{ color: '#ffd600', fontSize: 18 }}>
-              ★★★★★{' '}
-              <span style={{ color: 'white', fontSize: 14 }}>
-                (184 reviews)
-              </span>
-            </p>
-
-            <p style={{ color: '#00e676', fontWeight: 'bold' }}>
-              ✅ En stock
-            </p>
-
-            <p style={{ opacity: 0.8 }}>
-              🚚 Envío GRATIS mañana
-            </p>
-
-            <p
-              style={{
-                marginTop: 15,
-                opacity: 0.7,
-                lineHeight: 1.5,
-                padding: '0 20px',
-              }}
-            >
-              Zapatilla premium con diseño urbano y máxima comodidad para uso diario.
-            </p>
-          </div>
         </div>
       )}
     </main>
