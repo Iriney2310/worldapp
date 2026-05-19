@@ -38,251 +38,223 @@ const sneakers: Sneaker[] = [
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
+  const [search, setSearch] = useState('')
   const [cart, setCart] = useState<Sneaker[]>([])
-  const [flyItem, setFlyItem] = useState<any>(null)
-  const [shake, setShake] = useState(false)
 
   const cartRef = useRef<HTMLDivElement | null>(null)
 
   const filtered = useMemo(() => {
-    if (brand === 'all') return sneakers
-    return sneakers.filter(s => s.brand === brand)
-  }, [brand])
-
-  const addToCart = (item: Sneaker, e?: any) => {
-    setCart(prev => [...prev, item])
-
-    setShake(true)
-    setTimeout(() => setShake(false), 400)
-
-    if (!e?.currentTarget || !cartRef.current) return
-
-    const rect = e.currentTarget.getBoundingClientRect()
-    const cartRect = cartRef.current.getBoundingClientRect()
-
-    setFlyItem({
-      image: item.image,
-      top: rect.top,
-      left: rect.left,
+    return sneakers.filter(s => {
+      const matchBrand = brand === 'all' || s.brand === brand
+      const matchSearch =
+        s.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.brand.toLowerCase().includes(search.toLowerCase())
+      return matchBrand && matchSearch
     })
+  }, [brand, search])
 
-    setTimeout(() => {
-      setFlyItem({
-        image: item.image,
-        top: cartRect.top,
-        left: cartRect.left,
-        transition: 'all 0.6s ease-in-out',
-      })
-    }, 50)
-
-    setTimeout(() => setFlyItem(null), 700)
+  const addToCart = (item: Sneaker) => {
+    setCart(prev => [...prev, item])
   }
 
   return (
     <main
       style={{
         minHeight: '100vh',
-        background: '#0b0b0b',
+        backgroundImage: "url('/fondo.jpg')", // 👈 TU IMAGEN AQUÍ
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         color: 'white',
         fontFamily: 'sans-serif',
         padding: 20,
         position: 'relative',
       }}
     >
-      {/* ☰ MENU BUTTON */}
-      {!selected && (
-        <button
-          onClick={() => setMenuOpen(true)}
-          style={{
-            position: 'absolute',
-            top: 15,
-            left: 15,
-            padding: 8,
-            borderRadius: 10,
-            border: '1px solid white',
-            background: 'transparent',
-            color: 'white',
-          }}
-        >
-          ☰
-        </button>
-      )}
+      {/* OVERLAY */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0,0,0,0.65)',
+          pointerEvents: 'none',
+        }}
+      />
 
-      {/* 🛒 CART TOP RIGHT */}
-      {!selected && (
-        <div
-          ref={cartRef}
-          style={{
-            position: 'absolute',
-            top: 15,
-            right: 20,
-            fontSize: 18,
-            zIndex: 10,
-            transform: shake ? 'scale(1.2)' : 'scale(1)',
-            transition: '0.2s',
-          }}
-        >
-          🛒: {cart.length}
-        </div>
-      )}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* TOP BAR */}
+        {!selected && (
+          <div style={{ textAlign: 'center' }}>
+            <h1>👟 SNEAKERS</h1>
+            <p style={{ opacity: 0.7 }}>Tu tienda de zapatillas</p>
 
-      {/* ✈️ FLYING ITEM */}
-      {flyItem && (
-        <img
-          src={flyItem.image}
-          style={{
-            position: 'fixed',
-            top: flyItem.top,
-            left: flyItem.left,
-            width: 60,
-            height: 60,
-            borderRadius: 10,
-            zIndex: 9999,
-            transition: flyItem.transition,
-            pointerEvents: 'none',
-          }}
-        />
-      )}
-
-      {/* SIDEBAR */}
-      {!selected && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: menuOpen ? 0 : '-260px',
-            width: 260,
-            height: '100%',
-            background: '#111',
-            padding: 20,
-            transition: '0.3s',
-            zIndex: 1000,
-          }}
-        >
-          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
-            ✕ Cerrar
-          </button>
-
-          <h3>Filtros</h3>
-
-          <button onClick={() => setBrand('all')} style={sideBtn}>
-            Todas
-          </button>
-          <button onClick={() => setBrand('Nike')} style={sideBtn}>
-            Nike
-          </button>
-          <button onClick={() => setBrand('Adidas')} style={sideBtn}>
-            Adidas
-          </button>
-        </div>
-      )}
-
-      {/* HOME */}
-      {!selected && (
-        <div style={{ textAlign: 'center' }}>
-          <h1>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>Tu tienda de zapatillas</p>
-        </div>
-      )}
-
-      {/* GRID */}
-      {!selected && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 16,
-            marginTop: 30,
-          }}
-        >
-          {filtered.map(s => (
+            {/* CART ICON */}
             <div
-              key={s.id}
-              onClick={() => setSelected(s)}
+              onClick={() => setCartOpen(true)}
               style={{
-                background: 'rgba(255,255,255,0.05)',
-                borderRadius: 14,
-                padding: 12,
+                position: 'absolute',
+                top: 15,
+                right: 20,
                 cursor: 'pointer',
-                position: 'relative',
+                fontSize: 18,
               }}
             >
-              <img
-                src={s.image}
-                style={{
-                  width: '100%',
-                  borderRadius: 12,
-                }}
-              />
-
-              <h3>{s.name}</h3>
-              <p>{s.brand}</p>
-              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
-
-              <button
-                onClick={e => {
-                  e.stopPropagation()
-                  addToCart(s, e)
-                }}
-                style={{
-                  marginTop: 10,
-                  padding: 10,
-                  width: '100%',
-                  border: '1px solid white',
-                  background: 'transparent',
-                  color: 'white',
-                  borderRadius: 10,
-                }}
-              >
-                🛒 Añadir
-              </button>
+              🛒: {cart.length}
             </div>
-          ))}
-        </div>
-      )}
 
-      {/* DETAIL */}
-      {selected && (
-        <div style={{ textAlign: 'center', paddingTop: 60 }}>
-          <button onClick={() => setSelected(null)}>
-            ← Volver
-          </button>
+            {/* MENU */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              style={{
+                position: 'absolute',
+                top: 15,
+                left: 15,
+                padding: 8,
+                borderRadius: 10,
+                border: '1px solid white',
+                background: 'transparent',
+                color: 'white',
+              }}
+            >
+              ☰
+            </button>
+          </div>
+        )}
 
-          <h2>{selected.name}</h2>
-
-          <img
-            src={selected.image}
-            style={{ width: 320, borderRadius: 12 }}
-          />
-
-          <button
-            onClick={e => addToCart(selected, e)}
+        {/* SIDEBAR */}
+        {menuOpen && (
+          <div
             style={{
-              marginTop: 20,
-              padding: 14,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              borderRadius: 10,
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: 260,
+              height: '100%',
+              background: '#111',
+              padding: 20,
+              zIndex: 2000,
             }}
           >
-            🛒 Añadir al carrito
-          </button>
-        </div>
-      )}
+            <button onClick={() => setMenuOpen(false)}>
+              ✕ Cerrar
+            </button>
+
+            <input
+              placeholder="Buscar..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              style={{
+                width: '100%',
+                marginTop: 10,
+                padding: 10,
+                borderRadius: 8,
+              }}
+            />
+
+            <h3>Filtros</h3>
+
+            <button onClick={() => setBrand('all')}>Todas</button>
+            <button onClick={() => setBrand('Nike')}>Nike</button>
+            <button onClick={() => setBrand('Adidas')}>Adidas</button>
+          </div>
+        )}
+
+        {/* CART PANEL */}
+        {cartOpen && (
+          <div
+            style={{
+              position: 'fixed',
+              right: 0,
+              top: 0,
+              width: 300,
+              height: '100%',
+              background: '#111',
+              padding: 20,
+              zIndex: 3000,
+            }}
+          >
+            <button onClick={() => setCartOpen(false)}>
+              ✕ Cerrar
+            </button>
+
+            <h3>🛒 Carrito</h3>
+
+            {cart.length === 0 && <p>Vacío</p>}
+
+            {cart.map((item, i) => (
+              <div key={i} style={{ marginTop: 10 }}>
+                <p>{item.name}</p>
+                <p>{item.price}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* GRID */}
+        {!selected && (
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: 16,
+              marginTop: 40,
+            }}
+          >
+            {filtered.map(s => (
+              <div
+                key={s.id}
+                onClick={() => setSelected(s)}
+                style={{
+                  background: 'rgba(255,255,255,0.08)',
+                  padding: 12,
+                  borderRadius: 14,
+                  cursor: 'pointer',
+                }}
+              >
+                <img
+                  src={s.image}
+                  style={{ width: '100%', borderRadius: 12 }}
+                />
+
+                <h3>{s.name}</h3>
+                <p>{s.brand}</p>
+                <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+
+                <button
+                  onClick={e => {
+                    e.stopPropagation()
+                    addToCart(s)
+                  }}
+                >
+                  🛒 Añadir
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* DETAIL */}
+        {selected && (
+          <div style={{ textAlign: 'center', paddingTop: 60 }}>
+            <button onClick={() => setSelected(null)}>
+              ← Volver
+            </button>
+
+            <h2>{selected.name}</h2>
+
+            <img
+              src={selected.image}
+              style={{ width: 320, borderRadius: 12 }}
+            />
+
+            <button onClick={() => addToCart(selected)}>
+              🛒 Añadir al carrito
+            </button>
+          </div>
+        )}
+      </div>
     </main>
   )
-}
-
-const sideBtn = {
-  display: 'block',
-  marginTop: 10,
-  padding: 10,
-  width: '100%',
-  borderRadius: 10,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
-  cursor: 'pointer',
 }
