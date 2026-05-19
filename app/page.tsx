@@ -1,7 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-import { supabase } from '@/lib/supabase'
+import { useMemo, useState } from 'react'
 
 type Sneaker = {
   id: number
@@ -36,52 +35,12 @@ const sneakers: Sneaker[] = [
   },
 ]
 
-const USER_ID = 'demo-user'
-
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<number[]>([])
-
-  // 🧠 CARGAR FAVORITOS DESDE BD
-  useEffect(() => {
-    const loadFavorites = async () => {
-      const { data } = await supabase
-        .from('favorites')
-        .select('sneaker_id')
-        .eq('user_id', USER_ID)
-
-      if (data) {
-        setFavorites(data.map((f: any) => f.sneaker_id))
-      }
-    }
-
-    loadFavorites()
-  }, [])
-
-  // ❤️ TOGGLE FAVORITO (BD + UI)
-  const toggleFavorite = async (id: number) => {
-    const isFav = favorites.includes(id)
-
-    if (isFav) {
-      await supabase
-        .from('favorites')
-        .delete()
-        .eq('user_id', USER_ID)
-        .eq('sneaker_id', id)
-
-      setFavorites(prev => prev.filter(f => f !== id))
-    } else {
-      await supabase.from('favorites').insert({
-        user_id: USER_ID,
-        sneaker_id: id,
-      })
-
-      setFavorites(prev => [...prev, id])
-    }
-  }
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -92,6 +51,16 @@ export default function Home() {
       return matchBrand && matchSearch
     })
   }, [brand, search])
+
+  const toggleFavorite = (id: number) => {
+    setFavorites(prev =>
+      prev.includes(id)
+        ? prev.filter(f => f !== id)
+        : [...prev, id]
+    )
+  }
+
+  const isFavorite = (id: number) => favorites.includes(id)
 
   return (
     <main
@@ -105,11 +74,11 @@ export default function Home() {
       }}
     >
 
-      {/* TOP */}
+      {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>Marketplace real con favoritos</p>
+          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
+          <p style={{ opacity: 0.7 }}>Marketplace de zapatillas</p>
 
           <button
             onClick={() => setMenuOpen(true)}
@@ -150,17 +119,21 @@ export default function Home() {
       {!selected && (
         <div style={grid}>
           {filtered.map(s => (
-            <div key={s.id} style={card} onClick={() => setSelected(s)}>
+            <div
+              key={s.id}
+              style={card}
+              onClick={() => setSelected(s)}
+            >
 
-              {/* ❤️ FAVORITOS */}
+              {/* ❤️ FAVORITO */}
               <div
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation()
                   toggleFavorite(s.id)
                 }}
                 style={heart}
               >
-                {favorites.includes(s.id) ? '❤️' : '🤍'}
+                {isFavorite(s.id) ? '❤️' : '🤍'}
               </div>
 
               <img src={s.image} style={img} />
@@ -173,11 +146,10 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL */}
+      {/* DETAIL (ARREGLADO) */}
       {selected && (
         <div style={detail}>
 
-          {/* BACK BUTTON PRO */}
           <button
             onClick={() => setSelected(null)}
             style={backBtn}
@@ -185,11 +157,11 @@ export default function Home() {
             ← Volver
           </button>
 
-          <h2>{selected.name}</h2>
+          <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={center}>
             <img src={selected.image} style={imgDetail} />
           </div>
 
@@ -197,22 +169,17 @@ export default function Home() {
             onClick={() => window.open(selected.link, '_blank')}
             style={buyBtn}
           >
-            🌐 Comprar en Amazon
+            🛒 Comprar
           </button>
 
-          <button
-            onClick={() => toggleFavorite(selected.id)}
-            style={favBtn}
-          >
-            {favorites.includes(selected.id) ? '❤️ Guardado' : '🤍 Guardar favorito'}
-          </button>
         </div>
       )}
     </main>
   )
 }
 
-/* STYLES */
+/* ================= STYLES ================= */
+
 const grid = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
@@ -236,7 +203,7 @@ const img = {
 }
 
 const imgDetail = {
-  width: 340,
+  width: 320,
   borderRadius: 14,
 }
 
@@ -245,6 +212,21 @@ const heart = {
   top: 10,
   right: 10,
   cursor: 'pointer',
+  fontSize: 18,
+}
+
+const center = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 20,
+}
+
+const detail = {
+  maxWidth: 500,
+  margin: '0 auto',
+  textAlign: 'center' as const,
+  paddingTop: 60,
+  position: 'relative' as const,
 }
 
 const backBtn = {
@@ -254,26 +236,20 @@ const backBtn = {
   padding: '6px 12px',
   borderRadius: 999,
   border: '1px solid white',
-  background: 'rgba(255,255,255,0.05)',
+  background: 'transparent',
   color: 'white',
+  cursor: 'pointer',
 }
 
 const buyBtn = {
-  marginTop: 20,
+  marginTop: 25,
   padding: 14,
-  borderRadius: 12,
-  border: '1px solid #00c853',
-  color: '#00c853',
-  background: 'transparent',
-}
-
-const favBtn = {
-  marginTop: 10,
-  padding: 12,
+  width: 220,
   borderRadius: 12,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
+  cursor: 'pointer',
 }
 
 const sidebar = {
@@ -290,10 +266,10 @@ const sideBtn = {
   width: '100%',
   marginTop: 10,
   padding: 10,
+  borderRadius: 10,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  borderRadius: 10,
 }
 
 const input = {
