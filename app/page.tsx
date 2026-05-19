@@ -38,9 +38,10 @@ const sneakers: Sneaker[] = [
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
+  const [cart, setCart] = useState<Sneaker[]>([])
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
-  const [cart, setCart] = useState<Sneaker[]>([])
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
@@ -56,19 +57,6 @@ export default function Home() {
     setCart(prev => [...prev, item])
   }
 
-  const badgeColor = (badge?: string) => {
-    switch (badge) {
-      case 'BESTSELLER':
-        return '#ffd600'
-      case 'HOT':
-        return '#ff3d00'
-      case 'NEW':
-        return '#00c853'
-      default:
-        return 'transparent'
-    }
-  }
-
   return (
     <main
       style={{
@@ -80,41 +68,48 @@ export default function Home() {
         position: 'relative',
       }}
     >
+
       {/* TOP BAR */}
       {!selected && (
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
-          <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
-
+        <>
           <button
             onClick={() => setMenuOpen(true)}
             style={{
               position: 'absolute',
-              top: 15,
-              left: 15,
-              padding: 10,
+              top: 12,
+              left: 12,
+              padding: 8,
               borderRadius: 10,
               border: '1px solid white',
               background: 'transparent',
               color: 'white',
+              cursor: 'pointer',
             }}
           >
             ☰
           </button>
 
+          {/* CART BUTTON */}
           <div
+            onClick={() => setCartOpen(true)}
             style={{
               position: 'absolute',
-              top: 15,
-              right: 15,
+              top: 12,
+              right: 12,
               padding: '6px 10px',
               borderRadius: 10,
               border: '1px solid white',
+              cursor: 'pointer',
             }}
           >
-            🛒 {cart.length}
+            🛒:{cart.length}
           </div>
-        </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
+            <p style={{ opacity: 0.7 }}>Tu marketplace de zapatillas</p>
+          </div>
+        </>
       )}
 
       {/* SIDEBAR */}
@@ -142,8 +137,6 @@ export default function Home() {
             style={inputStyle}
           />
 
-          <h3>Filtros</h3>
-
           <button style={sideBtn} onClick={() => setBrand('all')}>
             Todas
           </button>
@@ -153,6 +146,36 @@ export default function Home() {
           <button style={sideBtn} onClick={() => setBrand('Adidas')}>
             Adidas
           </button>
+        </div>
+      )}
+
+      {/* CART */}
+      {cartOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            width: 300,
+            height: '100%',
+            background: '#111',
+            padding: 20,
+            zIndex: 3000,
+          }}
+        >
+          <button onClick={() => setCartOpen(false)} style={sideBtn}>
+            ✕ Cerrar carrito
+          </button>
+
+          {cart.length === 0 ? (
+            <p style={{ opacity: 0.6 }}>Carrito vacío</p>
+          ) : (
+            cart.map((item, i) => (
+              <div key={i} style={cartItem}>
+                <p style={{ fontSize: 12 }}>{item.name}</p>
+              </div>
+            ))
+          )}
         </div>
       )}
 
@@ -172,24 +195,6 @@ export default function Home() {
               onClick={() => setSelected(s)}
               style={cardStyle}
             >
-              {s.badge && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 10,
-                    left: 10,
-                    padding: '4px 8px',
-                    fontSize: 10,
-                    borderRadius: 6,
-                    fontWeight: 'bold',
-                    background: badgeColor(s.badge),
-                    color: 'black',
-                  }}
-                >
-                  {s.badge}
-                </div>
-              )}
-
               <img src={s.image} style={imgStyle} />
 
               <h3 style={{ fontSize: 14 }}>{s.name}</h3>
@@ -210,76 +215,54 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL (FIXED) */}
+      {/* DETAIL */}
       {selected && (
         <div
           style={{
             maxWidth: 520,
             margin: '0 auto',
             textAlign: 'center',
-            paddingTop: 60,
+            paddingTop: 70,
             position: 'relative',
           }}
         >
-          {/* BACK */}
+
+          {/* BACK BUTTON FIXED */}
           <button
-  onClick={() => setSelected(null)}
-  style={{
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    padding: '6px 12px',
-    borderRadius: 999,
-    border: '1px solid rgba(255,255,255,0.25)',
-    background: 'rgba(255,255,255,0.05)',
-    color: 'white',
-    cursor: 'pointer',
-    fontSize: 13,
-    backdropFilter: 'blur(6px)',
-    transition: '0.2s',
-  }}
-  onMouseOver={e => {
-    e.currentTarget.style.transform = 'scale(1.05)'
-    e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
-  }}
-  onMouseOut={e => {
-    e.currentTarget.style.transform = 'scale(1)'
-    e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-  }}
->
-  ← Volver
-</button>
+            onClick={() => setSelected(null)}
+            style={{
+              position: 'absolute',
+              top: 10,
+              left: 10,
+              padding: '6px 12px',
+              borderRadius: 999,
+              border: '1px solid rgba(255,255,255,0.3)',
+              background: 'rgba(255,255,255,0.05)',
+              color: 'white',
+              cursor: 'pointer',
+              fontSize: 13,
+            }}
+          >
+            ← Volver
+          </button>
 
           <h2 style={{ fontSize: 30 }}>{selected.name}</h2>
           <p>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          {/* IMAGE CENTERED PERFECTLY */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              marginTop: 25,
-            }}
-          >
+          {/* IMAGE CENTERED */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
             <img
               src={selected.image}
               style={{
                 width: 340,
                 borderRadius: 14,
-                objectFit: 'cover',
               }}
             />
           </div>
 
-          {/* AMAZON BUTTON FIXED POSITION */}
-          <div
-            style={{
-              marginTop: 30,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
+          {/* AMAZON BUTTON */}
+          <div style={{ marginTop: 25 }}>
             <button
               onClick={() => window.open(selected.link, '_blank')}
               style={{
@@ -290,7 +273,6 @@ export default function Home() {
                 background: 'transparent',
                 color: '#00c853',
                 fontWeight: 'bold',
-                cursor: 'pointer',
               }}
             >
               🌐 Comprar en Amazon
@@ -304,7 +286,6 @@ export default function Home() {
 
 /* STYLES */
 const cardStyle = {
-  position: 'relative' as const,
   background: 'rgba(255,255,255,0.05)',
   borderRadius: 14,
   padding: 14,
@@ -327,7 +308,6 @@ const btn = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  cursor: 'pointer',
 }
 
 const sideBtn = {
@@ -339,7 +319,6 @@ const sideBtn = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  cursor: 'pointer',
 }
 
 const inputStyle = {
@@ -352,13 +331,9 @@ const inputStyle = {
   marginBottom: 20,
 }
 
-const backBtn = {
-  position: 'absolute' as const,
-  top: 15,
-  left: 15,
+const cartItem = {
   padding: 10,
+  border: '1px solid rgba(255,255,255,0.2)',
   borderRadius: 10,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  marginTop: 10,
 }
