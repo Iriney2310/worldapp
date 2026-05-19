@@ -52,8 +52,7 @@ export default function Home() {
       {!selected && (
         <>
           <div style={{ textAlign: 'center' }}>
-            <h1>👟 ¡NOVEDADES! 👟</h1>
-            <p>TUS ZAPATILLAS AL MEJOR PRECIO</p>
+            <h1>👟 ¡SNEAKERS! 👟</h1>
           </div>
 
           <div
