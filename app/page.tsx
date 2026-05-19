@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import type { CSSProperties } from 'react'
 
 type Sneaker = {
   id: number
@@ -38,6 +39,7 @@ const sneakers: Sneaker[] = [
 export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [favOpen, setFavOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<number[]>([])
@@ -48,6 +50,7 @@ export default function Home() {
       const matchSearch =
         s.name.toLowerCase().includes(search.toLowerCase()) ||
         s.brand.toLowerCase().includes(search.toLowerCase())
+
       return matchBrand && matchSearch
     })
   }, [brand, search])
@@ -60,19 +63,12 @@ export default function Home() {
     )
   }
 
-  const isFavorite = (id: number) => favorites.includes(id)
+  const favItems = sneakers.filter(s =>
+    favorites.includes(s.id)
+  )
 
   return (
-    <main
-      style={{
-        minHeight: '100vh',
-        background: '#0b0b0b',
-        color: 'white',
-        fontFamily: 'sans-serif',
-        padding: 20,
-        position: 'relative',
-      }}
-    >
+    <main style={main}>
 
       {/* TOP BAR */}
       {!selected && (
@@ -80,48 +76,39 @@ export default function Home() {
           <h1 style={{ fontSize: 34 }}>👟 SNEAKERS</h1>
           <p style={{ opacity: 0.7 }}>Marketplace de zapatillas</p>
 
+          {/* MENU BUTTON */}
           <button
             onClick={() => setMenuOpen(true)}
-            style={{
-              position: 'absolute',
-              top: 10,
-              left: 10,
-              padding: 8,
-              borderRadius: 10,
-              border: '1px solid white',
-              background: 'transparent',
-              color: 'white',
-              cursor: 'pointer',
-            }}
+            style={topLeftBtn}
           >
             ☰
+          </button>
+
+          {/* FAVORITOS BUTTON */}
+          <button
+            onClick={() => setFavOpen(true)}
+            style={topRightBtn}
+          >
+            ❤️ {favorites.length}
           </button>
         </div>
       )}
 
-      {/* OVERLAY (ARREGLA EL PROBLEMA) */}
-      {menuOpen && !selected && (
+      {/* OVERLAY */}
+      {(menuOpen || favOpen) && (
         <div
-          onClick={() => setMenuOpen(false)}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0,0,0,0.5)',
-            zIndex: 9998,
+          onClick={() => {
+            setMenuOpen(false)
+            setFavOpen(false)
           }}
+          style={overlay}
         />
       )}
 
       {/* SIDEBAR */}
-      {menuOpen && !selected && (
+      {menuOpen && (
         <div style={sidebar}>
-          <button
-            onClick={() => setMenuOpen(false)}
-            style={sideBtn}
-          >
+          <button onClick={() => setMenuOpen(false)} style={sideBtn}>
             ✕ Cerrar
           </button>
 
@@ -144,6 +131,35 @@ export default function Home() {
         </div>
       )}
 
+      {/* FAVORITES PANEL */}
+      {favOpen && (
+        <div style={favPanel}>
+          <button onClick={() => setFavOpen(false)} style={sideBtn}>
+            ✕ Cerrar favoritos
+          </button>
+
+          <h3>❤️ Favoritos</h3>
+
+          {favItems.length === 0 && (
+            <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
+          )}
+
+          {favItems.map(item => (
+            <div key={item.id} style={favCard}>
+              <img src={item.image} style={favImg} />
+              <p style={{ fontSize: 12 }}>{item.name}</p>
+
+              <button
+                onClick={() => toggleFavorite(item.id)}
+                style={removeBtn}
+              >
+                Quitar
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* GRID */}
       {!selected && (
         <div style={grid}>
@@ -153,7 +169,6 @@ export default function Home() {
               style={card}
               onClick={() => setSelected(s)}
             >
-
               <div
                 onClick={(e) => {
                   e.stopPropagation()
@@ -161,7 +176,7 @@ export default function Home() {
                 }}
                 style={heart}
               >
-                {isFavorite(s.id) ? '❤️' : '🤍'}
+                {favorites.includes(s.id) ? '❤️' : '🤍'}
               </div>
 
               <img src={s.image} style={img} />
@@ -177,20 +192,16 @@ export default function Home() {
       {/* DETAIL */}
       {selected && (
         <div style={detail}>
-          <button
-            onClick={() => setSelected(null)}
-            style={backBtn}
-          >
+          <button onClick={() => setSelected(null)} style={backBtn}>
             ← Volver
           </button>
 
           <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
-          <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
-          <div style={center}>
-            <img src={selected.image} style={imgDetail} />
-          </div>
+          <img src={selected.image} style={imgDetail} />
+
+          <p style={{ marginTop: 10 }}>{selected.brand}</p>
+          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
 
           <button
             onClick={() => window.open(selected.link, '_blank')}
@@ -206,57 +217,57 @@ export default function Home() {
 
 /* ================= STYLES ================= */
 
-const grid = {
+const main: CSSProperties = {
+  minHeight: '100vh',
+  background: '#0b0b0b',
+  color: 'white',
+  fontFamily: 'sans-serif',
+  padding: 20,
+  position: 'relative',
+}
+
+const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
   gap: 16,
   marginTop: 40,
 }
 
-const card = {
+const card: CSSProperties = {
   background: 'rgba(255,255,255,0.05)',
   padding: 12,
   borderRadius: 14,
-  position: 'relative' as const,
+  position: 'relative',
   cursor: 'pointer',
 }
 
-const img = {
+const img: CSSProperties = {
   width: '100%',
-  height: 140,
-  objectFit: 'cover' as const,
   borderRadius: 12,
 }
 
-const imgDetail = {
+const imgDetail: CSSProperties = {
   width: 320,
   borderRadius: 14,
 }
 
-const heart = {
-  position: 'absolute' as const,
+const heart: CSSProperties = {
+  position: 'absolute',
   top: 10,
   right: 10,
   cursor: 'pointer',
-  fontSize: 18,
 }
 
-const center = {
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: 20,
-}
-
-const detail = {
+const detail: CSSProperties = {
   maxWidth: 500,
   margin: '0 auto',
-  textAlign: 'center' as const,
+  textAlign: 'center',
   paddingTop: 60,
-  position: 'relative' as const,
+  position: 'relative',
 }
 
-const backBtn = {
-  position: 'absolute' as const,
+const backBtn: CSSProperties = {
+  position: 'absolute',
   top: 10,
   left: 10,
   padding: '6px 12px',
@@ -264,22 +275,19 @@ const backBtn = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  cursor: 'pointer',
 }
 
-const buyBtn = {
-  marginTop: 25,
-  padding: 14,
-  width: 220,
-  borderRadius: 12,
+const buyBtn: CSSProperties = {
+  marginTop: 20,
+  padding: 12,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  cursor: 'pointer',
+  borderRadius: 10,
 }
 
-const sidebar = {
-  position: 'fixed' as const,
+const sidebar: CSSProperties = {
+  position: 'fixed',
   top: 0,
   left: 0,
   width: 280,
@@ -287,20 +295,82 @@ const sidebar = {
   background: '#111',
   padding: 20,
   zIndex: 9999,
-  boxShadow: '2px 0 20px rgba(0,0,0,0.5)',
 }
 
-const sideBtn = {
+const favPanel: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  width: 300,
+  height: '100%',
+  background: '#111',
+  padding: 20,
+  zIndex: 9999,
+}
+
+const favCard: CSSProperties = {
+  marginTop: 10,
+  padding: 8,
+  border: '1px solid rgba(255,255,255,0.2)',
+  borderRadius: 10,
+}
+
+const favImg: CSSProperties = {
   width: '100%',
+  borderRadius: 8,
+}
+
+const removeBtn: CSSProperties = {
+  marginTop: 5,
+  width: '100%',
+  padding: 6,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+
+const overlay: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0,0,0,0.5)',
+  zIndex: 9998,
+}
+
+const topLeftBtn: CSSProperties = {
+  position: 'absolute',
+  top: 10,
+  left: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  padding: 6,
+}
+
+const topRightBtn: CSSProperties = {
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  padding: 6,
+}
+
+const sideBtn: CSSProperties = {
+  display: 'block',
   marginTop: 10,
   padding: 10,
+  width: '100%',
   borderRadius: 10,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
 }
 
-const input = {
+const input: CSSProperties = {
   width: '100%',
   padding: 10,
   marginTop: 10,
