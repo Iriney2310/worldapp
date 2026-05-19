@@ -73,7 +73,7 @@ export default function Home() {
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: 34 }}>¡SNEAKERS!</h1>
+          <h1 style={{ fontSize: 34 }}>👟 ¡SNEAKERS!</h1>
           <p style={{ opacity: 0.7 }}>Tus Sneakers Favoritas</p>
 
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
@@ -105,7 +105,7 @@ export default function Home() {
           </button>
 
           <input
-            placeholder="🔎Buscar..."
+            placeholder="🔎 Buscar..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             style={input}
@@ -178,6 +178,14 @@ export default function Home() {
               style={card}
               onClick={() => setSelected(s)}
             >
+
+              {/* BADGE FIX */}
+              {s.badge && (
+                <div style={badge}>
+                  {s.badge}
+                </div>
+              )}
+
               <div
                 onClick={(e) => {
                   e.stopPropagation()
@@ -198,7 +206,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* DETAIL */}
+      {/* DETAIL FIXED */}
       {selected && (
         <div style={detail}>
           <button onClick={() => setSelected(null)} style={backBtn}>
@@ -207,7 +215,17 @@ export default function Home() {
 
           <h2 style={{ fontSize: 28 }}>{selected.name}</h2>
 
-          <img src={selected.image} style={imgDetail} />
+          {/* IMAGE CENTER FIX */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+            <img
+              src={selected.image}
+              style={{
+                width: 320,
+                borderRadius: 14,
+                objectFit: 'contain',
+              }}
+            />
+          </div>
 
           <p style={{ marginTop: 10 }}>{selected.brand}</p>
           <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
@@ -255,16 +273,23 @@ const img: CSSProperties = {
   borderRadius: 12,
 }
 
-const imgDetail: CSSProperties = {
-  width: 320,
-  borderRadius: 14,
-}
-
 const heart: CSSProperties = {
   position: 'absolute',
   top: 10,
   right: 10,
   cursor: 'pointer',
+}
+
+const badge: CSSProperties = {
+  position: 'absolute',
+  top: 8,
+  left: 8,
+  fontSize: 10,
+  padding: '4px 8px',
+  borderRadius: 6,
+  background: '#ffd600',
+  color: 'black',
+  fontWeight: 'bold',
 }
 
 const detail: CSSProperties = {
