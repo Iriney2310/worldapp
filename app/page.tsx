@@ -421,12 +421,12 @@ const overlay: CSSProperties = {
 
 const topLeftBtn: CSSProperties = {
   position: 'absolute',
-  top: 15,
-  left: 10,
+  top: 12,
+  left: 15,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '2px 10px',  // 👈 más ancho y alto
+  padding: '2px 16px',  // 👈 más ancho y alto
   fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
 }
@@ -466,7 +466,7 @@ const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',
   margin: '3px auto',
-  marginTop: 15,
+  marginTop: 12,
   padding: '6px 16px',
   borderRadius: 12,
   textAlign: 'center',
