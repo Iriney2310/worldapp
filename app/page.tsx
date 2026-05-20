@@ -50,7 +50,7 @@ const sneakers: Sneaker[] = [
     brand: 'Adidas',
     price: 'Desde39,99€',
     image:
-      'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
+      'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
   },
