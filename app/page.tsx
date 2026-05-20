@@ -258,6 +258,7 @@ export default function Home() {
           onClick={(e) => {
             e.stopPropagation()
             toggleFavorite(s.id)
+            e.currentTarget.parentElement!.style.transform = 'translateY(0) scale(1)'
           }}
           style={heart}
         >
