@@ -264,19 +264,17 @@ export default function Home() {
 /* ================= STYLES ================= */
 
 const main: CSSProperties = {
-  minHeight: '100vh',
-  color: 'white',
-  fontFamily: 'sans-serif',
-  padding: 20,
-
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  backgroundAttachment: 'fixed',
-
-  backgroundColor: 'rgba(0,0,0,0.55)',
-  backgroundBlendMode: 'darken',
+  filter: 'blur(18px) brightness(0.4) saturate(1.2)',
+  transform: 'scale(1.1)',
+  zIndex: -2,
 }
 
 const grid: CSSProperties = {
