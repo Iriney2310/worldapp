@@ -26,6 +26,16 @@ const sneakers: Sneaker[] = [
   },
   {
     id: 2,
+    name: 'Air Max Ltd 3',
+    brand: 'Nike',
+    price: '90,99€',
+    image:
+      'https://vvrl.cc/es/kh30cq/300x300/air-max-ltd-3-zapatos-de-correr-para-hombre-9nZgqj.jpg',
+    link: 'https://amzn.to/4nIiepg',
+    badge: 'NEW',
+  },
+  {
+    id: 3,
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
     price: '39,99€-54,99€',
@@ -426,7 +436,7 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '2px 16px',  // 👈 más ancho y alto
+  padding: '4px 14px',  // 👈 más ancho y alto
   fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
 }
