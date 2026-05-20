@@ -4,12 +4,10 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --bg: #0b0b0b;
+  --card: rgba(255,255,255,0.05);
+  --accent: #ff00cc;
 }
 
 @media (prefers-color-scheme: dark) {
