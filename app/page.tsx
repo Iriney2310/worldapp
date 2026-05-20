@@ -126,7 +126,7 @@ export default function Home() {
     setTimeout(() => {
       setSelected(null)
       setClosing(false)
-    }, 200)
+    }, 60)
   }
 
   return (
@@ -314,7 +314,6 @@ export default function Home() {
   </div>
 )}
 
-      {/* DETAIL */}
 {/* DETAIL */}
 {selected && (
   <div
