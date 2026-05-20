@@ -78,6 +78,8 @@ export default function Home() {
 
   return (
     <main style={main}>
+      <div style={bg} />
+<div style={overlayBg} />
 {/* BANNER */}
 {!selected && (
   <div style={banner}>
@@ -273,28 +275,17 @@ const main: CSSProperties = {
 }
 const bg: CSSProperties = {
   position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
+  inset: 0,
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   transform: 'scale(1.05)',
   zIndex: -3,
 }
-
 const overlayBg: CSSProperties = {
   position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  background: `
-    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 40%),
-    linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.9))
-  `,
-  backdropFilter: 'blur(2px)',
+  inset: 0,
+  background: 'rgba(0,0,0,0.55)',
   zIndex: -2,
 }
 const overlayLayer: CSSProperties = {
