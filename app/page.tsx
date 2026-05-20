@@ -81,13 +81,13 @@ export default function Home() {
 {/* BANNER */}
 {!selected && (
   <div style={banner}>
-    👟 ¡LOS MEJORES PRECIOS!🚚
+    👟¡SNEAKERS!🚚
   </div>
 )}
       {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <h5>¡SNEAKERS!</h5>
+          
           <p style={{ opacity: 0.7 }}>
             Tus Sneakers Favoritas A Un Solo Click
           </p>
@@ -400,9 +400,9 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '8px 16px',  // 👈 más ancho y alto
-  fontSize: 16,          // 👈 icono más grande
-  borderRadius: 0,
+  padding: '5px 15px',  // 👈 más ancho y alto
+  fontSize: 23,          // 👈 icono más grande
+  borderRadius: 5,
 }
 
 const topRightBtn: CSSProperties = {
@@ -413,6 +413,7 @@ const topRightBtn: CSSProperties = {
   background: 'transparent',
   color: 'white',
   padding: 6,
+  borderRadius: 5,
 }
 
 const sideBtn: CSSProperties = {
