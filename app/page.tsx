@@ -40,7 +40,7 @@ const sneakers: Sneaker[] = [
     brand: 'Nike',
     price: 'Desde 53,99€',
     image:
-      'https://img.joomcdn.net/883868001ecba1511625e32d8e3bc043d9d3768c_1024_1024.jpeg',
+      'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
     badge: 'NEW',
   },
