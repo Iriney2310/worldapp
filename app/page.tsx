@@ -120,7 +120,7 @@ export default function Home() {
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           
-          <p style={{ opacity: 0.7, marginTop: 10 }}>
+          <p style={{ opacity: 0.5, marginTop: 10 }}>
             ¡TUS SNEAKERS AL MEJOR PRECIO!
           </p>
 
@@ -260,7 +260,7 @@ export default function Home() {
       transform: closing
         ? 'translateY(10px) scale(0.98)'
         : 'translateY(0) scale(1)',
-      transition: '0.25s ease',
+      transition: '0.15s ease',
     }}
   >
     <button onClick={closeDetail} style={backBtn}>
@@ -268,9 +268,15 @@ export default function Home() {
     </button>
 
     {/* TITULO GRANDE */}
-    <h2 style={{ fontSize: 28, marginBottom: 10 }}>
-      {selected.name}
-    </h2>
+    <h2
+  style={{
+    marginTop: 40,
+    fontSize: 28,
+    marginBottom: 10,
+  }}
+>
+  {selected.name}
+</h2>
 
     {/* IMAGEN MÁS PRO */}
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -415,7 +421,8 @@ const backBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   left: 10,
-  padding: '6px 12px',
+  padding: '4px 10px',
+  fontSize: 10,
   borderRadius: 999,
   border: '1px solid white',
   background: 'transparent',
