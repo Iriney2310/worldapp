@@ -30,7 +30,7 @@ const sneakers: Sneaker[] = [
     brand: 'Nike',
     price: '90,99€',
     image:
-      'https://academy.scene7.com/is/image/academy/20461600?$pdp-gallery-ng$',
+      'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
     badge: 'NEW',
   },
@@ -42,6 +42,16 @@ const sneakers: Sneaker[] = [
     image:
       'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
     link: 'https://amzn.to/3Px9aGX',
+    badge: 'HOT',
+  },
+  {
+    id: 4,
+    name: 'VL Court 3.0',
+    brand: 'Adidas',
+    price: '41,99€',
+    image:
+      'https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp',
+    link: 'https://amzn.to/4nHqSUY',
     badge: 'HOT',
   },
 ]
