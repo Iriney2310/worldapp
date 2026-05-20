@@ -266,14 +266,14 @@ export default function Home() {
 /* ================= STYLES ================= */
 
 const main: CSSProperties = {
-  position: 'relative',
-  zIndex: 1,
   minHeight: '100vh',
+  position: 'relative',
   color: 'white',
   fontFamily: 'sans-serif',
-  padding: 20,
-  background: 'transparent', // 👈 clave
+  overflow: 'hidden',
 }
+
+/* fondo real */
 const bg: CSSProperties = {
   position: 'fixed',
   inset: 0,
@@ -282,22 +282,18 @@ const bg: CSSProperties = {
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
   zIndex: -2,
+  transform: 'scale(1.05)',
 }
+
+/* capa elegante tipo Nike (MUY suave) */
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'rgba(0,0,0,0.25)', // 👈 más transparente
+  background:
+    'radial-gradient(circle at top, rgba(0,0,0,0.15), rgba(0,0,0,0.75))',
   zIndex: -1,
 }
-const overlayLayer: CSSProperties = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  background: 'rgba(0,0,0,0.35)',
-  zIndex: -1,
-}
+
 const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
