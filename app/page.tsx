@@ -252,6 +252,7 @@ export default function Home() {
 )}
 
       {/* DETAIL */}
+{/* DETAIL */}
 {selected && (
   <div
     style={{
@@ -263,59 +264,61 @@ export default function Home() {
       transition: '0.15s ease',
     }}
   >
+    {/* BOTÓN VOLVER */}
     <button onClick={closeDetail} style={backBtn}>
       ← Volver
     </button>
 
-    {/* TITULO GRANDE */}
+    {/* TITULO */}
     <h2
-  style={{
-    marginTop: 40,
-    fontSize: 28,
-    marginBottom: 10,
-  }}
->
-  {selected.name}
-</h2>
+      style={{
+        marginTop: 50,
+        fontSize: 30,
+        marginBottom: 12,
+        textAlign: 'center',
+      }}
+    >
+      {selected.name}
+    </h2>
 
-    {/* IMAGEN MÁS PRO */}
+    {/* IMAGEN */}
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <img
         src={selected.image}
         style={{
-          width: 340,
+          width: 360,
           borderRadius: 18,
           objectFit: 'contain',
-          boxShadow: '0 15px 40px rgba(0,0,0,0.4)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
         }}
       />
     </div>
 
-    {/* INFO MÁS PRO */}
-    <div style={{ marginTop: 20 }}>
+    {/* INFO */}
+    <div style={{ marginTop: 22, textAlign: 'center' }}>
       <p style={{ fontSize: 16, opacity: 0.8 }}>
         Marca: <b>{selected.brand}</b>
       </p>
 
-      <p style={{ fontSize: 18, marginTop: 8 }}>
+      <p style={{ fontSize: 20, marginTop: 8 }}>
         Precio: <b>{selected.price}</b>
       </p>
 
-      <p style={{ opacity: 0.6, marginTop: 10 }}>
-        La opcion mas economica y con mejor valoracion.
+      <p style={{ opacity: 0.6, marginTop: 10, fontSize: 14 }}>
+        Diseño premium, comodidad diaria y estilo urbano.
       </p>
     </div>
 
-    {/* BOTÓN MÁS PRO */}
+    {/* BOTÓN */}
     <button
       onClick={() => window.open(selected.link, '_blank')}
       style={{
         ...buyBtn,
-        marginTop: 25,
-        padding: '14px 20px',
+        marginTop: 28,
+        padding: '14px 22px',
         fontSize: 16,
         fontWeight: 'bold',
-        borderRadius: 12,
+        borderRadius: 14,
         background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
         border: 'none',
       }}
@@ -421,8 +424,8 @@ const backBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   left: 10,
-  padding: '4px 10px',
-  fontSize: 10,
+  padding: '6px 12px',
+  fontSize: 12,
   borderRadius: 999,
   border: '1px solid white',
   background: 'transparent',
