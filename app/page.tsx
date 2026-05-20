@@ -30,7 +30,7 @@ const sneakers: Sneaker[] = [
     brand: 'Nike',
     price: '90,99€',
     image:
-      'https://vvrl.cc/es/kh30cq/300x300/air-max-ltd-3-zapatos-de-correr-para-hombre-9nZgqj.jpg',
+      'https://academy.scene7.com/is/image/academy/20461600?$pdp-gallery-ng$',
     link: 'https://amzn.to/4nIiepg',
     badge: 'NEW',
   },
