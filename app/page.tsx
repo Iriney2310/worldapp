@@ -8,6 +8,7 @@ type Sneaker = {
   name: string
   brand: string
   price: string
+  oldPrice?: string
   image: string
   link: string
   rating: string
@@ -36,7 +37,8 @@ const sneakers: Sneaker[] = [
     id: 2,
     name: 'Air Max Ltd 3',
     brand: 'Nike',
-    price: '<del>119,95€</del> ➡ 90,99€',
+    price: '90,99€',
+    oldPrice: '129,99€',
     image:
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
@@ -267,7 +269,7 @@ export default function Home() {
     style={{
       position: 'absolute',
       top: 8,
-      left: 45 + i * 60,
+      left: 70 + i * 60,
       fontSize: 10,
       padding: '3px 8px',
       borderRadius: 6,
@@ -286,7 +288,26 @@ export default function Home() {
 
         <h3>{s.name}</h3>
         <p>{s.brand}</p>
-        <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+        <div style={{ marginTop: 6 }}>
+  {/* precio actual */}
+  <p style={{ fontWeight: 'bold', fontSize: 16 }}>
+    {s.price}
+  </p>
+
+  {/* precio antiguo tachado */}
+  {s.oldPrice && (
+    <p
+      style={{
+        textDecoration: 'line-through',
+        opacity: 0.5,
+        fontSize: 13,
+        marginTop: 2,
+      }}
+    >
+      {s.oldPrice}
+    </p>
+  )}
+</div>
       </div>
     ))}
   </div>
