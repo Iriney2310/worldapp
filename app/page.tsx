@@ -291,7 +291,7 @@ export default function Home() {
     {/* TITULO */}
     <h2
   style={{
-    marginTop: 55,
+    marginTop: 40,
     fontSize: 34,
     fontWeight: 800,
     letterSpacing: '-0.5px',
