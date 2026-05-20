@@ -10,7 +10,7 @@ type Sneaker = {
   price: string
   image: string
   link: string
-  badge?: 'NEW' | 'HOT' | 'BESTSELLER'
+  badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
 }
 
 const sneakers: Sneaker[] = [
@@ -32,20 +32,30 @@ const sneakers: Sneaker[] = [
     image:
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
-    badge: 'NEW',
+    badge: 'OFFER',
   },
   {
     id: 3,
+    name: 'Court Vision Low',
+    brand: 'Nike',
+    price: 'Desde 53,99€',
+    image:
+      'https://img.joomcdn.net/883868001ecba1511625e32d8e3bc043d9d3768c_1024_1024.jpeg',
+    link: 'https://amzn.to/4die6c0',
+    badge: 'NEW',
+  },
+  {
+    id: 4,
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
-    price: '39,99€-54,99€',
+    price: 'Desde39,99€',
     image:
       'https://cdn1.ozone.ru/s3/multimedia-1-l/c600/7032969129.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
   },
   {
-    id: 4,
+    id: 5,
     name: 'VL Court 3.0',
     brand: 'Adidas',
     price: '41,99€',
@@ -441,12 +451,12 @@ const overlay: CSSProperties = {
 
 const topLeftBtn: CSSProperties = {
   position: 'absolute',
-  top: 12,
-  left: 15,
+  top: 10,
+  left: 13,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '4px 14px',  // 👈 más ancho y alto
+  padding: '3px 14px',  // 👈 más ancho y alto
   fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
 }
