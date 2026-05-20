@@ -400,8 +400,8 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '0px 10px',  // 👈 más ancho y alto
-  fontSize: 23,          // 👈 icono más grande
+  padding: '3px 15px',  // 👈 más ancho y alto
+  fontSize: 25,          // 👈 icono más grande
   borderRadius: 5,
 }
 
@@ -440,7 +440,7 @@ const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',
   margin: '3px auto',
-  marginTop: 10,
+  marginTop: -10,
   padding: '8px 16px',
   borderRadius: 12,
   textAlign: 'center',
@@ -448,5 +448,5 @@ const banner: CSSProperties = {
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 1.5,
+  lineHeight: 2,
 }
