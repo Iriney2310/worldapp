@@ -40,7 +40,7 @@ const sneakers: Sneaker[] = [
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
     badge: 'OFFER',
-    rating: "4.5 / 5",
+    rating: "4.0 / 5",
   usage: "Running",
   stock: "Pocas unidades"
   },
@@ -53,7 +53,7 @@ const sneakers: Sneaker[] = [
       'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
     badge: 'NEW',
-    rating: "4.5 / 5",
+    rating: "4.4 / 5",
   usage: "Running",
   stock: "Pocas unidades"
   },
@@ -66,7 +66,7 @@ const sneakers: Sneaker[] = [
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
-    rating: "4.5 / 5",
+    rating: "4.4 / 5",
   usage: "Running",
   stock: "Pocas unidades"
   },
