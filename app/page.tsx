@@ -265,10 +265,18 @@ export default function Home() {
 
 const main: CSSProperties = {
   minHeight: '100vh',
-  background: '#0b0b0b',
   color: 'white',
   fontFamily: 'sans-serif',
   padding: 20,
+
+  backgroundImage: 'url("/fondo.jpg")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundAttachment: 'fixed',
+
+  backgroundColor: 'rgba(0,0,0,0.55)',
+  backgroundBlendMode: 'darken',
 }
 
 const grid: CSSProperties = {
@@ -279,12 +287,16 @@ const grid: CSSProperties = {
 }
 
 const card: CSSProperties = {
-  background: 'rgba(255,255,255,0.05)',
+  background: 'rgba(255,255,255,0.06)',
   padding: 12,
-  borderRadius: 14,
+  borderRadius: 22,
   position: 'relative',
   cursor: 'pointer',
-  transition: '0.2s ease',
+  transition: '0.25s ease',
+  backdropFilter: 'blur(12px)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
+  overflow: 'hidden',
 }
 
 const img: CSSProperties = {
