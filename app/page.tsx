@@ -269,7 +269,7 @@ export default function Home() {
     style={{
       position: 'absolute',
       top: 8,
-      left: 70 + i * 60,
+      left: 55 + i * 60,
       fontSize: 10,
       padding: '3px 8px',
       borderRadius: 6,
@@ -295,18 +295,17 @@ export default function Home() {
   </p>
 
   {/* precio antiguo tachado */}
-  {s.oldPrice && (
-    <p
-      style={{
-        textDecoration: 'line-through',
-        opacity: 0.5,
-        fontSize: 13,
-        marginTop: 2,
-      }}
-    >
-      {s.oldPrice}
-    </p>
-  )}
+  <p
+  style={{
+    textDecoration: 'line-through',
+    color: '#fff',   // 👈 blanco
+    fontSize: 14,
+    opacity: 0.8,
+  }}
+>
+  {s.oldPrice}
+</p>
+
 </div>
       </div>
     ))}
