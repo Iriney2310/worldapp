@@ -121,7 +121,7 @@ export default function Home() {
         <div style={{ textAlign: 'center' }}>
           
           <p style={{ opacity: 0.7, marginTop: 10 }}>
-            LAS MEJORES ZAPATILLAS AL MEJOR PRECIO!
+            ¡TUS SNEAKERS AL MEJOR PRECIO!
           </p>
 
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
@@ -295,7 +295,7 @@ export default function Home() {
       </p>
 
       <p style={{ opacity: 0.6, marginTop: 10 }}>
-        Zapatilla seleccionada de nuestra colección premium.
+        La opcion mas economica y con mejor valoracion.
       </p>
     </div>
 
@@ -400,7 +400,14 @@ const detail: CSSProperties = {
   margin: '0 auto',
   textAlign: 'center',
   paddingTop: 60,
+
   position: 'relative',
+  zIndex: 1,
+
+  backdropFilter: 'blur(6px)',
+  background: 'rgba(0,0,0,0.15)',
+  borderRadius: 20,
+  padding: 20,
 }
 
 const backBtn: CSSProperties = {
