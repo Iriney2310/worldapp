@@ -290,15 +290,19 @@ export default function Home() {
 
     {/* TITULO */}
     <h2
-      style={{
-        marginTop: 50,
-        fontSize: 30,
-        marginBottom: 12,
-        textAlign: 'center',
-      }}
-    >
-      {selected.name}
-    </h2>
+  style={{
+    marginTop: 55,
+    fontSize: 34,
+    fontWeight: 800,
+    letterSpacing: '-0.5px',
+    textAlign: 'center',
+    background: 'linear-gradient(90deg, #ffffff, #bdbdbd)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  }}
+>
+  {selected.name}
+</h2>
 
     {/* IMAGEN */}
     <div style={{ display: 'flex', justifyContent: 'center' }}>
