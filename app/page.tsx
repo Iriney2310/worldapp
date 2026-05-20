@@ -29,7 +29,7 @@ const sneakers: Sneaker[] = [
     badge: 'BESTSELLER',
     rating: "4.5 / 5",
   usage: "Daily",
-  stock: "Pocas unidades"
+  stock: "Ultimas unidades🔥"
   },
   {
     id: 2,
@@ -339,16 +339,19 @@ export default function Home() {
   </p>
 
   {/* NUEVO: STOCK */}
-  <p style={{ fontSize: 14 }}>
+  <p style={{ fontSize: 14, marginTop: 6 }}>
   📦 Estado:{' '}
+
   <b
     style={{
       color:
-        selected.stock === 'En stock'
+        selected.stock.includes('En stock')
           ? '#00ff99'
-          : selected.stock === 'Pocas unidades'
+          : selected.stock.includes('Pocas')
           ? 'orange'
-          : 'red',
+          : selected.stock.includes('Últimas')
+          ? 'red'
+          : '#ccc',
     }}
   >
     {selected.stock}
