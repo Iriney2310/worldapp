@@ -83,7 +83,7 @@ export default function Home() {
 {/* BANNER */}
 {!selected && (
   <div style={banner}>
-    ¡SNEAKERS!
+    👟¡SNEAKERS!🚚
   </div>
 )}
       {/* TOP BAR */}
@@ -283,6 +283,14 @@ const bg: CSSProperties = {
   backgroundRepeat: 'no-repeat',
   zIndex: -2,
   transform: 'scale(1.05)',
+}
+
+/* capa elegante tipo Nike (MUY suave) */
+const overlayBg: CSSProperties = {
+  position: 'fixed',
+  inset: 0,
+  background: 'rgba(0,0,0,0.35)',
+  zIndex: -1,
 }
 
 const grid: CSSProperties = {
