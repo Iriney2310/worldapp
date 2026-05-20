@@ -13,6 +13,7 @@ type Sneaker = {
   rating: string
   usage: string
   stock: string
+  tags?: string[]
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
   
 }
@@ -29,7 +30,7 @@ const sneakers: Sneaker[] = [
     badge: 'BESTSELLER',
     rating: "4.5 / 5",
   usage: "Daily",
-  stock: "Ultimas unidades🔥"
+  stock: "Ultimas Unidades"
   },
   {
     id: 2,
@@ -41,8 +42,9 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/4nIiepg',
     badge: 'OFFER',
     rating: "4.0 / 5",
-  usage: "Daily",
-  stock: "Pocas unidades"
+    tags: ['-30%'],
+    usage: "Daily",
+    stock: "Pocas Unidades"
   },
   {
     id: 3,
@@ -55,7 +57,7 @@ const sneakers: Sneaker[] = [
     badge: 'NEW',
     rating: "4.4 / 5",
   usage: "Daily / Lifestyle",
-  stock: "Pocas unidades"
+  stock: "En Stock"
   },
   {
     id: 4,
@@ -68,7 +70,7 @@ const sneakers: Sneaker[] = [
     badge: 'HOT',
     rating: "4.4 / 5",
   usage: "Daily / Lifestyle",
-  stock: "Pocas unidades"
+  stock: "En Stock"
   },
   {
     id: 5,
@@ -81,7 +83,7 @@ const sneakers: Sneaker[] = [
     badge: 'HOT',
     rating: "4.5 / 5",
   usage: "Football / Lifestyle",
-  stock: "Pocas unidades"
+  stock: "En Stock"
   },
 ]
 
@@ -259,7 +261,27 @@ export default function Home() {
         >
           {favorites.includes(s.id) ? '❤️' : '🤍'}
         </div>
-
+{s.tags?.map((tag, i) => (
+  <span
+    key={i}
+    style={{
+      position: 'absolute',
+      top: 8,
+      left: 8 + i * 60,
+      fontSize: 10,
+      padding: '3px 8px',
+      borderRadius: 6,
+      background: tag.includes('%')
+        ? '#ff3b30'
+        : '#111',
+      color: 'white',
+      fontWeight: 'bold',
+      border: '1px solid rgba(255,255,255,0.2)',
+    }}
+  >
+    {tag}
+  </span>
+))}
         <img src={s.image} style={img} />
 
         <h3>{s.name}</h3>
