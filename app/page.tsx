@@ -275,7 +275,7 @@ const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
   gap: 16,
-  marginTop: 40,
+  marginTop: 30,
 }
 
 const card: CSSProperties = {
@@ -440,13 +440,13 @@ const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',
   margin: '3px auto',
-  marginTop: -10,
-  padding: '8px 16px',
+  marginTop: -15,
+  padding: '6px 16px',
   borderRadius: 12,
   textAlign: 'center',
   fontSize: 20,
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 2,
+  lineHeight: 1.5,
 }
