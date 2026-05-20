@@ -16,7 +16,7 @@ type Sneaker = {
 const sneakers: Sneaker[] = [
   {
     id: 1,
-    name: 'Nike Air Force 1',
+    name: 'Air Force 1 \'07',
     brand: 'Nike',
     price: '95,95€',
     image:
@@ -26,7 +26,7 @@ const sneakers: Sneaker[] = [
   },
   {
     id: 2,
-    name: 'Adidas Grand Court',
+    name: 'Grand Court Base 00s',
     brand: 'Adidas',
     price: '39,99€-54,99€',
     image:
@@ -90,7 +90,7 @@ export default function Home() {
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           
-          <p style={{ opacity: 0.7 }}>
+          <p style={{ opacity: 0.7, marginTop: 10 }}>
             Tus Sneakers Favoritas A Un Solo Click
           </p>
 
@@ -430,8 +430,8 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '3px 15px',  // 👈 más ancho y alto
-  fontSize: 25,          // 👈 icono más grande
+  padding: '2px 10px',  // 👈 más ancho y alto
+  fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
 }
 
@@ -474,7 +474,7 @@ const banner: CSSProperties = {
   padding: '6px 16px',
   borderRadius: 12,
   textAlign: 'center',
-  fontSize: 20,
+  fontSize: 25,
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
