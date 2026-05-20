@@ -297,12 +297,12 @@ const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
   gap: 16,
-  marginTop: 30,
+  marginTop: 25,
 }
 
 const card: CSSProperties = {
   background: 'rgba(255,255,255,0.06)',
-  padding: 12,
+  padding: 10,
   borderRadius: 22,
   position: 'relative',
   cursor: 'pointer',
@@ -421,7 +421,7 @@ const overlay: CSSProperties = {
 
 const topLeftBtn: CSSProperties = {
   position: 'absolute',
-  top: 15,
+  top: 10,
   left: 10,
   border: '1px solid white',
   background: 'transparent',
@@ -438,7 +438,8 @@ const topRightBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: 6,
+  padding: '2px 10px',  // 👈 más ancho y alto
+  fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
 }
 
