@@ -343,7 +343,7 @@ const sidebar: CSSProperties = {
   position: 'fixed',
   top: 0,
   left: 0,
-  width: 340,
+  width: 280,
   height: '100%',
   background: '#111',
   padding: 20,
@@ -400,7 +400,7 @@ const topLeftBtn: CSSProperties = {
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
-  padding: '10px 16px',  // 👈 más ancho y alto
+  padding: '8px 16px',  // 👈 más ancho y alto
   fontSize: 16,          // 👈 icono más grande
   borderRadius: 0,
 }
@@ -437,8 +437,8 @@ const input: CSSProperties = {
 }
 const banner: CSSProperties = {
   width: 'fit-content',
-  maxWidth: '100%',
-  margin: '5px auto',
+  maxWidth: '90%',
+  margin: '3px auto',
   padding: '6px 14px',
   borderRadius: 12,
   textAlign: 'center',
@@ -446,5 +446,5 @@ const banner: CSSProperties = {
   fontWeight: 'bold',
   color: 'white',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
-  lineHeight: 2,
+  lineHeight: 1.5,
 }
