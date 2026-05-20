@@ -314,21 +314,42 @@ export default function Home() {
     </div>
 
     {/* INFO */}
-<p>⭐ Valoración: <b>{selected.rating}</b></p>
+<div style={{ marginTop: 22, textAlign: 'center' }}>
+  
+  <p style={{ fontSize: 16, opacity: 0.8 }}>
+    Marca: <b>{selected.brand}</b>
+  </p>
 
-<p>👟 Uso: <b>{selected.usage}</b></p>
+  <p style={{ fontSize: 20, marginTop: 8 }}>
+    Precio: <b>{selected.price}</b>
+  </p>
 
-<p>
-  📦 Estado: <b style={{ color: selected.stock === 'En stock' ? '#00ff99' : 'orange' }}>
-    {selected.stock}
-  </b>
-</p>
+  {/* NUEVO: VALORACIÓN */}
+  <p style={{ fontSize: 16, marginTop: 10 }}>
+    ⭐ Valoración: <b>4.6 / 5</b>
+  </p>
+
+  {/* NUEVO: USO */}
+  <p style={{ fontSize: 16, marginTop: 6, opacity: 0.85 }}>
+    👟 Uso: <b>Lifestyle / Urbano</b>
+  </p>
+
+  {/* NUEVO: STOCK */}
+  <p style={{ fontSize: 16, marginTop: 6 }}>
+    📦 Estado: <b style={{ color: '#00ff99' }}>En stock</b>
+  </p>
+
+  <p style={{ opacity: 0.6, marginTop: 10, fontSize: 14 }}>
+    Diseño premium, comodidad diaria y estilo urbano.
+  </p>
+</div>
+
     {/* BOTÓN */}
     <button
       onClick={() => window.open(selected.link, '_blank')}
       style={{
         ...buyBtn,
-        marginTop: 23,
+        marginTop: 28,
         padding: '14px 22px',
         fontSize: 16,
         fontWeight: 'bold',
@@ -423,7 +444,7 @@ const detail: CSSProperties = {
   maxWidth: 500,
   margin: '0 auto',
   textAlign: 'center',
-  paddingTop: 80,
+  paddingTop: 100,
 
   position: 'relative',
   zIndex: 1,
