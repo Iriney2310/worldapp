@@ -440,7 +440,7 @@ const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',
   margin: '3px auto',
-  marginTop: -15,
+  marginTop: -10,
   padding: '6px 16px',
   borderRadius: 12,
   textAlign: 'center',
