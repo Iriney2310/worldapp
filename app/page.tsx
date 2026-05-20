@@ -301,7 +301,7 @@ export default function Home() {
     color: '#fff',   // 👈 blanco
     fontSize: 15,
     fontWeight: 200,
-    opacity: 0,
+    opacity: 1,
   }}
 >
   {s.oldPrice}
