@@ -52,7 +52,7 @@ const sneakers: Sneaker[] = [
     id: 3,
     name: 'Court Vision Low',
     brand: 'Nike',
-    price: 'Desde 53,99€',
+    price: '53,99€',
     image:
       'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
@@ -65,7 +65,7 @@ const sneakers: Sneaker[] = [
     id: 4,
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
-    price: 'Desde 39,99€',
+    price: '39,99€',
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
@@ -126,7 +126,7 @@ export default function Home() {
     setTimeout(() => {
       setSelected(null)
       setClosing(false)
-    }, 60)
+    }, 80)
   }
 
   return (
