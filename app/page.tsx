@@ -212,42 +212,45 @@ export default function Home() {
       </div>
 
       {/* GRID */}
-      {!selected && (
-        <div style={grid}>
-          {filtered.map(s => (
-            <div
-              key={s.id}
-              style={card}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'
-                e.currentTarget.style.transition = '0.2s ease'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)'
-              }}
-              onClick={() => setSelected(s)}
-            >
-              {s.badge && <div style={badge}>{s.badge}</div>}
+      {/* GRID */}
+{!selected && (
+  <div style={grid}>
+    {filtered.map((s) => (
+      <div
+        key={s.id}
+        style={card}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-6px) scale(1.03)'
+          e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,0,0,0.5)'
+          e.currentTarget.style.transition = '0.25s ease'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0) scale(1)'
+          e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.35)'
+        }}
+        onClick={() => setSelected(s)}
+      >
+        {s.badge && <div style={badge}>{s.badge}</div>}
 
-              <div
-                onClick={(e) => {
-                  e.stopPropagation()
-                  toggleFavorite(s.id)
-                }}
-                style={heart}
-              >
-                {favorites.includes(s.id) ? '❤️' : '🤍'}
-              </div>
-
-              <img src={s.image} style={img} />
-
-              <h3>{s.name}</h3>
-              <p>{s.brand}</p>
-              <p style={{ fontWeight: 'bold' }}>{s.price}</p>
-            </div>
-          ))}
+        <div
+          onClick={(e) => {
+            e.stopPropagation()
+            toggleFavorite(s.id)
+          }}
+          style={heart}
+        >
+          {favorites.includes(s.id) ? '❤️' : '🤍'}
         </div>
-      )}
+
+        <img src={s.image} style={img} />
+
+        <h3>{s.name}</h3>
+        <p>{s.brand}</p>
+        <p style={{ fontWeight: 'bold' }}>{s.price}</p>
+      </div>
+    ))}
+  </div>
+)}
 
       {/* DETAIL */}
       {/* DETAIL */}
@@ -360,11 +363,11 @@ const grid: CSSProperties = {
 
 const card: CSSProperties = {
   background: 'rgba(255,255,255,0.06)',
-  padding: 10,
+  padding: 12,
   borderRadius: 22,
   position: 'relative',
   cursor: 'pointer',
-  transition: '0.25s ease',
+  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
   backdropFilter: 'blur(12px)',
   border: '1px solid rgba(255,255,255,0.08)',
   boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
