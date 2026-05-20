@@ -279,14 +279,13 @@ const bg: CSSProperties = {
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  transform: 'scale(1.05)',
-  zIndex: -3,
+  zIndex: -2,
 }
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'rgba(0,0,0,0.55)',
-  zIndex: -2,
+  background: 'rgba(0,0,0,0.35)',
+  zIndex: -1,
 }
 const overlayLayer: CSSProperties = {
   position: 'fixed',
@@ -419,7 +418,7 @@ const overlay: CSSProperties = {
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'rgba(0,0,0,0.5)',
+  background: 'rgba(0,0,0,0.2)',
   zIndex: 9998,
 }
 
