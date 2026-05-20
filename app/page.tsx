@@ -272,11 +272,19 @@ const main: CSSProperties = {
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-  filter: 'blur(18px) brightness(0.4) saturate(1.2)',
-  transform: 'scale(1.1)',
+  filter: 'blur(10px) brightness(0.7) saturate(1.1)',
+  transform: 'scale(1.05)',
   zIndex: -2,
 }
-
+const overlayLayer: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0,0,0,0.35)',
+  zIndex: -1,
+}
 const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
