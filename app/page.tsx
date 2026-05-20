@@ -10,13 +10,13 @@ type Sneaker = {
   price: string
   image: string
   link: string
-  badge?: 'NEW' | 'HOT' | 'BESTSELLER' | 'OFFER' | 'LIMITED'
+  badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
 }
 
 const sneakers: Sneaker[] = [
   {
     id: 1,
-    name: "Air Force 1 '07",
+    name: 'Air Force 1 \'07',
     brand: 'Nike',
     price: '95,95€',
     image:
@@ -38,7 +38,7 @@ const sneakers: Sneaker[] = [
     id: 3,
     name: 'Court Vision Low',
     brand: 'Nike',
-    price: '53,99€',
+    price: 'Desde 53,99€',
     image:
       'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
@@ -48,7 +48,7 @@ const sneakers: Sneaker[] = [
     id: 4,
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
-    price: '39,99€',
+    price: 'Desde39,99€',
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
@@ -108,19 +108,20 @@ export default function Home() {
 
   return (
     <main style={main}>
-
-      {/* BACKGROUND */}
       <div style={bg} />
-      <div style={overlayBg} />
-
-      {/* BANNER */}
-      {!selected && <div style={banner}>👟 ¡SNEAKERS! 🚚</div>}
-
-      {/* TOP TEXT */}
+<div style={overlayBg} />
+{/* BANNER */}
+{!selected && (
+  <div style={banner}>
+    ¡SNEAKERS!
+  </div>
+)}
+      {/* TOP BAR */}
       {!selected && (
         <div style={{ textAlign: 'center' }}>
-          <p style={{ opacity: 0.7, marginTop: 12 }}>
-            LAS MEJORES ZAPATILLAS AL MEJOR PRECIO
+          
+          <p style={{ opacity: 0.7, marginTop: 10 }}>
+            LAS MEJORES ZAPATILLAS AL MEJOR PRECIO!
           </p>
 
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
@@ -133,24 +134,113 @@ export default function Home() {
         </div>
       )}
 
+      {/* OVERLAY */}
+      {(menuOpen || favOpen) && (
+        <div
+          onClick={() => {
+            setMenuOpen(false)
+            setFavOpen(false)
+          }}
+          style={{
+            ...overlay,
+            opacity: 1,
+            transition: '0.25s ease',
+          }}
+        />
+      )}
+
+      {/* SIDEBAR */}
+      <div
+        style={{
+          ...sidebar,
+          transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
+        }}
+      >
+        <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+          ✕ Cerrar
+        </button>
+
+        <input
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="🔎 Buscar..."
+          style={input}
+        />
+
+        <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
+        <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
+        <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
+      </div>
+
+      {/* FAVORITOS */}
+      <div
+        style={{
+          ...favPanel,
+          transform: favOpen ? 'translateX(0)' : 'translateX(110%)',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
+        }}
+      >
+        <button onClick={() => setFavOpen(false)} style={sideBtn}>
+          ✕ Cerrar Favoritos
+        </button>
+
+        {favItems.length === 0 && (
+          <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
+        )}
+
+        {favItems.map(item => (
+          <div
+            key={item.id}
+            style={favCard}
+            onClick={() => setSelected(item)}
+          >
+            <img src={item.image} style={favImg} />
+            <p>{item.name}</p>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleFavorite(item.id)
+              }}
+              style={removeBtn}
+            >
+              Quitar
+            </button>
+          </div>
+        ))}
+      </div>
+
       {/* GRID */}
       {!selected && (
         <div style={grid}>
           {filtered.map(s => (
-            <div key={s.id} style={card} onClick={() => setSelected(s)}>
-              <div style={badge}>{s.badge}</div>
+            <div
+              key={s.id}
+              style={card}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)'
+                e.currentTarget.style.transition = '0.2s ease'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)'
+              }}
+              onClick={() => setSelected(s)}
+            >
+              {s.badge && <div style={badge}>{s.badge}</div>}
 
               <div
-                style={heart}
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleFavorite(s.id)
                 }}
+                style={heart}
               >
                 {favorites.includes(s.id) ? '❤️' : '🤍'}
               </div>
 
               <img src={s.image} style={img} />
+
               <h3>{s.name}</h3>
               <p>{s.brand}</p>
               <p style={{ fontWeight: 'bold' }}>{s.price}</p>
@@ -160,27 +250,73 @@ export default function Home() {
       )}
 
       {/* DETAIL */}
-      {selected && (
-        <div style={detail}>
-          <button onClick={closeDetail} style={backBtn}>
-            ← Volver
-          </button>
+      {/* DETAIL */}
+{selected && (
+  <div
+    style={{
+      ...detail,
+      opacity: closing ? 0 : 1,
+      transform: closing
+        ? 'translateY(10px) scale(0.98)'
+        : 'translateY(0) scale(1)',
+      transition: '0.25s ease',
+    }}
+  >
+    <button onClick={closeDetail} style={backBtn}>
+      ← Volver
+    </button>
 
-          <h2>{selected.name}</h2>
+    {/* TITULO GRANDE */}
+    <h2 style={{ fontSize: 28, marginBottom: 10 }}>
+      {selected.name}
+    </h2>
 
-          <img src={selected.image} style={{ width: 320 }} />
+    {/* IMAGEN MÁS PRO */}
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <img
+        src={selected.image}
+        style={{
+          width: 340,
+          borderRadius: 18,
+          objectFit: 'contain',
+          boxShadow: '0 15px 40px rgba(0,0,0,0.4)',
+        }}
+      />
+    </div>
 
-          <p>{selected.brand}</p>
-          <p style={{ fontWeight: 'bold' }}>{selected.price}</p>
+    {/* INFO MÁS PRO */}
+    <div style={{ marginTop: 20 }}>
+      <p style={{ fontSize: 16, opacity: 0.8 }}>
+        Marca: <b>{selected.brand}</b>
+      </p>
 
-          <button
-            onClick={() => window.open(selected.link, '_blank')}
-            style={buyBtn}
-          >
-            🛒 VER EN AMAZON
-          </button>
-        </div>
-      )}
+      <p style={{ fontSize: 18, marginTop: 8 }}>
+        Precio: <b>{selected.price}</b>
+      </p>
+
+      <p style={{ opacity: 0.6, marginTop: 10 }}>
+        Zapatilla seleccionada de nuestra colección premium.
+      </p>
+    </div>
+
+    {/* BOTÓN MÁS PRO */}
+    <button
+      onClick={() => window.open(selected.link, '_blank')}
+      style={{
+        ...buyBtn,
+        marginTop: 25,
+        padding: '14px 20px',
+        fontSize: 16,
+        fontWeight: 'bold',
+        borderRadius: 12,
+        background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
+        border: 'none',
+      }}
+    >
+      🛒 VER EN AMAZON
+    </button>
+  </div>
+)}
     </main>
   )
 }
@@ -195,19 +331,23 @@ const main: CSSProperties = {
   overflow: 'hidden',
 }
 
+/* fondo real */
 const bg: CSSProperties = {
   position: 'fixed',
   inset: 0,
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
   zIndex: -2,
+  transform: 'scale(1.05)',
 }
 
+/* capa elegante tipo Nike (MUY suave) */
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'rgba(0,0,0,0.35)',
+  background: 'rgba(0,0,0,0.25)',
   zIndex: -1,
 }
 
@@ -215,14 +355,20 @@ const grid: CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(2,1fr)',
   gap: 16,
-  marginTop: 20,
+  marginTop: 25,
 }
 
 const card: CSSProperties = {
   background: 'rgba(255,255,255,0.06)',
-  padding: 12,
-  borderRadius: 20,
+  padding: 10,
+  borderRadius: 22,
+  position: 'relative',
   cursor: 'pointer',
+  transition: '0.25s ease',
+  backdropFilter: 'blur(12px)',
+  border: '1px solid rgba(255,255,255,0.08)',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
+  overflow: 'hidden',
 }
 
 const img: CSSProperties = {
@@ -232,54 +378,159 @@ const img: CSSProperties = {
 
 const heart: CSSProperties = {
   position: 'absolute',
-  right: 10,
   top: 10,
+  right: 10,
+  cursor: 'pointer',
 }
 
 const badge: CSSProperties = {
   position: 'absolute',
-  left: 10,
-  top: 10,
-  background: '#ffd600',
-  color: 'black',
+  top: 8,
+  left: 8,
+  fontSize: 10,
   padding: '4px 8px',
   borderRadius: 6,
+  background: '#ffd600',
+  color: 'black',
+  fontWeight: 'bold',
 }
 
 const detail: CSSProperties = {
+  maxWidth: 500,
+  margin: '0 auto',
   textAlign: 'center',
   paddingTop: 60,
+  position: 'relative',
 }
 
 const backBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   left: 10,
-}
-
-const buyBtn: CSSProperties = {
-  marginTop: 20,
-  padding: 10,
+  padding: '6px 12px',
+  borderRadius: 999,
   border: '1px solid white',
   background: 'transparent',
   color: 'white',
 }
 
-const banner: CSSProperties = {
-  textAlign: 'center',
+const buyBtn: CSSProperties = {
+  marginTop: 20,
+  padding: 12,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  borderRadius: 10,
+}
+
+const sidebar: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: 280,
+  height: '100%',
+  background: '#111',
+  padding: 20,
+  zIndex: 9999,
+}
+
+const favPanel: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  right: 0,
+  width: 300,
+  height: '100%',
+  background: '#111',
+  padding: 20,
+  zIndex: 9999,
+}
+
+const favCard: CSSProperties = {
   marginTop: 10,
-  fontSize: 24,
-  fontWeight: 'bold',
+  padding: 8,
+  border: '1px solid rgba(255,255,255,0.2)',
+  borderRadius: 10,
+  cursor: 'pointer',
+}
+
+const favImg: CSSProperties = {
+  width: '100%',
+  borderRadius: 8,
+}
+
+const removeBtn: CSSProperties = {
+  marginTop: 5,
+  width: '100%',
+  padding: 6,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+
+const overlay: CSSProperties = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0,0,0,0.2)',
+  zIndex: 9998,
 }
 
 const topLeftBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
-  left: 10,
+  left: 13,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  padding: '3px 14px',  // 👈 más ancho y alto
+  fontSize: 20,          // 👈 icono más grande
+  borderRadius: 5,
 }
 
 const topRightBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   right: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+  padding: 6,
+  borderRadius: 5,
+}
+
+const sideBtn: CSSProperties = {
+  display: 'block',
+  marginTop: 10,
+  padding: 10,
+  width: '100%',
+  borderRadius: 10,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+
+const input: CSSProperties = {
+  width: '100%',
+  padding: 10,
+  marginTop: 10,
+  borderRadius: 8,
+  border: '1px solid white',
+  background: 'transparent',
+  color: 'white',
+}
+const banner: CSSProperties = {
+  width: 'fit-content',
+  maxWidth: '100%',
+  margin: '3px auto',
+  marginTop: 12,
+  padding: '6px 16px',
+  borderRadius: 12,
+  textAlign: 'center',
+  fontSize: 25,
+  fontWeight: 'bold',
+  color: 'white',
+  background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
+  lineHeight: 1.5,
 }
