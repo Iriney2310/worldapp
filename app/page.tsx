@@ -10,7 +10,11 @@ type Sneaker = {
   price: string
   image: string
   link: string
+  rating: string
+  usage: string
+  stock: string
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
+  
 }
 
 const sneakers: Sneaker[] = [
@@ -23,6 +27,9 @@ const sneakers: Sneaker[] = [
       'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
     link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
     badge: 'BESTSELLER',
+    rating: "4.5 / 5",
+  usage: "Running",
+  stock: "Pocas unidades"
   },
   {
     id: 2,
@@ -33,6 +40,9 @@ const sneakers: Sneaker[] = [
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
     badge: 'OFFER',
+    rating: "4.5 / 5",
+  usage: "Running",
+  stock: "Pocas unidades"
   },
   {
     id: 3,
@@ -43,6 +53,9 @@ const sneakers: Sneaker[] = [
       'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
     badge: 'NEW',
+    rating: "4.5 / 5",
+  usage: "Running",
+  stock: "Pocas unidades"
   },
   {
     id: 4,
@@ -53,6 +66,9 @@ const sneakers: Sneaker[] = [
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
+    rating: "4.5 / 5",
+  usage: "Running",
+  stock: "Pocas unidades"
   },
   {
     id: 5,
@@ -63,6 +79,9 @@ const sneakers: Sneaker[] = [
       'https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp',
     link: 'https://amzn.to/4nHqSUY',
     badge: 'HOT',
+    rating: "4.5 / 5",
+  usage: "Running",
+  stock: "Pocas unidades"
   },
 ]
 
@@ -295,42 +314,21 @@ export default function Home() {
     </div>
 
     {/* INFO */}
-<div style={{ marginTop: 22, textAlign: 'center' }}>
-  
-  <p style={{ fontSize: 16, opacity: 0.8 }}>
-    Marca: <b>{selected.brand}</b>
-  </p>
+<p>⭐ Valoración: <b>{selected.rating}</b></p>
 
-  <p style={{ fontSize: 20, marginTop: 8 }}>
-    Precio: <b>{selected.price}</b>
-  </p>
+<p>👟 Uso: <b>{selected.usage}</b></p>
 
-  {/* NUEVO: VALORACIÓN */}
-  <p style={{ fontSize: 16, marginTop: 10 }}>
-    ⭐ Valoración: <b>4.6 / 5</b>
-  </p>
-
-  {/* NUEVO: USO */}
-  <p style={{ fontSize: 16, marginTop: 6, opacity: 0.85 }}>
-    👟 Uso: <b>Lifestyle / Urbano</b>
-  </p>
-
-  {/* NUEVO: STOCK */}
-  <p style={{ fontSize: 16, marginTop: 6 }}>
-    📦 Estado: <b style={{ color: '#00ff99' }}>En stock</b>
-  </p>
-
-  <p style={{ opacity: 0.6, marginTop: 10, fontSize: 14 }}>
-    Diseño premium, comodidad diaria y estilo urbano.
-  </p>
-</div>
-
+<p>
+  📦 Estado: <b style={{ color: selected.stock === 'En stock' ? '#00ff99' : 'orange' }}>
+    {selected.stock}
+  </b>
+</p>
     {/* BOTÓN */}
     <button
       onClick={() => window.open(selected.link, '_blank')}
       style={{
         ...buyBtn,
-        marginTop: 28,
+        marginTop: 23,
         padding: '14px 22px',
         fontSize: 16,
         fontWeight: 'bold',
@@ -425,7 +423,7 @@ const detail: CSSProperties = {
   maxWidth: 500,
   margin: '0 auto',
   textAlign: 'center',
-  paddingTop: 100,
+  paddingTop: 80,
 
   position: 'relative',
   zIndex: 1,
