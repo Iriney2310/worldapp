@@ -269,7 +269,7 @@ export default function Home() {
     style={{
       position: 'absolute',
       top: 8,
-      left: 55 + i * 60,
+      left: 60 + i * 60,
       fontSize: 10,
       padding: '3px 8px',
       borderRadius: 6,
@@ -300,7 +300,8 @@ export default function Home() {
     textDecoration: 'line-through',
     color: '#fff',   // 👈 blanco
     fontSize: 14,
-    opacity: 0.8,
+    fontWeight: 100,
+    opacity: 0.5,
   }}
 >
   {s.oldPrice}
