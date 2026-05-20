@@ -272,6 +272,7 @@ const main: CSSProperties = {
   color: 'white',
   fontFamily: 'sans-serif',
   padding: 20,
+  background: 'transparent', // 👈 clave
 }
 const bg: CSSProperties = {
   position: 'fixed',
@@ -279,12 +280,13 @@ const bg: CSSProperties = {
   backgroundImage: 'url("/fondo.jpg")',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
   zIndex: -2,
 }
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'rgba(0,0,0,0.35)',
+  background: 'rgba(0,0,0,0.25)', // 👈 más transparente
   zIndex: -1,
 }
 const overlayLayer: CSSProperties = {
