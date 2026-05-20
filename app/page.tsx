@@ -289,8 +289,7 @@ const bg: CSSProperties = {
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background:
-    'radial-gradient(circle at top, rgba(0,0,0,0.15), rgba(0,0,0,0.75))',
+  background: 'rgba(0,0,0,0.35)', // MUCHO más suave
   zIndex: -1,
 }
 
@@ -467,7 +466,7 @@ const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',
   margin: '3px auto',
-  marginTop: -10,
+  marginTop: 5,
   padding: '6px 16px',
   borderRadius: 12,
   textAlign: 'center',
