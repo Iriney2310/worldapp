@@ -143,7 +143,7 @@ export default function Home() {
       {!selected && (
         <div style={{ textAlign: 'center' }}>
           
-          <p style={{ opacity: 0.5, marginTop: 10 }}>
+          <p style={{ opacity: 0.8, marginTop: 15 }}>
             ¡TUS SNEAKERS AL MEJOR PRECIO!
           </p>
 
@@ -301,7 +301,7 @@ export default function Home() {
     textDecoration: 'line-through',
     color: '#fff',   // 👈 blanco
     fontSize: 15,
-    fontWeight: 200,
+    fontWeight: 400,
     opacity: 1,
   }}
 >
