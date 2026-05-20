@@ -212,7 +212,6 @@ export default function Home() {
       </div>
 
       {/* GRID */}
-      {/* GRID */}
 {!selected && (
   <div style={grid}>
     {filtered.map((s) => (
@@ -220,14 +219,14 @@ export default function Home() {
         key={s.id}
         style={card}
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'translateY(-6px) scale(1.03)'
-          e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,0,0,0.5)'
-          e.currentTarget.style.transition = '0.25s ease'
-        }}
+       e.currentTarget.style.transform = 'translateY(-12px) scale(1.06)'
+       e.currentTarget.style.boxShadow = '0 30px 70px rgba(0,0,0,0.7)'
+      e.currentTarget.style.transition = '0.25s ease'
+      }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'translateY(0) scale(1)'
-          e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.35)'
-        }}
+      e.currentTarget.style.transform = 'translateY(0) scale(1)'
+     e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.35)'
+      }}
         onClick={() => setSelected(s)}
       >
         {s.badge && <div style={badge}>{s.badge}</div>}
@@ -252,7 +251,6 @@ export default function Home() {
   </div>
 )}
 
-      {/* DETAIL */}
       {/* DETAIL */}
 {selected && (
   <div
@@ -402,7 +400,7 @@ const detail: CSSProperties = {
   maxWidth: 500,
   margin: '0 auto',
   textAlign: 'center',
-  paddingTop: 60,
+  paddingTop: 100,
 
   position: 'relative',
   zIndex: 1,
