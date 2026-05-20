@@ -36,7 +36,7 @@ const sneakers: Sneaker[] = [
     id: 2,
     name: 'Air Max Ltd 3',
     brand: 'Nike',
-    price: '90,99€',
+    price: '<del>119,95€</del> ➡ 90,99€',
     image:
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
@@ -267,7 +267,7 @@ export default function Home() {
     style={{
       position: 'absolute',
       top: 8,
-      left: 20 + i * 60,
+      left: 45 + i * 60,
       fontSize: 10,
       padding: '3px 8px',
       borderRadius: 6,
