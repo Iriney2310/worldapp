@@ -28,7 +28,7 @@ const sneakers: Sneaker[] = [
     link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
     badge: 'BESTSELLER',
     rating: "4.5 / 5",
-  usage: "Running",
+  usage: "Daily",
   stock: "Pocas unidades"
   },
   {
@@ -41,7 +41,7 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/4nIiepg',
     badge: 'OFFER',
     rating: "4.0 / 5",
-  usage: "Running",
+  usage: "Daily",
   stock: "Pocas unidades"
   },
   {
@@ -54,20 +54,20 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/4die6c0',
     badge: 'NEW',
     rating: "4.4 / 5",
-  usage: "Running",
+  usage: "Daily / Lifestyle",
   stock: "Pocas unidades"
   },
   {
     id: 4,
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
-    price: 'Desde39,99€',
+    price: 'Desde 39,99€',
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
     badge: 'HOT',
     rating: "4.4 / 5",
-  usage: "Running",
+  usage: "Daily / Lifestyle",
   stock: "Pocas unidades"
   },
   {
@@ -80,7 +80,7 @@ const sneakers: Sneaker[] = [
     link: 'https://amzn.to/4nHqSUY',
     badge: 'HOT',
     rating: "4.5 / 5",
-  usage: "Running",
+  usage: "Football / Lifestyle",
   stock: "Pocas unidades"
   },
 ]
@@ -330,22 +330,30 @@ export default function Home() {
 
   {/* NUEVO: VALORACIÓN */}
   <p style={{ fontSize: 16, marginTop: 10 }}>
-    ⭐ Valoración: <b>4.6 / 5</b>
+    ⭐ Valoración: <b>{selected.rating}</b>
   </p>
 
   {/* NUEVO: USO */}
   <p style={{ fontSize: 16, marginTop: 6, opacity: 0.85 }}>
-    👟 Uso: <b>Lifestyle / Urbano</b>
+    👟 Uso: <b>{selected.usage}</b>
   </p>
 
   {/* NUEVO: STOCK */}
-  <p style={{ fontSize: 16, marginTop: 6 }}>
-    📦 Estado: <b style={{ color: '#00ff99' }}>En stock</b>
-  </p>
-
-  <p style={{ opacity: 0.6, marginTop: 10, fontSize: 14 }}>
-    Diseño premium, comodidad diaria y estilo urbano.
-  </p>
+  <p style={{ fontSize: 14 }}>
+  📦 Estado:{' '}
+  <b
+    style={{
+      color:
+        selected.stock === 'En stock'
+          ? '#00ff99'
+          : selected.stock === 'Pocas unidades'
+          ? 'orange'
+          : 'red',
+    }}
+  >
+    {selected.stock}
+  </b>
+</p>
 </div>
 
     {/* BOTÓN */}
