@@ -267,7 +267,7 @@ export default function Home() {
     style={{
       position: 'absolute',
       top: 8,
-      left: 8 + i * 60,
+      right: 8 + i * 60,
       fontSize: 10,
       padding: '3px 8px',
       borderRadius: 6,
