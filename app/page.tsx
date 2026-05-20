@@ -299,9 +299,9 @@ export default function Home() {
   style={{
     textDecoration: 'line-through',
     color: '#fff',   // 👈 blanco
-    fontSize: 14,
-    fontWeight: 100,
-    opacity: 0.5,
+    fontSize: 15,
+    fontWeight: 200,
+    opacity: 0,
   }}
 >
   {s.oldPrice}
