@@ -143,7 +143,7 @@ export default function Perfil() {
   <button
     onClick={() =>
       window.open(
-        "mailto:soporte@tusneakers.com?subject=Soporte%20Sneakers&body=Hola,%20necesito%20ayuda...",
+        "mailto:irineymm@gmail.com?subject=Soporte%20Sneakers&body=Hola,%20necesito%20ayuda...",
         "_blank"
       )
     }
