@@ -140,12 +140,14 @@ export default function Perfil() {
     irineymm@gmail.com
   </p>
 
-  <button
-    onClick={() => {
-  window.open(
-    "https://mail.google.com/mail/?view=cm&fs=1&to=iriney@gmail.com&su=Soporte Sneakers&body=Hola,%20necesito%20ayuda%20con...",
-    "_blank"
-  )
+    <button
+        onClick={() => {
+            const subject = encodeURIComponent("Soporte Sneakers")
+        const body = encodeURIComponent(
+      "Hola,\n\nNecesito ayuda con...\n\nGracias"
+     )
+
+  window.location.href = `mailto:irineymm@gmail.com?subject=${subject}&body=${body}`
 }}
     style={{
       padding: "10px 14px",
