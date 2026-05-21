@@ -142,38 +142,35 @@ export default function Perfil() {
   </p>
 
   <button
-    onClick={async () => {
-      const email = "irineymm@gmail.com"
+  onClick={async () => {
+    const email = "irineymm@gmail.com"
 
-      try {
-        await navigator.clipboard.writeText(email)
-        setCopied(true)
+    try {
+      await navigator.clipboard.writeText(email)
+      setCopied(true)
 
-        setTimeout(() => {
-          setCopied(false)
-        }, 2000)
-
-      } catch (err) {
-        console.error(err)
-      }
-    }}
-    style={{
-      padding: "10px 14px",
-      borderRadius: 10,
-      border: "1px solid white",
-      background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-      color: "white",
-      fontWeight: "bold",
-      cursor: "pointer"
-    }}
-  >
-    📋 Copiar email
-  </button>
-{copied && (
-  <p style={{ marginTop: 10, color: "#00ff99", fontWeight: "bold" }}>
-    ✔ Email copiado
-  </p>
-)}
+      setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+    } catch (err) {
+      console.error(err)
+    }
+  }}
+  style={{
+    padding: "10px 14px",
+    borderRadius: 10,
+    border: "1px solid white",
+    background: copied
+      ? "linear-gradient(90deg,#00ff99,#00cc66)"
+      : "linear-gradient(90deg,#ff00cc,#3333ff)",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "0.2s ease"
+  }}
+>
+  {copied ? "✔ Email copiado" : "📋 Copiar email"}
+</button>
 </div>
     </div>
   )
