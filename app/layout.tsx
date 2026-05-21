@@ -34,21 +34,21 @@ export default function RootLayout({
 
         {/* NAVBAR INFERIOR */}
         <div style={bottomNav}>
-          <Link href="/" style={navBtn}>
-            🏠
-            <span>Inicio</span>
-          </Link>
+        <Link href="/favoritos" style={navBtn}>
+       ❤️
+       <span>Favoritos</span>
+       </Link>
 
-          <Link href="/favoritos" style={navBtn}>
-            ❤️
-            <span>Favoritos</span>
-          </Link>
+        <Link href="/" style={navBtn}>
+        🏠
+       <span>Inicio</span>
+       </Link>
 
-          <Link href="/perfil" style={navBtn}>
-            👤
-            <span>Perfil</span>
-          </Link>
-        </div>
+      <Link href="/perfil" style={navBtn}>
+        👤
+        <span>Perfil</span>
+       </Link>
+      </div>
 
       </body>
     </html>
