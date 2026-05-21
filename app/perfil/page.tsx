@@ -137,15 +137,15 @@ export default function Perfil() {
   <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
 
   <p style={{ opacity: 0.8, marginBottom: 12 }}>
-    soporte@tusneakers.com
+    irineymm@gmail.com
   </p>
 
   <button
     onClick={() => {
   window.open(
-  "https://mail.google.com/mail/?view=cm&fs=1&to=irineymm@gmail.com&su=Soporte%20Sneakers",
-  "_blank"
-)
+    "https://mail.google.com/mail/?view=cm&fs=1&to=iriney@gmail.com&su=Soporte Sneakers&body=Hola,%20necesito%20ayuda%20con...",
+    "_blank"
+  )
 }}
     style={{
       padding: "10px 14px",
