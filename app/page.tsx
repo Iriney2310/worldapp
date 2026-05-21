@@ -271,7 +271,7 @@ useEffect(() => {
         <div
           onClick={(e) => {
             e.stopPropagation()
-            toggleFavorite(s.id)
+            toggleFavorite(s)
             e.currentTarget.parentElement!.style.transform = 'translateY(0) scale(1)'
           }}
           style={heart}
