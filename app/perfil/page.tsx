@@ -140,29 +140,30 @@ export default function Perfil() {
     irineymm@gmail.com
   </p>
 
-    <button
-        onClick={() => {
-  const email = "irineymm@gmail.com"
+  <button
+  onClick={() => {
+    const email = "irineymm@gmail.com"
 
-  const subject = encodeURIComponent("Soporte Sneakers")
-  const body = encodeURIComponent(
-    "Hola,\n\nNecesito ayuda con Sneakers.\n\nGracias"
-  )
+    const subject = "Soporte Sneakers"
+    const body = "Hola, necesito ayuda con Sneakers."
 
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`
-}}
-    style={{
-      padding: "10px 14px",
-      borderRadius: 10,
-      border: "1px solid white",
-      background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-      color: "white",
-      fontWeight: "bold",
-      cursor: "pointer"
-    }}
-  >
-    📧 Enviar email
-  </button>
+    const mailtoLink =
+      `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+    window.location.href = mailtoLink
+  }}
+  style={{
+    padding: "10px 14px",
+    borderRadius: 10,
+    border: "1px solid white",
+    background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer"
+  }}
+>
+  📧 Enviar email
+</button>
 </div>
     </div>
   )
