@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 type Sneaker = {
@@ -95,7 +95,15 @@ export default function Home() {
   const [favOpen, setFavOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
-  const [favorites, setFavorites] = useState<number[]>([])
+  const [favorites, setFavorites] = useState<number[]>(() => {
+  if (typeof window !== "undefined") {
+    return JSON.parse(localStorage.getItem("favorites") || "[]")
+  }
+  return []
+})
+useEffect(() => {
+  localStorage.setItem("favorites", JSON.stringify(favorites))
+}, [favorites])
   const [closing, setClosing] = useState(false)
 
   const filtered = useMemo(() => {
