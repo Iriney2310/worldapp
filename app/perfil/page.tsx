@@ -31,24 +31,6 @@ export default function Perfil() {
   return (
     <div style={{ color: "white", padding: 20, fontFamily: "sans-serif" }}>
 
-     {/* CONTACTO */}
-     <div
-            style={{
-            marginTop: 40,
-            padding: 15,
-            borderRadius: 12,
-            background: "rgba(255,255,255,0.06)",
-         border: "1px solid rgba(255,255,255,0.1)",
-         textAlign: "center"
-        }}
->
-  <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
-
-  <p style={{ opacity: 0.8, margin: 0 }}>
-    soporte@tusneakers.com
-  </p>
-</div>
-
       {/* TARJETA USUARIO */}
       <div
         style={{
@@ -122,6 +104,23 @@ export default function Perfil() {
               outline: "none",
             }}
           />
+{/* CONTACTO */}
+     <div
+            style={{
+            marginTop: 40,
+            padding: 15,
+            borderRadius: 12,
+            background: "rgba(255,255,255,0.06)",
+         border: "1px solid rgba(255,255,255,0.1)",
+         textAlign: "center"
+        }}
+>
+  <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
+
+  <p style={{ opacity: 0.8, margin: 0 }}>
+    soporte@tusneakers.com
+  </p>
+</div>
 
           <button
             onClick={saveName}
