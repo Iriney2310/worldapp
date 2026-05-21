@@ -72,14 +72,16 @@ export default function Favoritos() {
           }}
         >
           {favorites.map((shoe) => (
-            <div
-              key={shoe.id}
-              style={{
-                background: "rgba(255,255,255,0.06)",
-                padding: 10,
-                borderRadius: 14,
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
+              <div
+                key={shoe.id}
+                 onClick={() => router.push(`/?id=${shoe.id}`)}
+                 style={{
+                   background: "rgba(255,255,255,0.06)",
+                  padding: 10,
+                  borderRadius: 14,
+               border: "1px solid rgba(255,255,255,0.1)",
+          }}
+  
             >
               <img
                 src={shoe.image}
@@ -102,20 +104,23 @@ export default function Favoritos() {
               </p>
 
               <button
-                onClick={() => removeFavorite(shoe)}
-                style={{
-                  marginTop: 8,
-                  width: "100%",
-                  padding: 6,
-                  borderRadius: 8,
-                  border: "1px solid white",
-                  background: "transparent",
-                  color: "white",
-                  cursor: "pointer",
-                }}
-              >
-                Quitar
-              </button>
+         onClick={(e) => {
+         e.stopPropagation()
+             removeFavorite(shoe)
+         }}
+         style={{
+          marginTop: 8,
+          width: "100%",
+         padding: 6,
+         borderRadius: 8,
+         border: "1px solid white",
+         background: "transparent",
+         color: "white",
+         cursor: "pointer",
+    }}
+    >
+              Quitar
+        </button>
             </div>
           ))}
         </div>
