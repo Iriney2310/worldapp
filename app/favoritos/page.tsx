@@ -13,6 +13,7 @@ type Sneaker = {
 }
 
 export default function Favoritos() {
+    const [selected, setSelected] = useState<Sneaker | null>(null)
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const router = useRouter()
 
@@ -74,7 +75,7 @@ export default function Favoritos() {
           {favorites.map((shoe) => (
               <div
                 key={shoe.id}
-                 onClick={() => router.push(`/?id=${shoe.id}`)}
+                 onClick={() => setSelected(shoe)}
                  style={{
                    background: "rgba(255,255,255,0.06)",
                   padding: 10,
