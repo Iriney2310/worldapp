@@ -142,8 +142,10 @@ export default function Perfil() {
 
   <button
     onClick={() => {
-  window.location.href =
-    "mailto:irineymm@gmail.com?subject=Soporte Sneakers&body=Hola, necesito ayuda..."
+  window.open(
+  "https://mail.google.com/mail/?view=cm&fs=1&to=irineymm@gmail.com&su=Soporte%20Sneakers",
+  "_blank"
+)
 }}
     style={{
       padding: "10px 14px",
