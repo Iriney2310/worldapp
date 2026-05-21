@@ -151,9 +151,6 @@ export default function Home() {
             ☰
           </button>
 
-          <button onClick={() => setFavOpen(true)} style={topRightBtn}>
-            ❤️ {favorites.length}
-          </button>
         </div>
       )}
 
