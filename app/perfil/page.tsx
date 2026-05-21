@@ -141,17 +141,16 @@ export default function Perfil() {
   </p>
 
   <button
-  type="button"
-  onClick={(e) => {
-    e.preventDefault()
-    e.stopPropagation()
-
+  onClick={async () => {
     const email = "irineymm@gmail.com"
-    const subject = encodeURIComponent("Soporte Sneakers")
-    const body = encodeURIComponent("Hola, necesito ayuda con Sneakers.")
 
-    window.location.href =
-      `mailto:${email}?subject=${subject}&body=${body}`
+    try {
+      await navigator.clipboard.writeText(email)
+      alert("📋 Email copiado al portapapeles")
+    } catch (err) {
+      console.error("Error copiando:", err)
+      alert("No se pudo copiar el email")
+    }
   }}
   style={{
     padding: "10px 14px",
@@ -163,7 +162,7 @@ export default function Perfil() {
     cursor: "pointer"
   }}
 >
-  📧 Enviar email
+  📋 Copiar email
 </button>
 </div>
     </div>
