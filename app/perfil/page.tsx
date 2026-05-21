@@ -30,8 +30,24 @@ export default function Perfil() {
 
   return (
     <div style={{ color: "white", padding: 20, fontFamily: "sans-serif" }}>
-      
-      <h1>👤 Mi Perfil</h1>
+
+     {/* CONTACTO */}
+     <div
+            style={{
+            marginTop: 40,
+            padding: 15,
+            borderRadius: 12,
+            background: "rgba(255,255,255,0.06)",
+         border: "1px solid rgba(255,255,255,0.1)",
+         textAlign: "center"
+        }}
+>
+  <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
+
+  <p style={{ opacity: 0.8, margin: 0 }}>
+    soporte@tusneakers.com
+  </p>
+</div>
 
       {/* TARJETA USUARIO */}
       <div
@@ -68,7 +84,7 @@ export default function Perfil() {
         <div style={{ flex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <p style={{ margin: 0 }}>
-              👤 Usuario: <b>{name || "Invitado"}</b>
+                Usuario: <b>{name || "Invitado"}</b>
             </p>
 
             {/* LÁPIZ MÁS PEGADO */}
