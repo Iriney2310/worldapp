@@ -1,31 +1,63 @@
 "use client"
-
-import Link from "next/link"
 import { usePathname } from "next/navigation"
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import Link from "next/link";
 
-export default function BottomNav() {
-  const pathname = usePathname()
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-  const isHome = pathname === "/"
-  const isFav = pathname === "/favoritos"
-  const isProfile = pathname === "/perfil"
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
+export const metadata: Metadata = {
+  title: "Sneakers App",
+  description: "Tu app de zapatillas",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <div style={bottomNav}>
-      <Link href="/" style={{ ...navBtn, color: isHome ? "#00ff99" : "white" }}>
-        🏠<span>Inicio</span>
-      </Link>
+    <html
+      lang="es"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col" style={{ paddingBottom: 80 }}>
 
-      <Link href="/favoritos" style={{ ...navBtn, color: isFav ? "#00ff99" : "white" }}>
-        ❤️<span>Favoritos</span>
-      </Link>
+        {children}
 
-      <Link href="/perfil" style={{ ...navBtn, color: isProfile ? "#00ff99" : "white" }}>
-        👤<span>Perfil</span>
-      </Link>
-    </div>
-  )
+        {/* NAVBAR INFERIOR */}
+        <div style={bottomNav}>
+        <Link href="/favoritos" style={navBtn}>
+       ❤️
+       <span>Favoritos</span>
+       </Link>
+
+        <Link href="/" style={navBtn}>
+        🏠
+       <span>Inicio</span>
+       </Link>
+
+      <Link href="/perfil" style={navBtn}>
+        👤
+        <span>Perfil</span>
+       </Link>
+      </div>
+
+      </body>
+    </html>
+  );
 }
+
+/* ================= NAVBAR STYLES ================= */
 
 const bottomNav: React.CSSProperties = {
   position: "fixed",
@@ -39,14 +71,15 @@ const bottomNav: React.CSSProperties = {
   justifyContent: "space-around",
   alignItems: "center",
   borderTop: "1px solid rgba(255,255,255,0.1)",
-}
+  zIndex: 9999,
+};
 
 const navBtn: React.CSSProperties = {
+  color: "white",
+  textDecoration: "none",
+  fontSize: 13,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: 4,
-  textDecoration: "none",
-  fontSize: 13,
-  color: "white",
-}
+};
