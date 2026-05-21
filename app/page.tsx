@@ -100,6 +100,11 @@ export default function Home() {
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
 const searchParams = useSearchParams()
+
+useEffect(() => {
+  setMounted(true)
+}, [])
+
 useEffect(() => {
   if (!mounted) return
 
@@ -112,19 +117,7 @@ useEffect(() => {
     }
   }
 }, [mounted, searchParams])
-useEffect(() => {
-  setMounted(true)
-}, [])
-  useEffect(() => {
-  const id = searchParams.get("id")
 
-  if (id) {
-    const shoe = sneakers.find(s => s.id === Number(id))
-    if (shoe) {
-      setSelected(shoe)
-    }
-  }
-}, [searchParams])
 useEffect(() => {
   const data = localStorage.getItem('favorites')
 
