@@ -6,22 +6,41 @@ import { usePathname } from "next/navigation"
 export default function BottomNav() {
   const pathname = usePathname()
 
-  const isHome = pathname === "/"
-  const isFav = pathname === "/favoritos"
-  const isProfile = pathname === "/perfil"
+  const isActive = (path: string) => pathname === path
 
   return (
     <div style={bottomNav}>
-      <Link href="/favoritos" style={{ ...navBtn, color: isFav ? "#00ff99" : "white" }}>
-        ❤️<span>Favoritos</span>
+      <Link
+        href="/favoritos"
+        style={{
+          ...navBtn,
+          ...(isActive("/favoritos") ? activeBtn : {}),
+        }}
+      >
+        ❤️
+        <span>Favoritos</span>
       </Link>
 
-      <Link href="/" style={{ ...navBtn, color: isHome ? "#00ff99" : "white" }}>
-        🏠<span>Inicio</span>
+      <Link
+        href="/"
+        style={{
+          ...navBtn,
+          ...(isActive("/") ? activeBtn : {}),
+        }}
+      >
+        🏠
+        <span>Inicio</span>
       </Link>
 
-      <Link href="/perfil" style={{ ...navBtn, color: isProfile ? "#00ff99" : "white" }}>
-        👤<span>Perfil</span>
+      <Link
+        href="/perfil"
+        style={{
+          ...navBtn,
+          ...(isActive("/perfil") ? activeBtn : {}),
+        }}
+      >
+        👤
+        <span>Perfil</span>
       </Link>
     </div>
   )
@@ -43,10 +62,18 @@ const bottomNav: React.CSSProperties = {
 }
 
 const navBtn: React.CSSProperties = {
+  color: "white",
+  textDecoration: "none",
+  fontSize: 13,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   gap: 4,
-  textDecoration: "none",
-  fontSize: 13,
+}
+
+const activeBtn: React.CSSProperties = {
+  transform: "scale(1.15)",
+  background: "rgba(255,255,255,0.08)",
+  padding: "6px 10px",
+  borderRadius: 12,
 }
