@@ -104,23 +104,6 @@ export default function Perfil() {
               outline: "none",
             }}
           />
-{/* CONTACTO */}
-     <div
-            style={{
-            marginTop: 40,
-            padding: 15,
-            borderRadius: 12,
-            background: "rgba(255,255,255,0.06)",
-         border: "1px solid rgba(255,255,255,0.1)",
-         textAlign: "center"
-        }}
->
-  <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
-
-  <p style={{ opacity: 0.8, margin: 0 }}>
-    soporte@tusneakers.com
-  </p>
-</div>
 
           <button
             onClick={saveName}
@@ -140,6 +123,43 @@ export default function Perfil() {
           </button>
         </div>
       )}
+      {/* CONTACTO */}
+<div
+  style={{
+    marginTop: 40,
+    padding: 15,
+    borderRadius: 12,
+    background: "rgba(255,255,255,0.06)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    textAlign: "center"
+  }}
+>
+  <h3 style={{ marginBottom: 10 }}>📩 Contáctanos</h3>
+
+  <p style={{ opacity: 0.8, marginBottom: 12 }}>
+    soporte@tusneakers.com
+  </p>
+
+  <button
+    onClick={() =>
+      window.open(
+        "mailto:soporte@tusneakers.com?subject=Soporte%20Sneakers&body=Hola,%20necesito%20ayuda...",
+        "_blank"
+      )
+    }
+    style={{
+      padding: "10px 14px",
+      borderRadius: 10,
+      border: "1px solid white",
+      background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+      color: "white",
+      fontWeight: "bold",
+      cursor: "pointer"
+    }}
+  >
+    📧 Enviar email
+  </button>
+</div>
     </div>
   )
 }
