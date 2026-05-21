@@ -134,7 +134,7 @@ useEffect(() => {
   })
 }
   const favItems = sneakers.filter(s =>
-    favorites.includes(s.id)
+    favorites.some((item) => item.id === s.id)
   )
 
   const closeDetail = () => {
