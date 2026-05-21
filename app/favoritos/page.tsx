@@ -9,6 +9,7 @@ type Sneaker = {
   brand: string
   price: string
   image: string
+  link: string
 }
 
 export default function Favoritos() {
