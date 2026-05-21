@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 
@@ -420,6 +420,22 @@ export default function Home() {
     </button>
   </div>
 )}
+<div style={bottomNav}>
+  <Link href="/favoritos" style={navBtn}>
+    ❤️
+    <span>Favoritos</span>
+  </Link>
+
+  <Link href="/" style={navBtn}>
+    🏠
+    <span>Inicio</span>
+  </Link>
+
+  <Link href="/perfil" style={navBtn}>
+    👤
+    <span>Perfil</span>
+  </Link>
+</div>
     </main>
   )
 }
@@ -432,6 +448,7 @@ const main: CSSProperties = {
   color: 'white',
   fontFamily: 'sans-serif',
   overflow: 'hidden',
+  paddingBottom: 90,
 }
 
 /* fondo real */
@@ -460,7 +477,32 @@ const grid: CSSProperties = {
   gap: 16,
   marginTop: 25,
 }
+const bottomNav: CSSProperties = {
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  width: '100%',
+  height: 70,
+  background: 'rgba(15,15,15,0.9)',
+  backdropFilter: 'blur(10px)',
+  display: 'flex',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  borderTop: '1px solid rgba(255,255,255,0.1)',
+  zIndex: 9999,
+}
 
+const navBtn: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: 4,
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: 13,
+  fontWeight: 500,
+}
 const card: CSSProperties = {
   background: 'rgba(255,255,255,0.06)',
   padding: 12,
