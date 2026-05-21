@@ -98,7 +98,23 @@ export default function Home() {
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
-  const searchParams = useSearchParams()
+  const [mounted, setMounted] = useState(false)
+const searchParams = useSearchParams()
+useEffect(() => {
+  if (!mounted) return
+
+  const id = searchParams.get("id")
+
+  if (id) {
+    const shoe = sneakers.find(s => s.id === Number(id))
+    if (shoe) {
+      setSelected(shoe)
+    }
+  }
+}, [mounted, searchParams])
+useEffect(() => {
+  setMounted(true)
+}, [])
   useEffect(() => {
   const id = searchParams.get("id")
 
