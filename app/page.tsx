@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 type Sneaker = {
@@ -97,6 +97,17 @@ export default function Home() {
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
+useEffect(() => {
+  const data = localStorage.getItem('favorites')
+
+  if (data) {
+    setFavorites(JSON.parse(data))
+  }
+}, [])
+
+useEffect(() => {
+  localStorage.setItem('favorites', JSON.stringify(favorites))
+}, [favorites])
 
   const filtered = useMemo(() => {
     return sneakers.filter(s => {
