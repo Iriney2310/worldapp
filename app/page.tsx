@@ -180,10 +180,6 @@ useEffect(() => {
           <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
             ☰
           </button>
-
-          <button onClick={() => setFavOpen(true)} style={topRightBtn}>
-            ❤️ {favorites.length}
-          </button>
         </div>
       )}
 
