@@ -73,6 +73,7 @@ const navBtn: React.CSSProperties = {
 
 const activeBtn: React.CSSProperties = {
   transform: "scale(1.15)",
+  transformOrigin: "center",
   background: "rgba(255,255,255,0.08)",
   padding: "6px 10px",
   borderRadius: 12,
