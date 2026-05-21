@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 type Sneaker = {
   id: number
@@ -12,6 +13,7 @@ type Sneaker = {
 
 export default function Favoritos() {
   const [favorites, setFavorites] = useState<Sneaker[]>([])
+  const router = useRouter()
 
   // 🔄 Cargar favoritos al entrar + sincronizar
   useEffect(() => {
