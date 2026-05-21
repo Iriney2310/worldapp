@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
+import { useSearchParams } from "next/navigation"
 
 type Sneaker = {
   id: number
@@ -97,6 +98,17 @@ export default function Home() {
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
+  const searchParams = useSearchParams()
+  useEffect(() => {
+  const id = searchParams.get("id")
+
+  if (id) {
+    const shoe = sneakers.find(s => s.id === Number(id))
+    if (shoe) {
+      setSelected(shoe)
+    }
+  }
+}, [searchParams])
 useEffect(() => {
   const data = localStorage.getItem('favorites')
 
