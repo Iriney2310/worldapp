@@ -95,7 +95,7 @@ export default function Home() {
   const [favOpen, setFavOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
-  const [favorites, setFavorites] = useState<number[]>(() => {
+  const [favorites, setFavorites] = useState<any[]>(() => {
   if (typeof window !== "undefined") {
     return JSON.parse(localStorage.getItem("favorites") || "[]")
   }
@@ -117,12 +117,21 @@ useEffect(() => {
     })
   }, [brand, search])
 
-  const toggleFavorite = (id: number) => {
-    setFavorites(prev =>
-      prev.includes(id)
-        ? prev.filter(f => f !== id)
-        : [...prev, id]
-    )
+  const toggleFavorite = (shoe: any) => {
+  setFavorites((prev) => {
+    const exists = prev.find((item) => item.id === shoe.id)
+
+    let updated
+
+    if (exists) {
+      updated = prev.filter((item) => item.id !== shoe.id)
+    } else {
+      updated = [...prev, shoe]
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(updated))
+    return updated
+  })
   }
 
   const favItems = sneakers.filter(s =>
