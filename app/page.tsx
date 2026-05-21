@@ -119,7 +119,7 @@ useEffect(() => {
 
   const toggleFavorite = (shoe: any) => {
   setFavorites((prev) => {
-    const exists = prev.find((item) => item.id === shoe.id)
+    const exists = prev.some((item) => item.id === shoe.id)
 
     let updated
 
@@ -132,8 +132,7 @@ useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(updated))
     return updated
   })
-  }
-
+}
   const favItems = sneakers.filter(s =>
     favorites.includes(s.id)
   )
@@ -238,7 +237,7 @@ useEffect(() => {
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                toggleFavorite(item.id)
+                toggleFavorite(item)
               }}
               style={removeBtn}
             >
@@ -276,7 +275,7 @@ useEffect(() => {
           }}
           style={heart}
         >
-          {favorites.includes(s.id) ? '❤️' : '🤍'}
+          {favorites.includes(s) ? '❤️' : '🤍'}
         </div>
 {s.tags?.map((tag, i) => (
   <span
