@@ -141,12 +141,10 @@ export default function Perfil() {
   </p>
 
   <button
-    onClick={() =>
-      window.open(
-        "mailto:irineymm@gmail.com?subject=Soporte%20Sneakers&body=Hola,%20necesito%20ayuda...",
-        "_blank"
-      )
-    }
+    onClick={() => {
+  window.location.href =
+    "mailto:irineymm@gmail.com?subject=Soporte Sneakers&body=Hola, necesito ayuda..."
+}}
     style={{
       padding: "10px 14px",
       borderRadius: 10,
