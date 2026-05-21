@@ -4,21 +4,25 @@ import { useEffect, useState } from "react"
 
 export default function Perfil() {
   const [name, setName] = useState("")
-  const [saved, setSaved] = useState(false)
+  const [editing, setEditing] = useState(false)
+  const [input, setInput] = useState("")
 
   useEffect(() => {
-    const savedName = localStorage.getItem("username")
-    if (savedName) {
-      setName(savedName)
-      setSaved(true)
+    const saved = localStorage.getItem("username")
+    if (saved) {
+      setName(saved)
+      setInput(saved)
+    } else {
+      setEditing(true)
     }
   }, [])
 
   const saveName = () => {
-    if (!name.trim()) return
+    if (!input.trim()) return
 
-    localStorage.setItem("username", name)
-    setSaved(true)
+    localStorage.setItem("username", input)
+    setName(input)
+    setEditing(false)
   }
 
   return (
@@ -26,27 +30,46 @@ export default function Perfil() {
       
       <h1>👤 Mi Perfil</h1>
 
-      {/* SI YA HAY NOMBRE */}
-      {saved ? (
-        <div
+      {/* USUARIO */}
+      <div
+        style={{
+          marginTop: 20,
+          padding: 15,
+          borderRadius: 12,
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <p style={{ margin: 0 }}>
+          👤 Usuario:{" "}
+          <b>{name || "Invitado"}</b>
+        </p>
+
+        {/* LAPIZ */}
+        <span
+          onClick={() => setEditing(true)}
           style={{
-            marginTop: 20,
-            padding: 15,
-            borderRadius: 12,
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            cursor: "pointer",
+            fontSize: 18
           }}
         >
-          <p>👤 Usuario:</p>
-          <h2 style={{ marginTop: 5 }}>{name}</h2>
-        </div>
-      ) : (
-        /* SI NO HAY NOMBRE */
-        <div style={{ marginTop: 20 }}>
+          ✏️
+        </span>
+      </div>
+
+      {/* EDITAR NOMBRE */}
+      {editing && (
+        <div style={{ marginTop: 15 }}>
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Escribe tu nombre"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") saveName()
+            }}
             style={{
               width: "100%",
               padding: 10,
@@ -72,7 +95,7 @@ export default function Perfil() {
               cursor: "pointer",
             }}
           >
-            💾 Guardar nombre
+            💾 Guardar
           </button>
         </div>
       )}
