@@ -25,12 +25,15 @@ export default function Perfil() {
     setEditing(false)
   }
 
+  // 🧠 inicial del usuario
+  const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
+
   return (
     <div style={{ color: "white", padding: 20, fontFamily: "sans-serif" }}>
       
       <h1>👤 Mi Perfil</h1>
 
-      {/* USUARIO */}
+      {/* TARJETA USUARIO */}
       <div
         style={{
           marginTop: 20,
@@ -40,27 +43,50 @@ export default function Perfil() {
           border: "1px solid rgba(255,255,255,0.1)",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between"
+          gap: 12
         }}
       >
-        <p style={{ margin: 0 }}>
-          👤 Usuario:{" "}
-          <b>{name || "Invitado"}</b>
-        </p>
-
-        {/* LAPIZ */}
-        <span
-          onClick={() => setEditing(true)}
+        {/* AVATAR */}
+        <div
           style={{
-            cursor: "pointer",
-            fontSize: 18
+            width: 42,
+            height: 42,
+            borderRadius: "50%",
+            background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: 18,
+            flexShrink: 0
           }}
         >
-          ✏️
-        </span>
+          {avatarLetter}
+        </div>
+
+        {/* TEXTO + LÁPIZ */}
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <p style={{ margin: 0 }}>
+              👤 Usuario: <b>{name || "Invitado"}</b>
+            </p>
+
+            {/* LÁPIZ MÁS PEGADO */}
+            <span
+              onClick={() => setEditing(true)}
+              style={{
+                cursor: "pointer",
+                fontSize: 16,
+                opacity: 0.8
+              }}
+            >
+              ✏️
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* EDITAR NOMBRE */}
+      {/* EDITAR */}
       {editing && (
         <div style={{ marginTop: 15 }}>
           <input
