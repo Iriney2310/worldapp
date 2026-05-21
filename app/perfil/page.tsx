@@ -174,11 +174,6 @@ export default function Perfil() {
     ✔ Email copiado
   </p>
 )}
-  {copied && (
-    <p style={{ marginTop: 10, color: "#00ff99", fontWeight: "bold" }}>
-      ✔ Email copiado
-    </p>
-  )}
 </div>
     </div>
   )
