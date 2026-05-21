@@ -6,6 +6,7 @@ export default function Perfil() {
   const [name, setName] = useState("")
   const [editing, setEditing] = useState(false)
   const [input, setInput] = useState("")
+    const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem("username")
@@ -141,29 +142,43 @@ export default function Perfil() {
   </p>
 
   <button
-  onClick={async () => {
-    const email = "irineymm@gmail.com"
+    onClick={async () => {
+      const email = "irineymm@gmail.com"
 
-    try {
-      await navigator.clipboard.writeText(email)
-      alert("📋 Email copiado al portapapeles")
-    } catch (err) {
-      console.error("Error copiando:", err)
-      alert("No se pudo copiar el email")
-    }
-  }}
-  style={{
-    padding: "10px 14px",
-    borderRadius: 10,
-    border: "1px solid white",
-    background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer"
-  }}
->
-  📋 Copiar email
-</button>
+      try {
+        await navigator.clipboard.writeText(email)
+        setCopied(true)
+
+        setTimeout(() => {
+          setCopied(false)
+        }, 2000)
+
+      } catch (err) {
+        console.error(err)
+      }
+    }}
+    style={{
+      padding: "10px 14px",
+      borderRadius: 10,
+      border: "1px solid white",
+      background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+      color: "white",
+      fontWeight: "bold",
+      cursor: "pointer"
+    }}
+  >
+    📋 Copiar email
+  </button>
+{copied && (
+  <p style={{ marginTop: 10, color: "#00ff99", fontWeight: "bold" }}>
+    ✔ Email copiado
+  </p>
+)}
+  {copied && (
+    <p style={{ marginTop: 10, color: "#00ff99", fontWeight: "bold" }}>
+      ✔ Email copiado
+    </p>
+  )}
 </div>
     </div>
   )
