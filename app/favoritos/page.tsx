@@ -2,43 +2,62 @@
 
 import { useEffect, useState } from "react"
 
-export default function Favoritos() {
-  const [favorites, setFavorites] = useState<any[]>([])
+export default function Page() {
 
+  const [favorites, setFavorites] = useState<any[]>(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("favorites") || "[]")
+    }
+    return []
+  })
+
+  // 💾 Guardar cambios en localStorage
   useEffect(() => {
-    const data = localStorage.getItem("favorites")
-    if (data) setFavorites(JSON.parse(data))
+    localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [favorites])
+
+  // 🔄 Re-sincronizar al volver a la página
+  useEffect(() => {
+    const handleFocus = () => {
+      const data = localStorage.getItem("favorites")
+      if (data) setFavorites(JSON.parse(data))
+    }
+
+    window.addEventListener("focus", handleFocus)
+
+    return () => window.removeEventListener("focus", handleFocus)
   }, [])
 
+  // ❤️ Toggle favorito
+  const toggleFavorite = (shoe: any) => {
+    setFavorites((prev) => {
+      const exists = prev.some((item) => item.id === shoe.id)
+
+      let updated
+
+      if (exists) {
+        updated = prev.filter((item) => item.id !== shoe.id)
+      } else {
+        updated = [...prev, shoe]
+      }
+
+      localStorage.setItem("favorites", JSON.stringify(updated))
+      return updated
+    })
+  }
+
   return (
-    <div style={{ color: "white", padding: 20 }}>
-      <h1>❤️ Favoritos</h1>
-
-      {favorites.length === 0 ? (
-        <p>No tienes zapatillas</p>
-      ) : (
-        favorites.map((shoe) => (
-          <div
-            key={shoe.id}
-            style={{
-              display: "flex",
-              gap: 10,
-              alignItems: "center",
-              marginTop: 10,
-              padding: 10,
-              background: "rgba(255,255,255,0.05)",
-              borderRadius: 10,
-            }}
-          >
-            <img src={shoe.image} style={{ width: 60, borderRadius: 8 }} />
-
-            <div>
-              <p style={{ margin: 0 }}>{shoe.name}</p>
-              <p style={{ margin: 0, opacity: 0.7 }}>{shoe.price}</p>
-            </div>
-          </div>
-        ))
-      )}
-    </div>
+    <main>
+      {/* EJEMPLO BOTÓN ❤️ EN TARJETA */}
+      {/* Cambia esto dentro de tu map */}
+      {/*
+        <button onClick={(e) => {
+          e.stopPropagation()
+          toggleFavorite(s)
+        }}>
+          {favorites.some((item) => item.id === s.id) ? "❤️" : "🤍"}
+        </button>
+      */}
+    </main>
   )
 }
