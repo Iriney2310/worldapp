@@ -141,16 +141,17 @@ export default function Perfil() {
   </p>
 
   <button
-  onClick={() => {
+  type="button"
+  onClick={(e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
     const email = "irineymm@gmail.com"
+    const subject = encodeURIComponent("Soporte Sneakers")
+    const body = encodeURIComponent("Hola, necesito ayuda con Sneakers.")
 
-    const subject = "Soporte Sneakers"
-    const body = "Hola, necesito ayuda con Sneakers."
-
-    const mailtoLink =
-      `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-
-    window.location.href = mailtoLink
+    window.location.href =
+      `mailto:${email}?subject=${subject}&body=${body}`
   }}
   style={{
     padding: "10px 14px",
