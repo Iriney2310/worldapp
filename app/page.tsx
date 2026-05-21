@@ -1,6 +1,6 @@
 'use client'
-import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+
+import { useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 type Sneaker = {
@@ -95,15 +95,7 @@ export default function Home() {
   const [favOpen, setFavOpen] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
-  const [favorites, setFavorites] = useState<any[]>(() => {
-  if (typeof window !== "undefined") {
-    return JSON.parse(localStorage.getItem("favorites") || "[]")
-  }
-  return []
-})
-useEffect(() => {
-  localStorage.setItem("favorites", JSON.stringify(favorites))
-}, [favorites])
+  const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
 
   const filtered = useMemo(() => {
@@ -117,25 +109,19 @@ useEffect(() => {
     })
   }, [brand, search])
 
-  const toggleFavorite = (shoe: any) => {
-  setFavorites((prev) => {
-    const exists = prev.some((item) => item.id === shoe.id)
+  const toggleFavorite = (shoe: Sneaker) => {
+  setFavorites(prev => {
+    const exists = prev.some(item => item.id === shoe.id)
 
-    let updated
+    const updated = exists
+      ? prev.filter(item => item.id !== shoe.id)
+      : [...prev, shoe]
 
-    if (exists) {
-      updated = prev.filter((item) => item.id !== shoe.id)
-    } else {
-      updated = [...prev, shoe]
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(updated))
     return updated
   })
 }
-  const favItems = sneakers.filter(s =>
-    favorites.some((item) => item.id === s.id)
-  )
+
+  const favItems = sneakers.filter(s => favorites.some(fav => fav.id === s.id))
 
   const closeDetail = () => {
     setClosing(true)
@@ -167,6 +153,9 @@ useEffect(() => {
             ☰
           </button>
 
+          <button onClick={() => setFavOpen(true)} style={topRightBtn}>
+            ❤️ {favorites.length}
+          </button>
         </div>
       )}
 
@@ -275,7 +264,7 @@ useEffect(() => {
           }}
           style={heart}
         >
-          {favorites.includes(s) ? '❤️' : '🤍'}
+          {favorites.some(fav => fav.id === s.id) ? '❤️' : '🤍'}
         </div>
 {s.tags?.map((tag, i) => (
   <span
@@ -433,22 +422,6 @@ useEffect(() => {
     </button>
   </div>
 )}
-<div style={bottomNav}>
-  <Link href="/favoritos" style={navBtn}>
-    ❤️
-    <span>Favoritos</span>
-  </Link>
-
-  <Link href="/" style={navBtn}>
-    🏠
-    <span>Inicio</span>
-  </Link>
-
-  <Link href="/perfil" style={navBtn}>
-    👤
-    <span>Perfil</span>
-  </Link>
-</div>
     </main>
   )
 }
@@ -461,7 +434,6 @@ const main: CSSProperties = {
   color: 'white',
   fontFamily: 'sans-serif',
   overflow: 'hidden',
-  paddingBottom: 90,
 }
 
 /* fondo real */
@@ -490,32 +462,7 @@ const grid: CSSProperties = {
   gap: 16,
   marginTop: 25,
 }
-const bottomNav: CSSProperties = {
-  position: 'fixed',
-  bottom: 0,
-  left: 0,
-  width: '100%',
-  height: 70,
-  background: 'rgba(15,15,15,0.9)',
-  backdropFilter: 'blur(10px)',
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  borderTop: '1px solid rgba(255,255,255,0.1)',
-  zIndex: 9999,
-}
 
-const navBtn: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: 4,
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: 13,
-  fontWeight: 500,
-}
 const card: CSSProperties = {
   background: 'rgba(255,255,255,0.06)',
   padding: 12,
