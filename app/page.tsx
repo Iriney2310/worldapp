@@ -44,7 +44,6 @@ const sneakers: Sneaker[] = [
   name: "Air Max Ltd 3",
   brand: "Nike",
   price: "90.99",
-  oldPrice: "129.99",
   currency: "EUR",
   store: "Amazon",
   image:
@@ -437,23 +436,22 @@ useEffect(() => {
         <p>{s.brand}</p>
         <div style={{ marginTop: 6 }}>
   {/* precio actual */}
-  <p style={{ fontWeight: 'bold', fontSize: 16 }}>
-    {s.price}
-  </p>
-
-  {/* precio antiguo tachado */}
-  <p
-  style={{
-    textDecoration: 'line-through',
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: 400,
-    opacity: 1,
-  }}
->
-  <p>{convert(Number(s.price))}</p>
+<p style={{ fontWeight: 'bold', fontSize: 16 }}>
+  {s.price}
 </p>
-
+  {/* precio antiguo si existe */}
+  {s.oldPrice && (
+    <p
+      style={{
+        textDecoration: 'line-through',
+        fontSize: 12,
+        opacity: 0.7,
+        marginTop: -4,
+      }}
+    >
+      {s.oldPrice}
+    </p>
+  )}
 </div>
       </div>
     ))}
