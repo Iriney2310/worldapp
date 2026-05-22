@@ -477,7 +477,7 @@ const bg: CSSProperties = {
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'var(--overlay)',
+  background: 'rgba(0,0,0,0.25)',
   zIndex: -1,
 }
 

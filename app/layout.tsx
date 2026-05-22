@@ -4,7 +4,6 @@ import "./globals.css"
 
 import BottomNav from "./bottomnav"
 import { ThemeProvider } from "./context/ThemeContext"
-import Sidebar from "./components/Sidebar"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,28 +32,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
         style={{
           margin: 0,
-          display: "flex",
           minHeight: "100vh",
-          paddingBottom: 80,
         }}
       >
-
-        {/* 🔥 THEME GLOBAL */}
         <ThemeProvider>
 
-          {/* 🔥 SIDEBAR IZQUIERDA */}
-          <Sidebar />
+          {children}
 
-          {/* 🔥 CONTENIDO PRINCIPAL */}
-          <main style={{ flex: 1 }}>
-            {children}
-          </main>
-
-          {/* 🔥 BOTTOM NAV */}
           <BottomNav />
 
         </ThemeProvider>
-
       </body>
     </html>
   )
