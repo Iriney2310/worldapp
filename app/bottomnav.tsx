@@ -26,7 +26,7 @@ export default function bottomnav() {
     ❤️
   </span>
 
-  <span>Favoritos</span>
+  <span>FAVORITOS</span>
 </Link>
 
 <Link
@@ -45,7 +45,7 @@ export default function bottomnav() {
     🏠
   </span>
 
-  <span>Inicio</span>
+  <span>INICIO</span>
 </Link>
 
 <Link
@@ -64,7 +64,7 @@ export default function bottomnav() {
     👤
   </span>
 
-  <span>Perfil</span>
+  <span>PERFIL</span>
 </Link>
     </div>
   )}
