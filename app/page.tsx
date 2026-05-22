@@ -71,7 +71,7 @@ const sneakers: Sneaker[] = [
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
     price: '39,99€',
-    store: "Mercado Libre",
+    store: "MercadoLibre",
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
