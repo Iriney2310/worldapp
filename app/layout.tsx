@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
+
 import BottomNav from "./bottomnav"
 import { ThemeProvider } from "./context/ThemeContext"
+import Sidebar from "./components/Sidebar"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,12 +31,30 @@ export default function RootLayout({
       <body
         id="app-body"
         className={`${geistSans.variable} ${geistMono.variable}`}
-        style={{ paddingBottom: 80 }}
+        style={{
+          margin: 0,
+          display: "flex",
+          minHeight: "100vh",
+          paddingBottom: 80,
+        }}
       >
+
+        {/* 🔥 THEME GLOBAL */}
         <ThemeProvider>
-          {children}
+
+          {/* 🔥 SIDEBAR IZQUIERDA */}
+          <Sidebar />
+
+          {/* 🔥 CONTENIDO PRINCIPAL */}
+          <main style={{ flex: 1 }}>
+            {children}
+          </main>
+
+          {/* 🔥 BOTTOM NAV */}
           <BottomNav />
+
         </ThemeProvider>
+
       </body>
     </html>
   )
