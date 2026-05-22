@@ -35,7 +35,6 @@ export default function RootLayout({
         <ThemeProvider>
           <CurrencyProvider>
 
-            {/* CONTENIDO */}
             <div
               style={{
                 minHeight: "100vh",
