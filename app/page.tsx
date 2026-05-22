@@ -402,7 +402,8 @@ useEffect(() => {
         : 'https://static.wikia.nocookie.net/logopedia/images/c/ca/MercadoLibre_2000_(Background).svg/revision/latest?cb=20200601232030'
     }
     style={{
-      width: '70%',
+      width: '90%',
+      height: "90%",
       objectFit: 'contain',
     }}
   />
