@@ -2,6 +2,14 @@
 
 /* ================= THEME VARIABLES (DARK DEFAULT) ================= */
 :root {
+  --overlay: rgba(0,0,0,0.25);
+}
+
+.light {
+  --overlay: rgba(255,255,255,0.35);
+}
+
+:root {
   --bg: #000;
   --text: #fff;
   --card: rgba(255, 255, 255, 0.06);

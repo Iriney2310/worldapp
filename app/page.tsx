@@ -477,7 +477,7 @@ const bg: CSSProperties = {
 const overlayBg: CSSProperties = {
   position: 'fixed',
   inset: 0,
-  background: 'rgba(0,0,0,0.25)',
+  background: 'var(--overlay)',
   zIndex: -1,
 }
 
@@ -676,7 +676,7 @@ const banner: CSSProperties = {
   textAlign: 'center',
   fontSize: 25,
   fontWeight: 'bold',
-  color: 'white',
+  color: 'var(--text)',
   background: 'linear-gradient(90deg, #ff00cc, #3333ff)',
   lineHeight: 1.5,
 }
