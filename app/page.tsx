@@ -27,7 +27,7 @@ const sneakers: Sneaker[] = [
     name: 'Air Force 1 \'07',
     brand: 'Nike',
     price: '95,95€',
-    store: "MercadoLibre",
+    store: "Amazon",
     image:
       'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
     link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
@@ -402,8 +402,8 @@ useEffect(() => {
         : 'https://www.elcohetealaluna.com/wp-content/uploads/2019/07/Mercado-Libre..png'
     }
     style={{
-      width: '90%',
-      height: "900%",
+      width: '100%',
+      height: "100%",
       objectFit: 'contain',
     }}
   />
