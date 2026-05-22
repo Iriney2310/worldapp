@@ -246,8 +246,6 @@ useEffect(() => {
       <button onClick={() => setBrand("Adidas")} style={sideBtn}>
         Adidas
       </button>
-        <button onClick={() => setFavOpen(true)} style={sideBtn}>
-      </button>
     </div>
   )}
 

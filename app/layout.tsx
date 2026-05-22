@@ -30,17 +30,19 @@ export default function RootLayout({
       <body
         id="app-body"
         className={`${geistSans.variable} ${geistMono.variable}`}
-        style={{
-          margin: 0,
-          minHeight: "100vh",
-        }}
       >
         <ThemeProvider>
-
-          {children}
+          {/* CONTENIDO */}
+          <div
+            style={{
+              minHeight: "100vh",
+              paddingBottom: 90, // 👈 IMPORTANTE (BottomNav no tapa contenido)
+            }}
+          >
+            {children}
+          </div>
 
           <BottomNav />
-
         </ThemeProvider>
       </body>
     </html>
