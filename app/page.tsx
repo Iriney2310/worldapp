@@ -91,7 +91,7 @@ const sneakers: Sneaker[] = [
     link: 'https://meli.la/2sepjTm',
     badge: 'NEW',
     rating: "4.8 / 5",
-  usage: "Daily / Lifestyle",
+  usage: "Casual / Urbano",
   stock: "En Stock"
   },
   {
