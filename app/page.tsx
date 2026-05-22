@@ -101,6 +101,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
   const [openBrands, setOpenBrands] = useState(false)
+  const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
 const [openStores, setOpenStores] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
@@ -135,15 +136,18 @@ useEffect(() => {
 }, [favorites])
 
   const filtered = useMemo(() => {
-    return sneakers.filter(s => {
-      const matchBrand = brand === 'all' || s.brand === brand
-      const matchSearch =
-        s.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.brand.toLowerCase().includes(search.toLowerCase())
+  return sneakers.filter(s => {
+    const matchBrand = brand === 'all' || s.brand === brand
 
-      return matchBrand && matchSearch
-    })
-  }, [brand, search])
+    const matchSearch =
+      s.name.toLowerCase().includes(search.toLowerCase()) ||
+      s.brand.toLowerCase().includes(search.toLowerCase())
+
+    const matchStore = store === 'all' || s.store === store
+
+    return matchBrand && matchSearch && matchStore
+  })
+}, [brand, search, store])
 
   const toggleFavorite = (shoe: Sneaker) => {
   setFavorites(prev => {
@@ -257,16 +261,31 @@ useEffect(() => {
   </button>
 
   {openStores && (
-    <div style={{ marginLeft: 10 }}>
-      <button style={sideBtn}>
-        Amazon
-      </button>
+  <div style={{ marginLeft: 10 }}>
 
-      <button style={sideBtn}>
-        Mercado Libre
-      </button>
-    </div>
-  )}
+    <button
+      onClick={() => setStore('all')}
+      style={sideBtn}
+    >
+      🛒 Todas las tiendas
+    </button>
+
+    <button
+      onClick={() => setStore('Amazon')}
+      style={sideBtn}
+    >
+      Amazon
+    </button>
+
+    <button
+      onClick={() => setStore('MercadoLibre')}
+      style={sideBtn}
+    >
+      Mercado Libre
+    </button>
+
+  </div>
+)}
 </div>
 
       {/* FAVORITOS */}
