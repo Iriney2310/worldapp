@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { useCurrency } from "../context/CurrencyContext"
 import { useTheme } from "../context/ThemeContext"
 
 export default function Perfil() {
   const { dark, toggleTheme } = useTheme()
+  const { currency, setCurrency } = useCurrency()
 
   const [name, setName] = useState("")
   const [editing, setEditing] = useState(false)
@@ -32,15 +34,13 @@ export default function Perfil() {
   const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
 
   return (
-    <div
-      style={{
-        color: "var(--text)",
-        background: "var(--bg)",
-        minHeight: "100vh",
-        padding: 20,
-        fontFamily: "sans-serif",
-      }}
-    >
+    <div style={{
+      color: "var(--text)",
+      background: "var(--bg)",
+      minHeight: "100vh",
+      padding: 20,
+      fontFamily: "sans-serif",
+    }}>
 
       {/* USUARIO */}
       <div style={{
@@ -115,6 +115,35 @@ export default function Perfil() {
           </button>
         </div>
       )}
+
+      {/* 💰 SELECTOR DE MONEDA */}
+      <div style={{
+        marginTop: 20,
+        padding: 15,
+        borderRadius: 12,
+        background: "var(--card)",
+        border: "1px solid var(--border)"
+      }}>
+        <h3>💰 Moneda</h3>
+
+        <div style={{ display: "flex", gap: 10, marginTop: 10 }}>
+          <button onClick={() => setCurrency("EUR")}>
+            EUR €
+          </button>
+
+          <button onClick={() => setCurrency("USD")}>
+            USD $
+          </button>
+
+          <button onClick={() => setCurrency("ARS")}>
+            ARS $
+          </button>
+        </div>
+
+        <p style={{ marginTop: 10, opacity: 0.7 }}>
+          Actual: <b>{currency}</b>
+        </p>
+      </div>
 
       {/* BOTÓN TEMA */}
       <button

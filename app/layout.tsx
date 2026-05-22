@@ -4,6 +4,7 @@ import "./globals.css"
 
 import BottomNav from "./bottomnav"
 import { ThemeProvider } from "./context/ThemeContext"
+import { CurrencyProvider } from "./context/CurrencyContext"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,17 +33,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
         <ThemeProvider>
-          {/* CONTENIDO */}
-          <div
-            style={{
-              minHeight: "100vh",
-              paddingBottom: 90, // 👈 IMPORTANTE (BottomNav no tapa contenido)
-            }}
-          >
-            {children}
-          </div>
+          <CurrencyProvider>
 
-          <BottomNav />
+            {/* CONTENIDO */}
+            <div
+              style={{
+                minHeight: "100vh",
+                paddingBottom: 90,
+              }}
+            >
+              {children}
+            </div>
+
+            <BottomNav />
+
+          </CurrencyProvider>
         </ThemeProvider>
       </body>
     </html>

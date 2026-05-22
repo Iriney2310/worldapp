@@ -15,6 +15,7 @@ type Sneaker = {
   rating: string
   usage: string
   stock: string
+  currency: string
   tags?: string[]
   store: "Amazon" | "MercadoLibre"
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
@@ -23,91 +24,97 @@ type Sneaker = {
 
 const sneakers: Sneaker[] = [
   {
-    id: 1,
-    name: 'Air Force 1 \'07',
-    brand: 'Nike',
-    price: '95,95€',
-    store: "Amazon",
-    image:
-      'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
-    link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
-    badge: 'BESTSELLER',
-    rating: "4.5 / 5",
+  id: 1,
+  name: "Air Force 1 '07",
+  brand: "Nike",
+  price: "95.95",
+  currency: "EUR",
+  store: "Amazon",
+  image:
+    "https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png",
+  link: "https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21",
+  badge: "BESTSELLER",
+  rating: "4.5 / 5",
   usage: "Daily",
   stock: "Ultimas Unidades"
-  },
-  {
-    id: 2,
-    name: 'Air Max Ltd 3',
-    brand: 'Nike',
-    price: '90,99€',
-    oldPrice: '129,99€',
-    store: "Amazon",
-    image:
-      'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
-    link: 'https://amzn.to/4nIiepg',
-    badge: 'OFFER',
-    rating: "4.0 / 5",
-    tags: ['-30%'],
-    usage: "Daily",
-    stock: "Pocas Unidades"
-  },
-  {
-    id: 3,
-    name: 'Court Vision Low',
-    brand: 'Nike',
-    price: '53,99€',
-    store: "Amazon",
-    image:
-      'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
-    link: 'https://amzn.to/4die6c0',
-    badge: 'NEW',
-    rating: "4.4 / 5",
+},
+{
+  id: 2,
+  name: "Air Max Ltd 3",
+  brand: "Nike",
+  price: "90.99",
+  oldPrice: "129.99",
+  currency: "EUR",
+  store: "Amazon",
+  image:
+    "https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg",
+  link: "https://amzn.to/4nIiepg",
+  badge: "OFFER",
+  rating: "4.0 / 5",
+  tags: ["-30%"],
+  usage: "Daily",
+  stock: "Pocas Unidades"
+},
+{
+  id: 3,
+  name: "Court Vision Low",
+  brand: "Nike",
+  price: "53.99",
+  currency: "EUR",
+  store: "Amazon",
+  image:
+    "https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg",
+  link: "https://amzn.to/4die6c0",
+  badge: "NEW",
+  rating: "4.4 / 5",
   usage: "Daily / Lifestyle",
   stock: "En Stock"
-  },
-  {
-    id: 4,
-    name: 'Grand Court Base 00s',
-    brand: 'Adidas',
-    price: '39,99€',
-    store: "Amazon",
-    image:
-      'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
-    link: 'https://amzn.to/3Px9aGX',
-    badge: 'HOT',
-    rating: "4.4 / 5",
+},
+{
+  id: 4,
+  name: "Grand Court Base 00s",
+  brand: "Adidas",
+  price: "39.99",
+  currency: "EUR",
+  store: "Amazon",
+  image:
+    "https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg",
+  link: "https://amzn.to/3Px9aGX",
+  badge: "HOT",
+  rating: "4.4 / 5",
   usage: "Daily / Lifestyle",
   stock: "En Stock"
-  },
-  {
-    id: 5,
-    name: 'Court Vision Low',
-    brand: 'Nike',
-    price: "$127.499 (ARS)",
-    store: "MercadoLibre",
-    image:
-      'https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png',
-    link: 'https://meli.la/2sepjTm',
-    badge: 'NEW',
-    rating: "4.8 / 5",
+},
+{
+  id: 5,
+  name: "Court Vision Low",
+  brand: "Nike",
+  price: "127499",
+  currency: "ARS",
+  store: "MercadoLibre",
+  image:
+    "https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png",
+  link: "https://meli.la/2sepjTm",
+  badge: "NEW",
+  rating: "4.8 / 5",
   usage: "Casual / Urbano",
   stock: "En Stock"
-  },
-  {
-    id: 6,
-    name: 'VL Court 3.0',
-    brand: 'Adidas',
-    price: '41,99€',
-    store: "Amazon",
-    image:
-      'https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp',
-    link: 'https://amzn.to/4nHqSUY',
-    badge: 'HOT',
-    rating: "4.5 / 5",
+},
+{
+  id: 6,
+  name: "VL Court 3.0",
+  brand: "Adidas",
+  price: "41.99",
+  currency: "EUR",
+  store: "Amazon",
+  image:
+    "https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp",
+  link: "https://amzn.to/4nHqSUY",
+  badge: "HOT",
+  rating: "4.5 / 5",
   usage: "Football / Lifestyle",
   stock: "En Stock"
-  },
+}
 ]
 
 export default function Home() {
@@ -122,6 +129,23 @@ const [openStores, setOpenStores] = useState(false)
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
+
+const [currency, setCurrency] = useState<'EUR' | 'ARS'>('EUR')
+
+const formatPrice = (price: string) => {
+  const num = parseFloat(price.replace(/[^0-9.]/g, ''))
+
+  if (currency === 'EUR') {
+    return `€${num.toFixed(2)}`
+  }
+
+  if (currency === 'ARS') {
+    return `$${(num * 900).toFixed(0)} ARS` // ejemplo conversión
+  }
+
+  return price
+}
+
 const searchParams = typeof window !== 'undefined'
   ? useSearchParams()
   : null
@@ -435,13 +459,13 @@ useEffect(() => {
   <p
   style={{
     textDecoration: 'line-through',
-    color: '#fff',   // 👈 blanco
+    color: '#fff',
     fontSize: 15,
     fontWeight: 400,
     opacity: 1,
   }}
 >
-  {s.oldPrice}
+  {s.oldPrice ? formatPrice(s.oldPrice) : null}
 </p>
 
 </div>
