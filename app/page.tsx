@@ -82,20 +82,6 @@ const sneakers: Sneaker[] = [
   },
   {
     id: 5,
-    name: 'Court Vision Low',
-    brand: 'Nike',
-    price: '127,499~$',
-    store: "MercadoLibre",
-    image:
-      'https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png',
-    link: 'https://meli.la/2R7g7xT',
-    badge: 'NEW',
-    rating: "4.8 / 5",
-  usage: "Casual / Urbano",
-  stock: "En Stock"
-  },
-  {
-    id: 6,
     name: 'VL Court 3.0',
     brand: 'Adidas',
     price: '41,99€',
