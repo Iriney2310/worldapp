@@ -169,7 +169,6 @@ useEffect(() => {
 
   return (
     <main style={main}>
-      <div style={bg} />
 <div style={overlayBg} />
 {/* BANNER */}
 {!selected && (
@@ -509,17 +508,7 @@ const main: CSSProperties = {
   background: 'var(--bg)',
 }
 
-/* fondo real */
-const bg: CSSProperties = {
-  position: 'fixed',
-  inset: 0,
-  backgroundImage: 'url("/fondo.jpg")',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  backgroundRepeat: 'no-repeat',
-  zIndex: -2,
-  transform: 'scale(1.05)',
-}
+
 
 /* capa elegante tipo Nike (MUY suave) */
 const overlayBg: CSSProperties = {
