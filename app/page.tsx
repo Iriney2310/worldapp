@@ -27,7 +27,7 @@ const sneakers: Sneaker[] = [
     name: 'Air Force 1 \'07',
     brand: 'Nike',
     price: '95,95€',
-    store: "MercadoLibre",
+    store: "Amazon",
     image:
       'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
     link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
@@ -82,6 +82,20 @@ const sneakers: Sneaker[] = [
   },
   {
     id: 5,
+    name: 'Court Vision Low',
+    brand: 'Nike',
+    price: '127.499$',
+    store: "MercadoLibre",
+    image:
+      'https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png',
+    link: 'https://meli.la/2R7g7xT',
+    badge: 'NEW',
+    rating: "4.8 / 5",
+  usage: "Casual / Urbano",
+  stock: "En Stock"
+  },
+  {
+    id: 6,
     name: 'VL Court 3.0',
     brand: 'Adidas',
     price: '41,99€',
