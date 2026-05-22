@@ -132,20 +132,6 @@ export default function Home() {
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-const formatPrice = (price: string) => {
-  const num = parseFloat(price.replace(/[^0-9.]/g, ''))
-
-  if (currency === 'EUR') {
-    return `€${num.toFixed(2)}`
-  }
-
-  if (currency === 'ARS') {
-    return `$${(num * 900).toFixed(0)} ARS` // ejemplo conversión
-  }
-
-  return price
-}
-
 const searchParams = typeof window !== 'undefined'
   ? useSearchParams()
   : null
@@ -465,7 +451,7 @@ useEffect(() => {
     opacity: 1,
   }}
 >
-  {s.oldPrice ? formatPrice(s.oldPrice) : null}
+  <p>{convert(Number(s.price))}</p>
 </p>
 
 </div>
