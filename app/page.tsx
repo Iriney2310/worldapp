@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { CSSProperties } from 'react'
 import { useSearchParams } from "next/navigation"
+import { useCurrency } from './context/CurrencyContext'
 
 type Sneaker = {
   id: number
@@ -118,19 +119,18 @@ const sneakers: Sneaker[] = [
 ]
 
 export default function Home() {
+  const { currency, convert } = useCurrency()
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
   const [openBrands, setOpenBrands] = useState(false)
   const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
-const [openStores, setOpenStores] = useState(false)
+  const [openStores, setOpenStores] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
-
-const [currency, setCurrency] = useState<'EUR' | 'ARS'>('EUR')
 
 const formatPrice = (price: string) => {
   const num = parseFloat(price.replace(/[^0-9.]/g, ''))
