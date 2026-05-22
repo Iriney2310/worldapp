@@ -71,7 +71,7 @@ const sneakers: Sneaker[] = [
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
     price: '39,99€',
-    store: "MercadoLibre",
+    store: "Amazon",
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
@@ -233,7 +233,7 @@ useEffect(() => {
     onClick={() => setOpenBrands(!openBrands)}
     style={sideBtn}
   >
-    👟 Marcas {openBrands ? "▲" : "▼"}
+    👟 MARCAS {openBrands ? "▲" : "▼"}
   </button>
 
   {openBrands && (
@@ -257,7 +257,7 @@ useEffect(() => {
     onClick={() => setOpenStores(!openStores)}
     style={sideBtn}
   >
-    🛒 Tiendas {openStores ? "▲" : "▼"}
+    🛒 TIENDAS {openStores ? "▲" : "▼"}
   </button>
 
   {openStores && (
@@ -267,7 +267,7 @@ useEffect(() => {
       onClick={() => setStore('all')}
       style={sideBtn}
     >
-      🛒 Todas las tiendas
+      Todas 
     </button>
 
     <button
@@ -378,6 +378,35 @@ useEffect(() => {
   </span>
 ))}
         <img src={s.image} style={img} />
+<div
+  style={{
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 34,
+    height: 34,
+    borderRadius: '50%',
+    background: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    border: '1px solid rgba(255,255,255,0.2)',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+  }}
+>
+  <img
+    src={
+      s.store === 'Amazon'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
+        : 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercado_Libre_logo.svg'
+    }
+    style={{
+      width: '70%',
+      objectFit: 'contain',
+    }}
+  />
+</div>
 
         <h3>{s.name}</h3>
         <p>{s.brand}</p>
