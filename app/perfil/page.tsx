@@ -147,12 +147,12 @@ export default function Perfil() {
         <h3>📩 Contáctanos</h3>
 
         <p style={{ opacity: 0.8 }}>
-          irineymm@gmail.com
+          sneakersworldapp@gmail.com
         </p>
 
         <button
           onClick={async () => {
-            await navigator.clipboard.writeText("irineymm@gmail.com")
+            await navigator.clipboard.writeText("sneakersworldapp@gmail.com")
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
           }}
