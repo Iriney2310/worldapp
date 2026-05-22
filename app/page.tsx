@@ -628,7 +628,7 @@ const topLeftBtn: CSSProperties = {
   left: 13,
   background: 'var(--card)',
 color: 'var(--text)',
-border: '1px solid var(--border)'
+border: '1px solid var(--border)',
   padding: '3px 14px',  // 👈 más ancho y alto
   fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,

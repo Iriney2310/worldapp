@@ -56,7 +56,15 @@ useEffect(() => {
   const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
 
   return (
+  <div>
+    <button onClick={toggleTheme}>
+      Cambiar tema
+    </button>
+  </div>
+)
+  return (
     <div
+    
   style={{
     color: darkMode ? "white" : "black",
     background: darkMode ? "#000" : "#f2f2f2",
