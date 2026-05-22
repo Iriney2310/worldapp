@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-export default function BottomNav() {
+export default function bottomnav() {
   const pathname = usePathname()
 
   const isActive = (path: string) => pathname === path
@@ -11,40 +11,63 @@ export default function BottomNav() {
   return (
     <div style={bottomNav}>
       <Link
-        href="/favoritos"
-        style={{
-          ...navBtn,
-          ...(isActive("/favoritos") ? activeBtn : {}),
-        }}
-      >
-        ❤️
-        <span>Favoritos</span>
-      </Link>
+  href="/favoritos"
+  style={{
+    ...navBtn,
+    ...(isActive("/favoritos") ? activeBtn : {}),
+  }}
+>
+  <span
+    style={{
+      fontSize: isActive("/favoritos") ? 20 : 17,
+      transition: "0.2s ease",
+    }}
+  >
+    ❤️
+  </span>
 
-      <Link
-        href="/"
-        style={{
-          ...navBtn,
-          ...(isActive("/") ? activeBtn : {}),
-        }}
-      >
-        🏠
-        <span>Inicio</span>
-      </Link>
+  <span>Favoritos</span>
+</Link>
 
-      <Link
-        href="/perfil"
-        style={{
-          ...navBtn,
-          ...(isActive("/perfil") ? activeBtn : {}),
-        }}
-      >
-        👤
-        <span>Perfil</span>
-      </Link>
+<Link
+  href="/"
+  style={{
+    ...navBtn,
+    ...(isActive("/") ? activeBtn : {}),
+  }}
+>
+  <span
+    style={{
+      fontSize: isActive("/") ? 20 : 17,
+      transition: "0.2s ease",
+    }}
+  >
+    🏠
+  </span>
+
+  <span>Inicio</span>
+</Link>
+
+<Link
+  href="/perfil"
+  style={{
+    ...navBtn,
+    ...(isActive("/perfil") ? activeBtn : {}),
+  }}
+>
+  <span
+    style={{
+      fontSize: isActive("/perfil") ? 20 : 17,
+      transition: "0.2s ease",
+    }}
+  >
+    👤
+  </span>
+
+  <span>Perfil</span>
+</Link>
     </div>
-  )
-}
+  )}
 
 const bottomNav: React.CSSProperties = {
   position: "fixed",
@@ -72,9 +95,6 @@ const navBtn: React.CSSProperties = {
 }
 
 const activeBtn: React.CSSProperties = {
-  transform: "scale(1.15)",
-  transformOrigin: "center",
   background: "rgba(255,255,255,0.08)",
-  padding: "6px 10px",
   borderRadius: 12,
 }
