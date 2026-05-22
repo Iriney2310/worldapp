@@ -13,36 +13,23 @@ type Sneaker = {
 }
 
 export default function Favoritos() {
-    const [selected, setSelected] = useState<Sneaker | null>(null)
   const [favorites, setFavorites] = useState<Sneaker[]>([])
+  const [selected, setSelected] = useState<Sneaker | null>(null)
   const router = useRouter()
 
-  // 🔄 Cargar favoritos al entrar + sincronizar
+  // cargar favoritos
   useEffect(() => {
     const loadFavorites = () => {
-      try {
-        const data = localStorage.getItem("favorites")
-        if (data) {
-          setFavorites(JSON.parse(data))
-        } else {
-          setFavorites([])
-        }
-      } catch (e) {
-        setFavorites([])
-      }
+      const data = localStorage.getItem("favorites")
+      setFavorites(data ? JSON.parse(data) : [])
     }
 
     loadFavorites()
-
-    // 🔥 sincronización entre pestañas
     window.addEventListener("storage", loadFavorites)
 
-    return () => {
-      window.removeEventListener("storage", loadFavorites)
-    }
+    return () => window.removeEventListener("storage", loadFavorites)
   }, [])
 
-  // ❌ quitar favorito
   const removeFavorite = (shoe: Sneaker) => {
     const updated = favorites.filter((item) => item.id !== shoe.id)
     setFavorites(updated)
@@ -52,7 +39,9 @@ export default function Favoritos() {
   return (
     <div
       style={{
-        color: "white",
+        color: "var(--text)",
+        background: "var(--bg)",
+        minHeight: "100vh",
         padding: 20,
         fontFamily: "sans-serif",
       }}
@@ -73,16 +62,17 @@ export default function Favoritos() {
           }}
         >
           {favorites.map((shoe) => (
-              <div
-                key={shoe.id}
-                 onClick={() => setSelected(shoe)}
-                 style={{
-                   background: "rgba(255,255,255,0.06)",
-                  padding: 10,
-                  borderRadius: 14,
-               border: "1px solid rgba(255,255,255,0.1)",
-          }}
-  
+            <div
+              key={shoe.id}
+              onClick={() => setSelected(shoe)}
+              style={{
+                background: "var(--card)",
+                padding: 10,
+                borderRadius: 14,
+                border: "1px solid var(--border)",
+                color: "var(--text)",
+                cursor: "pointer",
+              }}
             >
               <img
                 src={shoe.image}
@@ -105,23 +95,23 @@ export default function Favoritos() {
               </p>
 
               <button
-         onClick={(e) => {
-         e.stopPropagation()
-             removeFavorite(shoe)
-         }}
-         style={{
-          marginTop: 8,
-          width: "100%",
-         padding: 6,
-         borderRadius: 8,
-         border: "1px solid white",
-         background: "transparent",
-         color: "white",
-         cursor: "pointer",
-    }}
-    >
-              Quitar
-        </button>
+                onClick={(e) => {
+                  e.stopPropagation()
+                  removeFavorite(shoe)
+                }}
+                style={{
+                  marginTop: 8,
+                  width: "100%",
+                  padding: 6,
+                  borderRadius: 8,
+                  border: "1px solid var(--border)",
+                  background: "var(--card)",
+                  color: "var(--text)",
+                  cursor: "pointer",
+                }}
+              >
+                Quitar
+              </button>
             </div>
           ))}
         </div>

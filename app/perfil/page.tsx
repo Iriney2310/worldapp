@@ -34,8 +34,8 @@ export default function Perfil() {
   return (
     <div
       style={{
-        color: dark ? "white" : "black",
-        background: dark ? "#000" : "#f2f2f2",
+        color: "var(--text)",
+        background: "var(--bg)",
         minHeight: "100vh",
         padding: 20,
         fontFamily: "sans-serif",
@@ -49,8 +49,8 @@ export default function Perfil() {
         gap: 12,
         padding: 15,
         borderRadius: 12,
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.1)"
+        background: "var(--card)",
+        border: "1px solid var(--border)"
       }}>
         <div style={{
           width: 42,
@@ -60,7 +60,8 @@ export default function Perfil() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontWeight: "bold"
+          fontWeight: "bold",
+          color: "white"
         }}>
           {avatarLetter}
         </div>
@@ -90,9 +91,9 @@ export default function Perfil() {
               width: "100%",
               padding: 10,
               borderRadius: 10,
-              border: "1px solid white",
-              background: "transparent",
-              color: dark ? "white" : "black",
+              border: "1px solid var(--border)",
+              background: "var(--card)",
+              color: "var(--text)",
               outline: "none"
             }}
           />
@@ -106,7 +107,8 @@ export default function Perfil() {
               borderRadius: 10,
               background: "linear-gradient(90deg,#ff00cc,#3333ff)",
               color: "white",
-              fontWeight: "bold"
+              fontWeight: "bold",
+              cursor: "pointer"
             }}
           >
             💾 Guardar
@@ -114,7 +116,7 @@ export default function Perfil() {
         </div>
       )}
 
-      {/* 🔥 SOLO UN BOTÓN DE TEMA (EL CORRECTO) */}
+      {/* BOTÓN TEMA */}
       <button
         onClick={toggleTheme}
         style={{
@@ -122,8 +124,9 @@ export default function Perfil() {
           width: "100%",
           padding: 12,
           borderRadius: 12,
-          background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-          color: "white",
+          background: "var(--card)",
+          border: "1px solid var(--border)",
+          color: "var(--text)",
           fontWeight: "bold",
           cursor: "pointer"
         }}
@@ -136,8 +139,10 @@ export default function Perfil() {
         marginTop: 40,
         padding: 15,
         borderRadius: 12,
-        background: "rgba(255,255,255,0.06)",
-        textAlign: "center"
+        background: "var(--card)",
+        border: "1px solid var(--border)",
+        textAlign: "center",
+        color: "var(--text)"
       }}>
         <h3>📩 Contáctanos</h3>
 
