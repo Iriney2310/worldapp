@@ -12,6 +12,18 @@ type CurrencyContextType = {
 
 const CurrencyContext = createContext<CurrencyContextType | null>(null)
 
+const rates: Record<Currency, number> = {
+  EUR: 1,
+  USD: 1.09,
+  ARS: 900,
+}
+
+const symbols: Record<Currency, string> = {
+  EUR: '€',
+  USD: '$',
+  ARS: '$',
+}
+
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const [currency, setCurrency] = useState<Currency>('EUR')
 
@@ -24,27 +36,10 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('currency', currency)
   }, [currency])
 
-  const rates = {
-    EUR: 1,
-    USD: 1.09,
-    ARS: 1716,
-  }
-
-  const symbols = {
-  EUR: '€',
-  USD: '$',
-  ARS: 'ARS $',
-}
-
   const convert = (price: number) => {
-  const converted = price * rates[currency]
-
-  return new Intl.NumberFormat('es-ES', {
-    style: 'currency',
-    currency: currency,
-    maximumFractionDigits: currency === 'ARS' ? 0 : 2,
-  }).format(converted)
-}
+    const converted = price * rates[currency]
+    return `${symbols[currency]}${converted.toFixed(2)}`
+  }
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency, convert }}>
