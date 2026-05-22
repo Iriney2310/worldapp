@@ -10,32 +10,45 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | null>(null)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [dark, setDark] = useState(true)
+  const [dark, setDark] = useState<boolean | null>(null)
 
-  // 👇 aplica tema SIEMPRE al cambiar dark
+  // 🔥 1. Cargar tema al iniciar app (solo una vez)
   useEffect(() => {
-    const body = document.body
+    const saved = localStorage.getItem("theme")
+
+    const isDark = saved ? saved === "dark" : true
+
+    setDark(isDark)
+
+    if (isDark) {
+      document.body.classList.remove("light")
+    } else {
+      document.body.classList.add("light")
+    }
+  }, [])
+
+  // 🔥 2. Aplicar cambios cuando dark cambie
+  useEffect(() => {
+    if (dark === null) return
 
     if (dark) {
-      body.classList.remove("light")
+      document.body.classList.remove("light")
       localStorage.setItem("theme", "dark")
     } else {
-      body.classList.add("light")
+      document.body.classList.add("light")
       localStorage.setItem("theme", "light")
     }
   }, [dark])
 
-  // 👇 cargar al iniciar app
-  useEffect(() => {
-    const saved = localStorage.getItem("theme")
-    if (saved === "light") {
-      setDark(false)
-    }
-  }, [])
-
   const toggleTheme = () => {
-    setDark(prev => !prev)
+    setDark(prev => {
+      if (prev === null) return false
+      return !prev
+    })
   }
+
+  // 🔥 evita render incorrecto antes de cargar localStorage
+  if (dark === null) return null
 
   return (
     <ThemeContext.Provider value={{ dark, toggleTheme }}>
