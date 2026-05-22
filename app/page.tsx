@@ -548,17 +548,17 @@ const backBtn: CSSProperties = {
   padding: '10px 16px',
   fontSize: 14,
   borderRadius: 999,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
 
 const buyBtn: CSSProperties = {
   marginTop: 20,
   padding: 12,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
   borderRadius: 10,
 }
 
@@ -607,9 +607,9 @@ const removeBtn: CSSProperties = {
   marginTop: 5,
   width: '100%',
   padding: 6,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
 
 const overlay: CSSProperties = {
@@ -626,9 +626,9 @@ const topLeftBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   left: 13,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  background: 'var(--card)',
+color: 'var(--text)',
+border: '1px solid var(--border)'
   padding: '3px 14px',  // 👈 más ancho y alto
   fontSize: 20,          // 👈 icono más grande
   borderRadius: 5,
@@ -638,9 +638,9 @@ const topRightBtn: CSSProperties = {
   position: 'absolute',
   top: 10,
   right: 10,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
   padding: 6,
   borderRadius: 5,
 }
