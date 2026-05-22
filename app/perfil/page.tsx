@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { useTheme } from "../context/ThemeContext"
 
 export default function Perfil() {
+  const { dark, toggleTheme } = useTheme()
   const [name, setName] = useState("")
   const [editing, setEditing] = useState(false)
   const [input, setInput] = useState("")
@@ -31,20 +33,6 @@ export default function Perfil() {
     setEditing(false)
   }
 
-  const toggleTheme = () => {
-  const body = document.getElementById("app-body")
-
-  const isLight = body?.classList.contains("light")
-
-  if (isLight) {
-    body?.classList.remove("light")
-    localStorage.setItem("theme", "dark")
-  } else {
-    body?.classList.add("light")
-    localStorage.setItem("theme", "light")
-  }
-}
-
   const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
 
   return (
@@ -57,7 +45,24 @@ export default function Perfil() {
         fontFamily: "sans-serif",
       }}
     >
-
+{/* 🔥 BOTÓN DE TEMA */}
+    <button
+      onClick={toggleTheme}
+      style={{
+        marginTop: 20,
+        width: "100%",
+        padding: 12,
+        borderRadius: 12,
+        border: "1px solid white",
+        background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+        color: "white",
+        fontWeight: "bold",
+        cursor: "pointer",
+      }}
+    >
+      {darkMode ? "🌙 Modo oscuro" : "☀️ Modo claro"}
+    </button>
+    
       {/* USUARIO */}
       <div style={{
         display: "flex",

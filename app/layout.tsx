@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import BottomNav from "./bottomnav"
-import { useEffect } from "react"
+import { ThemeProvider } from "./context/ThemeContext"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,26 +26,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body id="app-body" style={{ paddingBottom: 80 }}>
-        <ThemeLoader />
-        {children}
-        <BottomNav />
+      <body
+        id="app-body"
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        style={{ paddingBottom: 80 }}
+      >
+        <ThemeProvider>
+          {children}
+          <BottomNav />
+        </ThemeProvider>
       </body>
     </html>
   )
-}
-
-/* 🔥 ESTE COMPONENTE APLICA EL TEMA GLOBAL */
-function ThemeLoader() {
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("theme")
-
-    if (saved === "light") {
-      document.getElementById("app-body")?.classList.add("light")
-    } else {
-      document.getElementById("app-body")?.classList.remove("light")
-    }
-  }
-
-  return null
 }
