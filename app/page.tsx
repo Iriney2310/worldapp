@@ -514,8 +514,8 @@ useEffect(() => {
   </p>
 
   <p style={{ fontSize: 20, marginTop: 8 }}>
-    Precio: <b>{selected.price}</b>
-  </p>
+  Precio: <b>{convert(Number(selected.price))}</b>
+</p>
 
   {/* NUEVO: VALORACIÓN */}
   <p style={{ fontSize: 16, marginTop: 10 }}>
