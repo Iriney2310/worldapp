@@ -94,6 +94,8 @@ export default function Home() {
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
+  const [openBrands, setOpenBrands] = useState(false)
+const [openStores, setOpenStores] = useState(false)
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
@@ -199,28 +201,70 @@ useEffect(() => {
       )}
 
       {/* SIDEBAR */}
-      <div
-        style={{
-          ...sidebar,
-          transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
-          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
-        }}
-      >
-        <button onClick={() => setMenuOpen(false)} style={sideBtn}>
-          ✕ Cerrar
-        </button>
+<div
+  style={{
+    ...sidebar,
+    transform: menuOpen ? "translateX(0)" : "translateX(-110%)",
+    transition: "0.35s cubic-bezier(0.2,0.8,0.2,1)",
+  }}
+>
+  <button onClick={() => setMenuOpen(false)} style={sideBtn}>
+    ✕ Cerrar
+  </button>
 
-        <input
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          placeholder="🔎 Buscar..."
-          style={input}
-        />
+  <input
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="🔎 Buscar..."
+    style={input}
+  />
 
-        <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
-        <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
-        <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
-      </div>
+  {/* ================= MARCAS (DESPLEGABLE) ================= */}
+  <button
+    onClick={() => setOpenBrands(!openBrands)}
+    style={sideBtn}
+  >
+    👟 Marcas {openBrands ? "▲" : "▼"}
+  </button>
+
+  {openBrands && (
+    <div style={{ marginLeft: 10 }}>
+      <button onClick={() => setBrand("all")} style={sideBtn}>
+        Todas
+      </button>
+
+      <button onClick={() => setBrand("Nike")} style={sideBtn}>
+        Nike
+      </button>
+
+      <button onClick={() => setBrand("Adidas")} style={sideBtn}>
+        Adidas
+      </button>
+        <button onClick={() => setFavOpen(true)} style={sideBtn}>
+      </button>
+    </div>
+  )}
+
+  {/* ================= TIENDAS (DESPLEGABLE) ================= */}
+  <button
+    onClick={() => setOpenStores(!openStores)}
+    style={sideBtn}
+  >
+    🛒 Tiendas {openStores ? "▲" : "▼"}
+  </button>
+
+  {openStores && (
+    <div style={{ marginLeft: 10 }}>
+      <button style={sideBtn}>
+        Amazon
+      </button>
+
+      <button style={sideBtn}>
+        Mercado Libre
+      </button>
+    </div>
+  )}
+</div>
 
       {/* FAVORITOS */}
       <div
