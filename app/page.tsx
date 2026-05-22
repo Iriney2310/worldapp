@@ -23,7 +23,7 @@ type Sneaker = {
   
 }
 const convert = (price: number) => {
-  const converted = price * rates[currency]
+  const { currency, convert } = useCurrency()
 
   const symbol =
     currency === 'EUR' ? '€' :
