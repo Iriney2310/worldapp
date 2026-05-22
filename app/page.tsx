@@ -22,6 +22,16 @@ type Sneaker = {
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
   
 }
+const convert = (price: number) => {
+  const converted = price * rates[currency]
+
+  const symbol =
+    currency === 'EUR' ? '€' :
+    currency === 'USD' ? '$' :
+    currency === 'ARS' ? '$' : 
+
+  return `${symbol}${converted.toFixed(2)}`
+}
 
 const sneakers: Sneaker[] = [
   {
@@ -437,7 +447,10 @@ useEffect(() => {
         <div style={{ marginTop: 6 }}>
   {/* precio actual */}
 <p style={{ fontWeight: 'bold', fontSize: 16 }}>
-  {s.price}
+  const { currency, convert } = useCurrency()
+  <p style={{ fontWeight: 'bold', fontSize: 16 }}>
+  {convert(Number(s.price))}
+</p>
 </p>
   {/* precio antiguo si existe */}
   {s.oldPrice && (
