@@ -5,24 +5,20 @@ import { useTheme } from "../context/ThemeContext"
 
 export default function Perfil() {
   const { dark, toggleTheme } = useTheme()
+
   const [name, setName] = useState("")
   const [editing, setEditing] = useState(false)
   const [input, setInput] = useState("")
-  const [darkMode, setDarkMode] = useState(true)
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const savedUser = localStorage.getItem("username")
+
     if (savedUser) {
       setName(savedUser)
       setInput(savedUser)
     } else {
       setEditing(true)
-    }
-
-    const theme = localStorage.getItem("theme")
-    if (theme === "light") {
-      setDarkMode(false)
     }
   }, [])
 
@@ -38,30 +34,13 @@ export default function Perfil() {
   return (
     <div
       style={{
-        color: darkMode ? "white" : "black",
-        background: darkMode ? "#000" : "#f2f2f2",
+        color: dark ? "white" : "black",
+        background: dark ? "#000" : "#f2f2f2",
         minHeight: "100vh",
         padding: 20,
         fontFamily: "sans-serif",
       }}
     >
-{/* 🔥 BOTÓN DE TEMA */}
-<button
-  onClick={toggleTheme}
-  style={{
-    marginTop: 20,
-    width: "100%",
-    padding: 12,
-    borderRadius: 12,
-    border: "1px solid white",
-    background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-  }}
->
-  {dark ? "🌙 Modo oscuro" : "☀️ Modo claro"}
-</button>
 
       {/* USUARIO */}
       <div style={{
@@ -113,7 +92,8 @@ export default function Perfil() {
               borderRadius: 10,
               border: "1px solid white",
               background: "transparent",
-              color: "white"
+              color: dark ? "white" : "black",
+              outline: "none"
             }}
           />
 
@@ -134,7 +114,7 @@ export default function Perfil() {
         </div>
       )}
 
-      {/* TEMA */}
+      {/* 🔥 SOLO UN BOTÓN DE TEMA (EL CORRECTO) */}
       <button
         onClick={toggleTheme}
         style={{
@@ -144,10 +124,11 @@ export default function Perfil() {
           borderRadius: 12,
           background: "linear-gradient(90deg,#ff00cc,#3333ff)",
           color: "white",
-          fontWeight: "bold"
+          fontWeight: "bold",
+          cursor: "pointer"
         }}
       >
-        {darkMode ? "☀️ Modo claro" : "🌙 Modo oscuro"}
+        {dark ? "☀️ Modo claro" : "🌙 Modo oscuro"}
       </button>
 
       {/* CONTACTO */}
@@ -177,12 +158,14 @@ export default function Perfil() {
               ? "linear-gradient(90deg,#00ff99,#00cc66)"
               : "linear-gradient(90deg,#ff00cc,#3333ff)",
             color: "white",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            cursor: "pointer"
           }}
         >
           {copied ? "✔ Email copiado" : "📋 Copiar email"}
         </button>
       </div>
+
     </div>
   )
 }
