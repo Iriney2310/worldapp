@@ -12,28 +12,29 @@ const ThemeContext = createContext<ThemeContextType | null>(null)
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [dark, setDark] = useState(true)
 
-  // cargar tema guardado
+  // 👇 aplica tema SIEMPRE al cambiar dark
+  useEffect(() => {
+    const body = document.body
+
+    if (dark) {
+      body.classList.remove("light")
+      localStorage.setItem("theme", "dark")
+    } else {
+      body.classList.add("light")
+      localStorage.setItem("theme", "light")
+    }
+  }, [dark])
+
+  // 👇 cargar al iniciar app
   useEffect(() => {
     const saved = localStorage.getItem("theme")
-
     if (saved === "light") {
       setDark(false)
-      document.getElementById("app-body")?.classList.add("light")
     }
   }, [])
 
   const toggleTheme = () => {
-    const body = document.getElementById("app-body")
-
-    if (dark) {
-      body?.classList.add("light")
-      localStorage.setItem("theme", "light")
-    } else {
-      body?.classList.remove("light")
-      localStorage.setItem("theme", "dark")
-    }
-
-    setDark(!dark)
+    setDark(prev => !prev)
   }
 
   return (
@@ -45,6 +46,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useTheme() {
   const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error("useTheme debe usarse dentro de ThemeProvider")
+  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider")
   return ctx
 }
