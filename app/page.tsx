@@ -16,6 +16,7 @@ type Sneaker = {
   usage: string
   stock: string
   tags?: string[]
+  store: "Amazon" | "MercadoLibre"
   badge?: 'NEW' | 'HOT' | 'BESTSELLER'| 'OFFER' | 'LIMITED'
   
 }
@@ -26,6 +27,7 @@ const sneakers: Sneaker[] = [
     name: 'Air Force 1 \'07',
     brand: 'Nike',
     price: '95,95€',
+    store: "Amazon",
     image:
       'https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/e777c881-5b62-4250-92a6-362967f54cca/WMNS+AIR+FORCE+1+%2707.png',
     link: 'https://www.amazon.es/dp/B08QB1YKTR?tag=iriney06-21',
@@ -40,6 +42,7 @@ const sneakers: Sneaker[] = [
     brand: 'Nike',
     price: '90,99€',
     oldPrice: '129,99€',
+    store: "Amazon",
     image:
       'https://www.nespo.gr/wp-content/uploads/2023/03/687977-111-PHSLH000-2000_7.jpg',
     link: 'https://amzn.to/4nIiepg',
@@ -54,6 +57,7 @@ const sneakers: Sneaker[] = [
     name: 'Court Vision Low',
     brand: 'Nike',
     price: '53,99€',
+    store: "Amazon",
     image:
       'https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg',
     link: 'https://amzn.to/4die6c0',
@@ -67,6 +71,7 @@ const sneakers: Sneaker[] = [
     name: 'Grand Court Base 00s',
     brand: 'Adidas',
     price: '39,99€',
+    store: "Amazon",
     image:
       'https://www.sportvision.ba/files/images/slike_proizvoda/media/IH6/IH6185/images/IH6185.jpg',
     link: 'https://amzn.to/3Px9aGX',
@@ -80,6 +85,7 @@ const sneakers: Sneaker[] = [
     name: 'VL Court 3.0',
     brand: 'Adidas',
     price: '41,99€',
+    store: "Amazon",
     image:
       'https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp',
     link: 'https://amzn.to/4nHqSUY',
@@ -486,7 +492,7 @@ useEffect(() => {
         border: 'none',
       }}
     >
-      🛒 VER EN AMAZON
+      🛒 ¡Link Directo!
     </button>
   </div>
 )}
