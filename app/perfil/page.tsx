@@ -18,6 +18,14 @@ export default function Perfil() {
     }
   }, [])
 
+useEffect(() => {
+  const saved = localStorage.getItem("theme")
+
+  if (saved === "light") {
+    setDarkMode(false)
+  }
+}, []) 
+
   const saveName = () => {
     if (!input.trim()) return
 
@@ -25,12 +33,21 @@ export default function Perfil() {
     setName(input)
     setEditing(false)
   }
+  const [darkMode, setDarkMode] = useState(true)
 
   // 🧠 inicial del usuario
   const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
 
   return (
-    <div style={{ color: "white", padding: 20, fontFamily: "sans-serif" }}>
+    <div
+  style={{
+    color: darkMode ? "white" : "black",
+    background: darkMode ? "#000" : "#f2f2f2",
+    padding: 20,
+    minHeight: "100vh",
+    fontFamily: "sans-serif",
+  }}
+>
 
       {/* TARJETA USUARIO */}
       <div
@@ -124,6 +141,33 @@ export default function Perfil() {
           </button>
         </div>
       )}
+
+<button
+  onClick={() => {
+    const newMode = !darkMode
+
+    setDarkMode(newMode)
+
+    localStorage.setItem(
+      "theme",
+      newMode ? "dark" : "light"
+    )
+  }}
+  style={{
+    marginTop: 20,
+    width: "100%",
+    padding: 12,
+    borderRadius: 12,
+    border: "1px solid white",
+    background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+    color: "white",
+    fontWeight: "bold",
+    cursor: "pointer",
+  }}
+>
+  {darkMode ? "☀️ Modo claro" : "🌙 Modo oscuro"}
+</button>
+
       {/* CONTACTO */}
 <div
   style={{
