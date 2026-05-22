@@ -399,7 +399,7 @@ useEffect(() => {
     src={
       s.store === 'Amazon'
         ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
-        : 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercado_Libre_logo.svg'
+        : 'https://static.wikia.nocookie.net/logopedia/images/c/ca/MercadoLibre_2000_(Background).svg/revision/latest?cb=20200601232030'
     }
     style={{
       width: '70%',
