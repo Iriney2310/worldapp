@@ -455,9 +455,10 @@ useEffect(() => {
 const main: CSSProperties = {
   minHeight: '100vh',
   position: 'relative',
-  color: 'white',
+  color: 'var(--text)',
   fontFamily: 'sans-serif',
   overflow: 'hidden',
+  background: 'var(--bg)',
 }
 
 /* fondo real */
@@ -488,16 +489,17 @@ const grid: CSSProperties = {
 }
 
 const card: CSSProperties = {
-  background: 'rgba(255,255,255,0.06)',
+  background: 'var(--card)',
   padding: 12,
   borderRadius: 22,
   position: 'relative',
   cursor: 'pointer',
   transition: 'transform 0.25s ease, box-shadow 0.25s ease',
   backdropFilter: 'blur(12px)',
-  border: '1px solid rgba(255,255,255,0.08)',
+  border: '1px solid var(--border)',
   boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
   overflow: 'hidden',
+  color: 'var(--text)',
 }
 
 const img: CSSProperties = {
@@ -529,14 +531,14 @@ const detail: CSSProperties = {
   margin: '0 auto',
   textAlign: 'center',
   paddingTop: 100,
-
   position: 'relative',
   zIndex: 1,
-
   backdropFilter: 'blur(6px)',
-  background: 'rgba(0,0,0,0.15)',
+  background: 'var(--card)',
   borderRadius: 20,
   padding: 20,
+  color: 'var(--text)',
+  border: '1px solid var(--border)',
 }
 
 const backBtn: CSSProperties = {
@@ -566,9 +568,11 @@ const sidebar: CSSProperties = {
   left: 0,
   width: 280,
   height: '100%',
-  background: '#111',
+  background: 'var(--bg)',
   padding: 20,
   zIndex: 9999,
+  color: 'var(--text)',
+  borderRight: '1px solid var(--border)',
 }
 
 const favPanel: CSSProperties = {
@@ -577,17 +581,21 @@ const favPanel: CSSProperties = {
   right: 0,
   width: 300,
   height: '100%',
-  background: '#111',
+  background: 'var(--bg)',
   padding: 20,
   zIndex: 9999,
+  color: 'var(--text)',
+  borderLeft: '1px solid var(--border)',
 }
 
 const favCard: CSSProperties = {
   marginTop: 10,
   padding: 8,
-  border: '1px solid rgba(255,255,255,0.2)',
+  border: '1px solid var(--border)',
   borderRadius: 10,
   cursor: 'pointer',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
 
 const favImg: CSSProperties = {
@@ -643,9 +651,9 @@ const sideBtn: CSSProperties = {
   padding: 10,
   width: '100%',
   borderRadius: 10,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
 
 const input: CSSProperties = {
@@ -653,10 +661,11 @@ const input: CSSProperties = {
   padding: 10,
   marginTop: 10,
   borderRadius: 8,
-  border: '1px solid white',
-  background: 'transparent',
-  color: 'white',
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
+
 const banner: CSSProperties = {
   width: 'fit-content',
   maxWidth: '100%',

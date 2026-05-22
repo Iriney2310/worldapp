@@ -18,6 +18,23 @@ export default function Perfil() {
     }
   }, [])
 
+const toggleTheme = () => {
+  const body = document.getElementById("app-body")
+
+  const isLight = body?.classList.contains("light")
+
+  if (isLight) {
+    body?.classList.remove("light")
+    localStorage.setItem("theme", "dark")
+  } else {
+    body?.classList.add("light")
+    localStorage.setItem("theme", "light")
+  }
+}
+<button onClick={toggleTheme}>
+  Cambiar tema
+</button>
+
 useEffect(() => {
   const saved = localStorage.getItem("theme")
 
