@@ -383,8 +383,8 @@ useEffect(() => {
     position: 'absolute',
     bottom: 10,
     right: 10,
-    width: 28,
-    height: 28,
+    width: 30,
+    height: 30,
     borderRadius: '50%',
     background: 'white',
     display: 'flex',
@@ -399,11 +399,11 @@ useEffect(() => {
     src={
       s.store === 'Amazon'
         ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
-        : 'https://static.wikia.nocookie.net/logopedia/images/c/ca/MercadoLibre_2000_(Background).svg/revision/latest?cb=20200601232030'
+        : 'https://www.elcohetealaluna.com/wp-content/uploads/2019/07/Mercado-Libre..png'
     }
     style={{
       width: '90%',
-      height: "90%",
+      height: "900%",
       objectFit: 'contain',
     }}
   />
