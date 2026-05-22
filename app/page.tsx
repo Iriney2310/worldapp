@@ -89,8 +89,8 @@ const sneakers: Sneaker[] = [
   id: 5,
   name: "Court Vision Low",
   brand: "Nike",
-  price: "127499",
-  currency: "ARS",
+  price: "72.67",
+  currency: "EUR",
   store: "MercadoLibre",
   image:
     "https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png",
