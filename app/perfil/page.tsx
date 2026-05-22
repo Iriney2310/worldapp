@@ -32,10 +32,18 @@ export default function Perfil() {
   }
 
   const toggleTheme = () => {
-    const newMode = !darkMode
-    setDarkMode(newMode)
-    localStorage.setItem("theme", newMode ? "dark" : "light")
+  const body = document.getElementById("app-body")
+
+  const isLight = body?.classList.contains("light")
+
+  if (isLight) {
+    body?.classList.remove("light")
+    localStorage.setItem("theme", "dark")
+  } else {
+    body?.classList.add("light")
+    localStorage.setItem("theme", "light")
   }
+}
 
   const avatarLetter = name?.trim()?.charAt(0).toUpperCase() || "?"
 
