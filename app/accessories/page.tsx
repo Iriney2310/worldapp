@@ -12,7 +12,6 @@ export default function AccessoriesPage() {
 
       {/* TOP BAR */}
       <div style={{ textAlign: 'center', position: 'relative' }}>
-        
         <button
           onClick={() => setMenuOpen(true)}
           style={topLeftBtn}
@@ -35,23 +34,16 @@ export default function AccessoriesPage() {
       <div
         style={{
           ...sidebar,
-          transform: menuOpen
-            ? 'translateX(0)'
-            : 'translateX(-110%)',
+          transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
           transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
         }}
       >
-        <button
-          onClick={() => setMenuOpen(false)}
-          style={sideBtn}
-        >
+        <button onClick={() => setMenuOpen(false)} style={sideBtn}>
           ✕ Cerrar
         </button>
 
         <button
-          onClick={() => {
-            window.location.href = '/'
-          }}
+          onClick={() => (window.location.href = '/')}
           style={sideBtn}
         >
           👟 Sneakers
@@ -61,12 +53,23 @@ export default function AccessoriesPage() {
       {/* GRID */}
       <div style={grid}>
         {accessories.map((item) => (
-          <div key={item.id} style={card}>
-
-            <img
-              src={item.image}
-              style={img}
-            />
+          <div
+            key={item.id}
+            style={card}
+            onClick={() =>
+              (window.location.href = `/accessories/${item.id}`)
+            }
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-10px) scale(1.03)'
+              e.currentTarget.style.boxShadow =
+                '0 20px 50px rgba(0,0,0,0.4)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          >
+            <img src={item.image} style={img} />
 
             <h3>{item.name}</h3>
 
@@ -77,12 +80,14 @@ export default function AccessoriesPage() {
             </p>
 
             <button
-              onClick={() => window.location.href = `/accessories/${item.id}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                window.open(item.link, '_blank')
+              }}
               style={btn}
             >
               Comprar
             </button>
-
           </div>
         ))}
       </div>
@@ -102,7 +107,6 @@ const main: CSSProperties = {
 const title: CSSProperties = {
   textAlign: 'center',
   marginBottom: 30,
-  marginTop: 10,
 }
 
 const grid: CSSProperties = {
@@ -116,6 +120,8 @@ const card: CSSProperties = {
   padding: 12,
   borderRadius: 20,
   border: '1px solid var(--border)',
+  cursor: 'pointer',
+  transition: '0.25s ease',
 }
 
 const img: CSSProperties = {
