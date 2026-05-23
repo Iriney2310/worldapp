@@ -197,6 +197,15 @@ useEffect(() => {
       Mercado Libre
     </button>
 
+<button
+  onClick={() => {
+    window.location.href = "/accessories"
+  }}
+  style={sideBtn}
+>
+  🧢 Accesorios
+</button>
+
   </div>
 )}
 </div>
