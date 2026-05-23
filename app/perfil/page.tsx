@@ -183,7 +183,7 @@ export default function Perfil() {
 
   <button
     onClick={() =>
-      window.open("t.me/sneakersworldapp", "_blank")
+      window.location.href = "https://t.me/sneakersworldapp"
     }
     style={{
       marginTop: 10,
