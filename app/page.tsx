@@ -252,7 +252,9 @@ useEffect(() => {
     {tag}
   </span>
 ))}
-        <img src={s.image} style={img} />
+        <div style={imgContainer}>
+  <img src={s.image} style={img} />
+</div>
 <div
   style={{
     position: 'absolute',
@@ -433,7 +435,22 @@ const main: CSSProperties = {
   background: 'var(--bg)',
 }
 
+const imgContainer: CSSProperties = {
+  width: '100%',
+  aspectRatio: '1 / 1',   // cuadrado perfecto
+  overflow: 'hidden',
+  borderRadius: 12,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#fff',
+}
 
+const img: CSSProperties = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+}
 
 /* capa elegante tipo Nike (MUY suave) */
 const overlayBg: CSSProperties = {
@@ -462,11 +479,6 @@ const card: CSSProperties = {
   boxShadow: '0 10px 30px rgba(0,0,0,0.35)',
   overflow: 'hidden',
   color: 'var(--text)',
-}
-
-const img: CSSProperties = {
-  width: '100%',
-  borderRadius: 12,
 }
 
 const heart: CSSProperties = {
