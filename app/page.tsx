@@ -199,6 +199,13 @@ useEffect(() => {
   </div>
 )}
 </div>
+{/* ================= ACCESORIOS ================= */}
+<button
+  onClick={() => window.location.href = '/accessories'}
+  style={sideBtn}
+>
+  🧢 Accesorios
+</button>
 
       {/* FAVORITOS */}
       <div
