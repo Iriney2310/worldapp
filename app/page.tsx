@@ -202,7 +202,6 @@ useEffect(() => {
 <button onClick={() => setMenuOpen(false)} style={sideBtn}>
   ✕ Cerrar
 </button>
-</div>
 
       {/* FAVORITOS */}
       <div
@@ -242,7 +241,9 @@ useEffect(() => {
         ))}
       </div>
 
-      {/* GRID */}
+      </div>
+
+          {/* GRID */}
 {!selected && (
   <div style={grid}>
     {filtered.map((s) => (
