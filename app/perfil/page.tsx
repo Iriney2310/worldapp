@@ -24,10 +24,10 @@ export default function Perfil() {
     }
   }, [])
 
-  const saveName = () => {
-    if (!input.trim()) return
-    localStorage.setItem("username", input)
-    setName(input)
+  const saveName = (newName: string) => {
+    if (!newName.trim()) return
+    localStorage.setItem("username", newName)
+    setName(newName)
     setEditing(false)
   }
 
@@ -42,79 +42,99 @@ export default function Perfil() {
       fontFamily: "sans-serif",
     }}>
 
-      {/* USUARIO */}
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-        padding: 15,
-        borderRadius: 12,
+{/* USUARIO */}
+<div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    padding: 15,
+    borderRadius: 12,
+    background: "var(--card)",
+    border: "1px solid var(--border)",
+  }}
+>
+  {/* AVATAR */}
+  <div
+    style={{
+      width: 42,
+      height: 42,
+      borderRadius: "50%",
+      background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontWeight: "bold",
+      color: "white",
+      flexShrink: 0,
+    }}
+  >
+    {avatarLetter}
+  </div>
+
+  {/* INFO */}
+  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+    <p style={{ margin: 0 }}>
+      Usuario: <b>{name || "Invitado"}</b>
+    </p>
+
+    <span
+      onClick={() => {
+        setInput(name || "")
+        setEditing(true)
+      }}
+      style={{
+        cursor: "pointer",
+        userSelect: "none",
+        fontSize: 16,
+      }}
+    >
+      ✏️
+    </span>
+  </div>
+</div>
+
+{/* EDITAR NOMBRE */}
+{editing && (
+  <div style={{ marginTop: 15 }}>
+    <input
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+      placeholder="Escribe tu nombre"
+      style={{
+        width: "100%",
+        padding: 10,
+        borderRadius: 10,
+        border: "1px solid var(--border)",
         background: "var(--card)",
-        border: "1px solid var(--border)"
-      }}>
-        <div style={{
-          width: 42,
-          height: 42,
-          borderRadius: "50%",
-          background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontWeight: "bold",
-          color: "white"
-        }}>
-          {avatarLetter}
-        </div>
+        color: "var(--text)",
+        outline: "none",
+      }}
+    />
 
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <p style={{ margin: 0 }}>
-            Usuario: <b>{name || "Invitado"}</b>
-          </p>
+    <button
+      onClick={() => {
+        if (!input.trim()) return
 
-          <span
-            onClick={() => setEditing(true)}
-            style={{ cursor: "pointer" }}
-          >
-            ✏️
-          </span>
-        </div>
-      </div>
-
-      {/* EDITAR NOMBRE */}
-      {editing && (
-        <div style={{ marginTop: 15 }}>
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Escribe tu nombre"
-            style={{
-              width: "100%",
-              padding: 10,
-              borderRadius: 10,
-              border: "1px solid var(--border)",
-              background: "var(--card)",
-              color: "var(--text)",
-              outline: "none"
-            }}
-          />
-
-          <button
-            onClick={saveName}
-            style={{
-              marginTop: 10,
-              width: "100%",
-              padding: 10,
-              borderRadius: 10,
-              background: "linear-gradient(90deg,#ff00cc,#3333ff)",
-              color: "white",
-              fontWeight: "bold",
-              cursor: "pointer"
-            }}
-          >
-            💾 Guardar
-          </button>
-        </div>
-      )}
+        saveName(input.trim())
+        setEditing(false)
+      }}
+      style={{
+        marginTop: 10,
+        width: "100%",
+        padding: 10,
+        borderRadius: 10,
+        background: "linear-gradient(90deg,#ff00cc,#3333ff)",
+        color: "white",
+        fontWeight: "bold",
+        cursor: "pointer",
+        border: "none",
+      }}
+    >
+      💾 Guardar
+    </button>
+  </div>
+)}
 
       {/* 💰 SELECTOR DE MONEDA */}
       <div style={{
