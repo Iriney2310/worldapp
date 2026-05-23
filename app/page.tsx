@@ -202,46 +202,7 @@ useEffect(() => {
 <button onClick={() => setMenuOpen(false)} style={sideBtn}>
   ✕ Cerrar
 </button>
-
-      {/* FAVORITOS */}
-      <div
-        style={{
-          ...favPanel,
-          transform: favOpen ? 'translateX(0)' : 'translateX(110%)',
-          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
-        }}
-      >
-        <button onClick={() => setFavOpen(false)} style={sideBtn}>
-          ✕ Cerrar Favoritos
-        </button>
-
-        {favItems.length === 0 && (
-          <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
-        )}
-
-        {favItems.map(item => (
-          <div
-            key={item.id}
-            style={favCard}
-            onClick={() => setSelected(item)}
-          >
-            <img src={item.image} style={favImg} />
-            <p>{item.name}</p>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleFavorite(item)
-              }}
-              style={removeBtn}
-            >
-              Quitar
-            </button>
-          </div>
-        ))}
-      </div>
-
-      </div>
+</div>
 
           {/* GRID */}
 {!selected && (
