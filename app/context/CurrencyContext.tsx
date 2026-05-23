@@ -27,7 +27,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const rates = {
     EUR: 1,
     USD: 1.09,
-    ARS: 1100, // ajuste más realista
+    ARS: 1631.84, // ajuste más realista
   }
 
   const symbols = {
