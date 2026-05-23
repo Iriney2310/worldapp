@@ -32,8 +32,24 @@ export const sneakers: Sneaker[] = [
     stock: "Ultimas Unidades",
   },
 
-  {
+{
     id: 2,
+    name: "Air Max Torch 4",
+    brand: "NIKE",
+    price: "105.55",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_602948-MLA110510406609_042026-F.webp",
+    link: "https://meli.la/1tTiWWx",
+    badge: "HOT",
+    rating: "5 / 5",
+    usage: "Running / Lifestyle",
+    stock: "En Stock",
+  },
+
+  {
+    id: 3,
     name: "Air Max Ltd 3",
     brand: "Nike",
     price: "90.99",
@@ -50,7 +66,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 3,
+    id: 4,
     name: "Court Vision Low",
     brand: "Nike",
     price: "53.99",
@@ -59,14 +75,13 @@ export const sneakers: Sneaker[] = [
     image:
       "https://www.intersport.es/421984/zapatillas-court-vision-lo-iic.nike.fn4019.001.jpg",
     link: "https://amzn.to/4die6c0",
-    badge: "NEW",
     rating: "4.4 / 5",
     usage: "Daily / Lifestyle",
     stock: "En Stock",
   },
 
   {
-    id: 4,
+    id: 5,
     name: "Grand Court Base 00s",
     brand: "Adidas",
     price: "39.99",
@@ -82,7 +97,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 5,
+    id: 6,
     name: "Court Vision Low",
     brand: "Nike",
     price: "72.67",
@@ -91,14 +106,13 @@ export const sneakers: Sneaker[] = [
     image:
       "https://cdn.evrysz.net/1000x1000/4/nike-court-vision-low-next-nature-dh3158003.png",
     link: "https://meli.la/2sepjTm",
-    badge: "NEW",
     rating: "4.8 / 5",
     usage: "Casual / Urbano",
     stock: "En Stock",
   },
 
   {
-    id: 6,
+    id: 7,
     name: "VL Court 3.0",
     brand: "Adidas",
     price: "41.99",
@@ -107,9 +121,24 @@ export const sneakers: Sneaker[] = [
     image:
       "https://http2.mlstatic.com/D_NQ_NP_784415-MLA79213189690_092024-O.webp",
     link: "https://amzn.to/4nHqSUY",
-    badge: "HOT",
     rating: "4.5 / 5",
     usage: "Football / Lifestyle",
+    stock: "En Stock",
+  },
+
+  {
+    id: 7,
+    name: "Air Max Torch 4",
+    brand: "NIKE",
+    price: "105.55",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_602948-MLA110510406609_042026-F.webp",
+    link: "https://meli.la/1tTiWWx",
+    badge: "HOT",
+    rating: "5 / 5",
+    usage: "Running / Lifestyle",
     stock: "En Stock",
   },
 ]
