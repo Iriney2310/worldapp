@@ -73,13 +73,8 @@ export default function Sidebar({
           </div>
         )}
 
-        {/* NAVEGACIÓN */}
-        <button onClick={goHome} style={sideBtn}>
-          👟 Sneakers
-        </button>
-
         <button onClick={goAccessories} style={sideBtn}>
-          🧢 Accesorios
+          💼 Accesorios
         </button>
       </div>
     </>

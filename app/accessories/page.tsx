@@ -7,15 +7,28 @@ import type { CSSProperties } from 'react'
 export default function AccessoriesPage() {
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const [openBrands, setOpenBrands] = useState(false)
+  const [openStores, setOpenStores] = useState(false)
+
+  const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
+  const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
+  const [search, setSearch] = useState('')
+
+  const filtered = accessories.filter((item) => {
+    const matchBrand = brand === 'all' || item.brand === brand
+    const matchStore = store === 'all' || item.store === store
+    const matchSearch =
+      item.name.toLowerCase().includes(search.toLowerCase())
+
+    return matchBrand && matchStore && matchSearch
+  })
+
   return (
     <main style={main}>
 
       {/* TOP BAR */}
       <div style={{ textAlign: 'center', position: 'relative' }}>
-        <button
-          onClick={() => setMenuOpen(true)}
-          style={topLeftBtn}
-        >
+        <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
           ☰
         </button>
 
@@ -35,24 +48,59 @@ export default function AccessoriesPage() {
         style={{
           ...sidebar,
           transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
-          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
         }}
       >
+
         <button onClick={() => setMenuOpen(false)} style={sideBtn}>
           ✕ Cerrar
         </button>
 
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="🔎 Buscar..."
+          style={input}
+        />
+
+        {/* MARCAS */}
+        <button onClick={() => setOpenBrands(!openBrands)} style={sideBtn}>
+          👟 MARCAS {openBrands ? '▲' : '▼'}
+        </button>
+
+        {openBrands && (
+          <div style={{ marginLeft: 10 }}>
+            <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
+            <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
+            <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
+          </div>
+        )}
+
+        {/* TIENDAS */}
+        <button onClick={() => setOpenStores(!openStores)} style={sideBtn}>
+          🛒 TIENDAS {openStores ? '▲' : '▼'}
+        </button>
+
+        {openStores && (
+          <div style={{ marginLeft: 10 }}>
+            <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
+            <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
+            <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
+          </div>
+        )}
+
+        {/* VOLVER */}
         <button
           onClick={() => (window.location.href = '/')}
           style={sideBtn}
         >
           👟 Sneakers
         </button>
+
       </div>
 
       {/* GRID */}
       <div style={grid}>
-        {accessories.map((item) => (
+        {filtered.map((item) => (
           <div
             key={item.id}
             style={card}
@@ -75,19 +123,7 @@ export default function AccessoriesPage() {
 
             <p>{item.brand}</p>
 
-            <p style={{ fontWeight: 'bold' }}>
-              €{item.price}
-            </p>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                window.open(item.link, '_blank')
-              }}
-              style={btn}
-            >
-              Comprar
-            </button>
+            <p style={{ fontWeight: 'bold' }}>€{item.price}</p>
           </div>
         ))}
       </div>
@@ -131,18 +167,6 @@ const img: CSSProperties = {
   borderRadius: 12,
 }
 
-const btn: CSSProperties = {
-  width: '100%',
-  padding: 10,
-  borderRadius: 10,
-  border: 'none',
-  marginTop: 10,
-  background: 'linear-gradient(90deg,#ff00cc,#3333ff)',
-  color: 'white',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-}
-
 const topLeftBtn: CSSProperties = {
   position: 'absolute',
   top: 0,
@@ -166,6 +190,7 @@ const sidebar: CSSProperties = {
   padding: 20,
   zIndex: 9999,
   borderRight: '1px solid var(--border)',
+  transition: '0.35s ease',
 }
 
 const sideBtn: CSSProperties = {
@@ -178,6 +203,16 @@ const sideBtn: CSSProperties = {
   background: 'var(--card)',
   color: 'var(--text)',
   cursor: 'pointer',
+}
+
+const input: CSSProperties = {
+  width: '100%',
+  padding: 10,
+  marginTop: 10,
+  borderRadius: 8,
+  border: '1px solid var(--border)',
+  background: 'var(--card)',
+  color: 'var(--text)',
 }
 
 const overlay: CSSProperties = {
