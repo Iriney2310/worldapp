@@ -41,7 +41,7 @@ export const sneakers: Sneaker[] = [
     currency: "EUR",
     store: "MercadoLibre",
     image:
-      "https://http2.mlstatic.com/D_NQ_NP_2X_602948-MLA110510406609_042026-F.webp",
+      "https://cms-cdn.thesolesupplier.co.uk/2020/07/Nike-Air-Max-Torch-4-Atmosphere-Grey-Black-CI2202-001_w672_h672_pad_.jpg.webp",
     link: "https://meli.la/1tTiWWx",
     badge: "HOT",
     rating: "5 / 5",
