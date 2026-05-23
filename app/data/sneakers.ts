@@ -138,8 +138,25 @@ export const sneakers: Sneaker[] = [
       "https://cdn.store-assets.com/s/234724/i/87840137.jpeg",
     link: "https://meli.la/22aBd6a",
     rating: "4.8 / 5",
+    badge: "OFFER",
     tags: ["-41%"],
     usage: "Casual / Urbano",
+    stock: "En Stock",
+  },
+
+  {
+    id: 8,
+    name: "Revolution 8",
+    brand: "Nike",
+    price: "79.98",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_934161-MLA110084335065_042026-F.webp",
+    link: "https://meli.la/2SXBeBz",
+    rating: "4.7 / 5",
+    badge: "BESTSELLER",
+    usage: "Running",
     stock: "En Stock",
   },
 ]
