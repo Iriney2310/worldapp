@@ -336,10 +336,19 @@ useEffect(() => {
   style={{
     marginTop: 40,
     fontSize: 34,
-    fontWeight: 800,
-    letterSpacing: '-0.5px',
+    fontWeight: 900,
+    letterSpacing: '-0.8px',
     textAlign: 'center',
+
+    // base legible SIEMPRE
     color: 'var(--text)',
+
+    // efecto premium suave
+    textShadow:
+      '0 1px 0 rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.25)',
+
+    // pequeño “lift” visual
+    transform: 'translateZ(0)',
   }}
 >
   {selected.name}
