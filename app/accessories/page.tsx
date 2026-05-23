@@ -77,7 +77,7 @@ export default function AccessoriesPage() {
             </p>
 
             <button
-              onClick={() => window.open(item.link, '_blank')}
+              onClick={() => window.location.href = `/accessories/${item.id}`}
               style={btn}
             >
               Comprar
