@@ -123,7 +123,7 @@ useEffect(() => {
         />
       )}
 
-      {/* SIDEBAR */}
+{/* SIDEBAR */}
 <div
   style={{
     ...sidebar,
@@ -142,11 +142,8 @@ useEffect(() => {
     style={input}
   />
 
-  {/* ================= MARCAS (DESPLEGABLE) ================= */}
-  <button
-    onClick={() => setOpenBrands(!openBrands)}
-    style={sideBtn}
-  >
+  {/* ================= MARCAS ================= */}
+  <button onClick={() => setOpenBrands(!openBrands)} style={sideBtn}>
     👟 MARCAS {openBrands ? "▲" : "▼"}
   </button>
 
@@ -155,100 +152,46 @@ useEffect(() => {
       <button onClick={() => setBrand("all")} style={sideBtn}>
         Todas
       </button>
-
       <button onClick={() => setBrand("Nike")} style={sideBtn}>
         Nike
       </button>
-
       <button onClick={() => setBrand("Adidas")} style={sideBtn}>
         Adidas
       </button>
     </div>
   )}
 
-  {/* ================= TIENDAS (DESPLEGABLE) ================= */}
-  <button
-    onClick={() => setOpenStores(!openStores)}
-    style={sideBtn}
-  >
+  {/* ================= TIENDAS ================= */}
+  <button onClick={() => setOpenStores(!openStores)} style={sideBtn}>
     🛒 TIENDAS {openStores ? "▲" : "▼"}
   </button>
 
   {openStores && (
-  <div style={{ marginLeft: 10 }}>
+    <div style={{ marginLeft: 10 }}>
+      <button onClick={() => setStore("all")} style={sideBtn}>
+        Todas
+      </button>
+      <button onClick={() => setStore("Amazon")} style={sideBtn}>
+        Amazon
+      </button>
+      <button onClick={() => setStore("MercadoLibre")} style={sideBtn}>
+        Mercado Libre
+      </button>
+    </div>
+  )}
 
-    <button
-      onClick={() => setStore('all')}
-      style={sideBtn}
-    >
-      Todas 
-    </button>
+  {/* ================= ACCESORIOS (AQUÍ DENTRO) ================= */}
+  <button
+    onClick={() => {
+      router.push("/accessories")
+      setMenuOpen(false)
+    }}
+    style={sideBtn}
+  >
+    🧢 Accesorios
+  </button>
 
-    <button
-      onClick={() => setStore('Amazon')}
-      style={sideBtn}
-    >
-      Amazon
-    </button>
-
-    <button
-      onClick={() => setStore('MercadoLibre')}
-      style={sideBtn}
-    >
-      Mercado Libre
-    </button>
-
-  </div>
-)}
 </div>
-{/*================= ACCESORIOS =================*/}
-<button
-  onClick={() => {
-    router.push("/accessories")
-    setMenuOpen(false)
-  }}
-  style={sideBtn}
->
-  🧢 Accesorios
-</button>
-
-      {/* FAVORITOS */}
-      <div
-        style={{
-          ...favPanel,
-          transform: favOpen ? 'translateX(0)' : 'translateX(110%)',
-          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
-        }}
-      >
-        <button onClick={() => setFavOpen(false)} style={sideBtn}>
-          ✕ Cerrar Favoritos
-        </button>
-
-        {favItems.length === 0 && (
-          <p style={{ opacity: 0.6 }}>No tienes favoritos</p>
-        )}
-
-        {favItems.map(item => (
-          <div
-            key={item.id}
-            style={favCard}
-            onClick={() => setSelected(item)}
-          >
-            <img src={item.image} style={favImg} />
-            <p>{item.name}</p>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleFavorite(item)
-              }}
-              style={removeBtn}
-            >
-              Quitar
-            </button>
-          </div>
-        ))}
-      </div>
 
       {/* GRID */}
 {!selected && (
