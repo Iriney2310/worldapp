@@ -1,21 +1,19 @@
-export interface Accessory {
+export interface Product {
   id: number
   name: string
-  brand: string
   price: string
-  currency: string
   image: string
   link: string
+  brand: string
 }
 
-export const accessories = [
+export const products: Product[] = [
   {
     id: 1,
-    name: "Gorra Nike",
-    brand: "Nike",
+    name: "Nike Cap",
     price: "19.99",
-    currency: "EUR",
-    image: "https://example.com/gorra.jpg",
-    link: "https://amazon.es",
+    image: "...",
+    link: "...",
+    brand: "Nike",
   },
 ]
