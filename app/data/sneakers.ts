@@ -1,3 +1,4 @@
+
 export interface Sneaker {
   id: number
   name: string
@@ -123,22 +124,6 @@ export const sneakers: Sneaker[] = [
     link: "https://amzn.to/4nHqSUY",
     rating: "4.5 / 5",
     usage: "Football / Lifestyle",
-    stock: "En Stock",
-  },
-
-  {
-    id: 7,
-    name: "Air Max Torch 4",
-    brand: "NIKE",
-    price: "105.55",
-    currency: "EUR",
-    store: "MercadoLibre",
-    image:
-      "https://http2.mlstatic.com/D_NQ_NP_2X_602948-MLA110510406609_042026-F.webp",
-    link: "https://meli.la/1tTiWWx",
-    badge: "HOT",
-    rating: "5 / 5",
-    usage: "Running / Lifestyle",
     stock: "En Stock",
   },
 ]

@@ -437,19 +437,17 @@ const main: CSSProperties = {
 
 const imgContainer: CSSProperties = {
   width: '100%',
-  aspectRatio: '1 / 1',   // cuadrado perfecto
+  aspectRatio: '1 / 1',
   overflow: 'hidden',
   borderRadius: 12,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   background: '#fff',
 }
 
 const img: CSSProperties = {
   width: '100%',
   height: '100%',
-  objectFit: 'cover',
+  objectFit: 'cover',   // 👈 ESTO es lo importante
+  display: 'block',
 }
 
 /* capa elegante tipo Nike (MUY suave) */
