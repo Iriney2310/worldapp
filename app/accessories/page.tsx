@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { accessories } from '../data/accessories'
 import type { CSSProperties } from 'react'
 import { useCurrency } from '../context/CurrencyContext'
 
 export default function AccessoriesPage() {
+  const [favorites, setFavorites] = useState<number[]>([])
   const [menuOpen, setMenuOpen] = useState(false)
 
   const [openBrands, setOpenBrands] = useState(false)
@@ -16,6 +17,28 @@ export default function AccessoriesPage() {
   const [search, setSearch] = useState('')
 
   const { convert } = useCurrency()
+
+  /* ================= FAVORITOS (LOAD) ================= */
+  useEffect(() => {
+    const data = localStorage.getItem('favorites_accessories')
+    if (data) setFavorites(JSON.parse(data))
+  }, [])
+
+  /* ================= FAVORITOS (SAVE) ================= */
+  useEffect(() => {
+    localStorage.setItem(
+      'favorites_accessories',
+      JSON.stringify(favorites)
+    )
+  }, [favorites])
+
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) =>
+      prev.includes(id)
+        ? prev.filter((f) => f !== id)
+        : [...prev, id]
+    )
+  }
 
   const filtered = accessories.filter((item) => {
     const matchBrand = brand === 'all' || item.brand === brand
@@ -92,7 +115,6 @@ export default function AccessoriesPage() {
           </div>
         )}
 
-        {/* VOLVER */}
         <button
           onClick={() => (window.location.href = '/')}
           style={sideBtn}
@@ -121,16 +143,26 @@ export default function AccessoriesPage() {
               e.currentTarget.style.boxShadow = 'none'
             }}
           >
+
+            {/* ❤️ FAVORITO */}
+            <div
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleFavorite(item.id)
+              }}
+              style={heart}
+            >
+              {favorites.includes(item.id) ? '❤️' : '🤍'}
+            </div>
+
             <img src={item.image} style={img} />
 
             <h3>{item.name}</h3>
             <p>{item.brand}</p>
 
-            {/* 💥 MONEDA GLOBAL */}
             <p style={{ fontWeight: 'bold' }}>
               {convert(item.price)}
             </p>
-
           </div>
         ))}
       </div>
@@ -165,6 +197,7 @@ const card: CSSProperties = {
   border: '1px solid var(--border)',
   cursor: 'pointer',
   transition: '0.25s ease',
+  position: 'relative',
 }
 
 const img: CSSProperties = {
@@ -172,6 +205,14 @@ const img: CSSProperties = {
   aspectRatio: '1 / 1',
   objectFit: 'cover',
   borderRadius: 12,
+}
+
+const heart: CSSProperties = {
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  cursor: 'pointer',
+  fontSize: 18,
 }
 
 const topLeftBtn: CSSProperties = {
@@ -197,7 +238,6 @@ const sidebar: CSSProperties = {
   padding: 20,
   zIndex: 9999,
   borderRight: '1px solid var(--border)',
-  transition: '0.35s ease',
 }
 
 const sideBtn: CSSProperties = {

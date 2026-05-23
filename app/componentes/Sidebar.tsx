@@ -74,7 +74,7 @@ export default function Sidebar({
         )}
 
         <button onClick={goAccessories} style={sideBtn}>
-          💼 Accesorios
+          👝 ACCESORIOS
         </button>
       </div>
     </>
