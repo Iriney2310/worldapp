@@ -5,7 +5,7 @@ import type { CSSProperties } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useCurrency } from './context/CurrencyContext'
 import { sneakers, type Sneaker } from './data/sneakers'
-
+import Sidebar from './componentes/Sidebar'
 
 export default function Home() {
   const { currency, convert } = useCurrency()
@@ -122,104 +122,25 @@ useEffect(() => {
         />
       )}
 
-{/* SIDEBAR */}
-<div
-  style={{
-    ...sidebar,
-    transform: menuOpen ? "translateX(0)" : "translateX(-110%)",
-    transition: "0.35s cubic-bezier(0.2,0.8,0.2,1)",
+<Sidebar
+  menuOpen={menuOpen}
+  setMenuOpen={setMenuOpen}
+  search={search}
+  setSearch={setSearch}
+  brand={brand}
+  setBrand={setBrand}
+  store={store}
+  setStore={setStore}
+  openBrands={openBrands}
+  setOpenBrands={setOpenBrands}
+  openStores={openStores}
+  setOpenStores={setOpenStores}
+  goHome={() => (window.location.href = '/')}
+  goAccessories={() => {
+    window.location.href = '/accessories'
+    setMenuOpen(false)
   }}
->
-  {/* CERRAR */}
-  <button onClick={() => setMenuOpen(false)} style={sideBtn}>
-    ✕ Cerrar
-  </button>
-
-  {/* BUSCADOR */}
-  <input
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    placeholder="🔎 Buscar..."
-    style={input}
-  />
-
-  {/* ================= MARCAS ================= */}
-  <button
-    onClick={() => setOpenBrands(!openBrands)}
-    style={sideBtn}
-  >
-    👟 MARCAS {openBrands ? "▲" : "▼"}
-  </button>
-
-  {openBrands && (
-    <div style={{ marginLeft: 10 }}>
-      <button
-        onClick={() => setBrand("all")}
-        style={sideBtn}
-      >
-        Todas
-      </button>
-
-      <button
-        onClick={() => setBrand("Nike")}
-        style={sideBtn}
-      >
-        Nike
-      </button>
-
-      <button
-        onClick={() => setBrand("Adidas")}
-        style={sideBtn}
-      >
-        Adidas
-      </button>
-    </div>
-  )}
-
-  {/* ================= TIENDAS ================= */}
-  <button
-    onClick={() => setOpenStores(!openStores)}
-    style={sideBtn}
-  >
-    🛒 TIENDAS {openStores ? "▲" : "▼"}
-  </button>
-
-  {openStores && (
-    <div style={{ marginLeft: 10 }}>
-      <button
-        onClick={() => setStore('all')}
-        style={sideBtn}
-      >
-        Todas
-      </button>
-
-      <button
-        onClick={() => setStore('Amazon')}
-        style={sideBtn}
-      >
-        Amazon
-      </button>
-
-      <button
-        onClick={() => setStore('MercadoLibre')}
-        style={sideBtn}
-      >
-        Mercado Libre
-      </button>
-    </div>
-  )}
-
-  {/* ================= ACCESORIOS ================= */}
-  <button
-    onClick={() => {
-      window.location.href = "/accessories"
-      setMenuOpen(false)
-    }}
-    style={sideBtn}
-  >
-    🧢 Accesorios
-  </button>
-</div>
+/>
 
           {/* GRID */}
 {!selected && (
