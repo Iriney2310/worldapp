@@ -5,7 +5,6 @@ import type { CSSProperties } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useCurrency } from './context/CurrencyContext'
 import { sneakers, type Sneaker } from './data/sneakers'
-import { products } from './data/accessories'
 import { useRouter } from "next/navigation"
 
 export default function Home() {
