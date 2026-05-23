@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { accessories } from '../data/accessories'
 import type { CSSProperties } from 'react'
+import { useCurrency } from '../context/CurrencyContext'
 
 export default function AccessoriesPage() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -13,6 +14,8 @@ export default function AccessoriesPage() {
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas'>('all')
   const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
   const [search, setSearch] = useState('')
+
+  const { convert } = useCurrency()
 
   const filtered = accessories.filter((item) => {
     const matchBrand = brand === 'all' || item.brand === brand
@@ -48,6 +51,7 @@ export default function AccessoriesPage() {
         style={{
           ...sidebar,
           transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
         }}
       >
 
@@ -120,10 +124,13 @@ export default function AccessoriesPage() {
             <img src={item.image} style={img} />
 
             <h3>{item.name}</h3>
-
             <p>{item.brand}</p>
 
-            <p style={{ fontWeight: 'bold' }}>€{item.price}</p>
+            {/* 💥 MONEDA GLOBAL */}
+            <p style={{ fontWeight: 'bold' }}>
+              {convert(item.price)}
+            </p>
+
           </div>
         ))}
       </div>
