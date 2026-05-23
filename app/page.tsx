@@ -199,7 +199,7 @@ useEffect(() => {
   </div>
 )}
 </div>
-{/* ================= ACCESORIOS ================= */}
+{/*================= ACCESORIOS =================*/}
 <button
   onClick={() => window.location.href = '/accessories'}
   style={sideBtn}
