@@ -179,17 +179,6 @@ useEffect(() => {
     </div>
   )}
 
-  {/* ================= ACCESORIOS (AQUÍ DENTRO) ================= */}
-  <button
-    onClick={() => {
-      router.push("/accessories")
-      setMenuOpen(false)
-    }}
-    style={sideBtn}
-  >
-    🧢 Accesorios
-  </button>
-
 </div>
 
       {/* GRID */}
