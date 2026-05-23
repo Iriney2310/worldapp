@@ -177,10 +177,6 @@ export default function Perfil() {
 >
   <h3>📢 Canal de Telegram</h3>
 
-  <p style={{ opacity: 0.8 }}>
-    Únete a nuestro canal para ofertas y novedades
-  </p>
-
   <button
     onClick={() =>
       window.location.href = "https://t.me/sneakersworldapp"
