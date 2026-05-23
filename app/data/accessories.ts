@@ -10,12 +10,12 @@ export interface Accessory {
 export const accessories: Accessory[] = [
   {
     id: 1,
-    name: "Nike Cap",
+    name: "Billetera",
     brand: "Nike",
     price: "24.99",
     image:
       "https://static.nike.com/a/images/t_default/fd8f9b7d/nike-cap.png",
-    link: "https://nike.com",
+    link: "https://meli.la/2qqcdyN",
   },
 
   {
