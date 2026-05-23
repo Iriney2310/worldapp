@@ -163,9 +163,46 @@ export default function Perfil() {
         {dark ? "☀️ Modo claro" : "🌙 Modo oscuro"}
       </button>
 
+{/* TELEGRAM */}
+<div
+  style={{
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 12,
+    background: "var(--card)",
+    border: "1px solid var(--border)",
+    textAlign: "center",
+    color: "var(--text)",
+  }}
+>
+  <h3>📢 Canal de Telegram</h3>
+
+  <p style={{ opacity: 0.8 }}>
+    Únete a nuestro canal para ofertas y novedades
+  </p>
+
+  <button
+    onClick={() =>
+      window.open("t.me/sneakersworldapp", "_blank")
+    }
+    style={{
+      marginTop: 10,
+      padding: "10px 14px",
+      borderRadius: 10,
+      background: "linear-gradient(90deg,#0088cc,#00c6ff)",
+      color: "white",
+      fontWeight: "bold",
+      cursor: "pointer",
+      border: "none",
+    }}
+  >
+    🚀 Ir al canal
+  </button>
+</div>
+
       {/* CONTACTO */}
       <div style={{
-        marginTop: 40,
+        marginTop: 20,
         padding: 15,
         borderRadius: 12,
         background: "var(--card)",
