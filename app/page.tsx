@@ -5,6 +5,8 @@ import type { CSSProperties } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useCurrency } from './context/CurrencyContext'
 import { sneakers, type Sneaker } from './data/sneakers'
+import { products } from './data/accessories'
+import { useRouter } from "next/navigation"
 
 export default function Home() {
   const { currency, convert } = useCurrency()
@@ -19,7 +21,7 @@ export default function Home() {
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
-
+  const router = useRouter()
 const searchParams = typeof window !== 'undefined'
   ? useSearchParams()
   : null
@@ -201,7 +203,10 @@ useEffect(() => {
 </div>
 {/*================= ACCESORIOS =================*/}
 <button
-  onClick={() => window.location.href = '/accessories'}
+  onClick={() => {
+    router.push("/accessories")
+    setMenuOpen(false)
+  }}
   style={sideBtn}
 >
   🧢 Accesorios
