@@ -199,9 +199,6 @@ useEffect(() => {
 
   </div>
 )}
-<button onClick={() => setMenuOpen(false)} style={sideBtn}>
-  ✕ Cerrar
-</button>
 </div>
 
           {/* GRID */}
