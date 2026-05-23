@@ -122,7 +122,7 @@ useEffect(() => {
         />
       )}
 
-      {/* SIDEBAR */}
+{/* SIDEBAR */}
 <div
   style={{
     ...sidebar,
@@ -130,10 +130,12 @@ useEffect(() => {
     transition: "0.35s cubic-bezier(0.2,0.8,0.2,1)",
   }}
 >
+  {/* CERRAR */}
   <button onClick={() => setMenuOpen(false)} style={sideBtn}>
     ✕ Cerrar
   </button>
 
+  {/* BUSCADOR */}
   <input
     value={search}
     onChange={(e) => setSearch(e.target.value)}
@@ -141,7 +143,7 @@ useEffect(() => {
     style={input}
   />
 
-  {/* ================= MARCAS (DESPLEGABLE) ================= */}
+  {/* ================= MARCAS ================= */}
   <button
     onClick={() => setOpenBrands(!openBrands)}
     style={sideBtn}
@@ -151,21 +153,30 @@ useEffect(() => {
 
   {openBrands && (
     <div style={{ marginLeft: 10 }}>
-      <button onClick={() => setBrand("all")} style={sideBtn}>
+      <button
+        onClick={() => setBrand("all")}
+        style={sideBtn}
+      >
         Todas
       </button>
 
-      <button onClick={() => setBrand("Nike")} style={sideBtn}>
+      <button
+        onClick={() => setBrand("Nike")}
+        style={sideBtn}
+      >
         Nike
       </button>
 
-      <button onClick={() => setBrand("Adidas")} style={sideBtn}>
+      <button
+        onClick={() => setBrand("Adidas")}
+        style={sideBtn}
+      >
         Adidas
       </button>
     </div>
   )}
 
-  {/* ================= TIENDAS (DESPLEGABLE) ================= */}
+  {/* ================= TIENDAS ================= */}
   <button
     onClick={() => setOpenStores(!openStores)}
     style={sideBtn}
@@ -174,40 +185,40 @@ useEffect(() => {
   </button>
 
   {openStores && (
-  <div style={{ marginLeft: 10 }}>
+    <div style={{ marginLeft: 10 }}>
+      <button
+        onClick={() => setStore('all')}
+        style={sideBtn}
+      >
+        Todas
+      </button>
 
-    <button
-      onClick={() => setStore('all')}
-      style={sideBtn}
-    >
-      Todas 
-    </button>
+      <button
+        onClick={() => setStore('Amazon')}
+        style={sideBtn}
+      >
+        Amazon
+      </button>
 
-    <button
-      onClick={() => setStore('Amazon')}
-      style={sideBtn}
-    >
-      Amazon
-    </button>
+      <button
+        onClick={() => setStore('MercadoLibre')}
+        style={sideBtn}
+      >
+        Mercado Libre
+      </button>
+    </div>
+  )}
 
-    <button
-      onClick={() => setStore('MercadoLibre')}
-      style={sideBtn}
-    >
-      Mercado Libre
-    </button>
-
-<button
-  onClick={() => {
-    window.location.href = "/accessories"
-  }}
-  style={sideBtn}
->
-  🧢 Accesorios
-</button>
-
-  </div>
-)}
+  {/* ================= ACCESORIOS ================= */}
+  <button
+    onClick={() => {
+      window.location.href = "/accessories"
+      setMenuOpen(false)
+    }}
+    style={sideBtn}
+  >
+    🧢 Accesorios
+  </button>
 </div>
 
           {/* GRID */}
