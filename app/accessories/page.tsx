@@ -147,31 +147,28 @@ export default function AccessoriesPage() {
             <p>{item.brand}</p>
 
             <p style={{ fontWeight: 'bold' }}>
-  {convert(item.price)}
-</p>
-
-{/* PRECIO + LOGO EN LA MISMA FILA */}
-<div
+              {convert(item.price)}
+              <div
   style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    position: 'relative',
     marginTop: 10,
   }}
 >
-  <p
-    style={{
-      fontWeight: 'bold',
-      margin: 0,
-    }}
-  >
-    {convert(item.price)}
-  </p>
-
   <div
     style={{
-      width: 90,
-      height: 28,
+      position: 'absolute',
+      bottom: 10,
+      right: 10,
+      width: 30,
+      height: 30,
+      borderRadius: '50%',
+      background: 'white',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      border: '1px solid rgba(255,255,255,0.2)',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
     }}
   >
     <img
@@ -188,12 +185,12 @@ export default function AccessoriesPage() {
     />
   </div>
 </div>
-
-</div>
-))}
-</div>
-</main>
-)
+            </p>
+          </div>
+        ))}
+      </div>
+    </main>
+  )
 }
 
 /* ================= STYLES ================= */
