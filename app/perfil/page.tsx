@@ -139,18 +139,17 @@ export default function Perfil() {
 
 <div
   style={{
-    marginTop: 30,
+    marginTop: 20,
     padding: 15,
     borderRadius: 12,
     background: 'var(--card)',
     border: '1px solid var(--border)',
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: 15,
     opacity: 0.9,
   }}
 >
-  🆕 Esta página se actualiza diariamente con nuevos modelos de zapatillas y accesorios.  
-  Vuelve cada día para descubrir lanzamientos y novedades exclusivas.
+  🆕 ¡Actualizamos la app cada día con nuevas zapatillas y accesorios! Vuelve para ver novedades.✨  
 </div>
 
       {/* 💰 SELECTOR DE MONEDA */}
