@@ -14,7 +14,7 @@ export default function AccessoriesPage() {
 
   const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas' | 'New Era'>('all')
   const [store, setStore] =
-  useState<'all' | 'Amazon' | 'MercadoLibre' | 'NewEra'>('all')
+  useState<'all' | 'Amazon' | 'MercadoLibre' | 'New Era'>('all')
   const [search, setSearch] = useState('')
 
   const { convert } = useCurrency()
@@ -85,6 +85,7 @@ export default function AccessoriesPage() {
             <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
             <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
             <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
+            <button onClick={() => setBrand('New Era')} style={sideBtn}>New Era</button>
           </div>
         )}
 
@@ -98,7 +99,7 @@ export default function AccessoriesPage() {
             <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
             <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
             <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
-            <button onClick={() => setStore('NewEra')} style={sideBtn}>New Era</button>
+            <button onClick={() => setStore('New Era')} style={sideBtn}>New Era</button>
           </div>
         )}
 

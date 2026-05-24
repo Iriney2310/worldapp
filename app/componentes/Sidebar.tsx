@@ -57,6 +57,7 @@ export default function Sidebar({
             <button onClick={() => setBrand('all')} style={sideBtn}>Todas</button>
             <button onClick={() => setBrand('Nike')} style={sideBtn}>Nike</button>
             <button onClick={() => setBrand('Adidas')} style={sideBtn}>Adidas</button>
+            <button onClick={() => setBrand('New Era')} style={sideBtn}>New Era</button>
           </div>
         )}
 
@@ -70,7 +71,6 @@ export default function Sidebar({
     <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
     <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
     <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
-    <button onClick={() => setStore('NewEra')} style={sideBtn}>New Era</button>
   </div>
 )}
 
