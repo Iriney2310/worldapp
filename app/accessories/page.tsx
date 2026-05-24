@@ -245,8 +245,8 @@ const overlay: CSSProperties = {
 
 const favBtn: CSSProperties = {
   position: 'absolute',
-  top: 10,
-  right: 10,
+  top: 15,
+  right: 15,
 
   background: 'var(--card)',
   color: 'var(--text)',
@@ -254,7 +254,7 @@ const favBtn: CSSProperties = {
   border: '1px solid var(--border)',
   borderRadius: 12,
 
-  padding: '8px 14px',
+  padding: '6px 12px',
 
   cursor: 'pointer',
   fontWeight: 'bold',
