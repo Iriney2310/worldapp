@@ -66,12 +66,13 @@ export default function Sidebar({
         </button>
 
         {openStores && (
-          <div style={{ marginLeft: 10 }}>
-            <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
-            <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
-            <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
-          </div>
-        )}
+  <div style={{ marginLeft: 10 }}>
+    <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
+    <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
+    <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
+    <button onClick={() => setStore('NewEra')} style={sideBtn}>New Era</button>
+  </div>
+)}
 
         <button onClick={goAccessories} style={sideBtn}>
           👝 ACCESORIOS
