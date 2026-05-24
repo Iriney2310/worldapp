@@ -56,6 +56,15 @@ export default function AccessoriesPage() {
     <main style={main}>
 
       {/* TOP BAR */}
+      <div style={{ position: 'absolute', top: 10, right: 10 }}>
+  <button
+    onClick={() => (window.location.href = '/favorites')}
+    style={favBtn}
+  >
+    ❤️ {favorites.length}
+  </button>
+</div>
+
       <div style={{ textAlign: 'center', position: 'relative' }}>
         <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
           ☰
@@ -255,4 +264,13 @@ const overlay: CSSProperties = {
   inset: 0,
   background: 'rgba(0,0,0,0.3)',
   zIndex: 9998,
+}
+
+const favBtn: CSSProperties = {
+  background: 'var(--card)',
+  border: '1px solid var(--border)',
+  padding: '6px 12px',
+  borderRadius: 10,
+  cursor: 'pointer',
+  fontWeight: 'bold',
 }

@@ -23,7 +23,7 @@ export const accessories: Accessory[] = [
   {
     id: 2,
     name: "Adidas Backpack",
-    brand: "Adidas",
+    brand: "Nike",
     price: 39.99,
     image:
       "https://assets.adidas.com/images/backpack.png",
