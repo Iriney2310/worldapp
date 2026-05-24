@@ -54,6 +54,22 @@ export default function Perfil() {
     border: "1px solid var(--border)",
   }}
 >
+  <div
+  style={{
+    marginTop: 30,
+    padding: 15,
+    borderRadius: 12,
+    background: 'var(--card)',
+    border: '1px solid var(--border)',
+    textAlign: 'center',
+    fontSize: 14,
+    opacity: 0.9,
+  }}
+>
+  🆕 Esta página se actualiza diariamente con nuevos modelos de zapatillas y accesorios.  
+  Vuelve cada día para descubrir lanzamientos y novedades exclusivas.
+</div>
+
   {/* AVATAR */}
   <div
     style={{

@@ -185,6 +185,7 @@ export default function AccessoriesPage() {
     />
   </div>
 </div>
+
             </p>
           </div>
         ))}

@@ -49,7 +49,7 @@ export default function Sidebar({
 
         {/* MARCAS */}
         <button onClick={() => setOpenBrands(!openBrands)} style={sideBtn}>
-          👟 MARCAS {openBrands ? '▲' : '▼'}
+          MARCAS {openBrands ? '▲' : '▼'}
         </button>
 
         {openBrands && (
@@ -63,7 +63,7 @@ export default function Sidebar({
 
         {/* TIENDAS */}
         <button onClick={() => setOpenStores(!openStores)} style={sideBtn}>
-          🛒 TIENDAS {openStores ? '▲' : '▼'}
+          TIENDAS {openStores ? '▲' : '▼'}
         </button>
 
         {openStores && (
@@ -75,7 +75,7 @@ export default function Sidebar({
 )}
 
         <button onClick={goAccessories} style={sideBtn}>
-          👝 ACCESORIOS
+          ACCESORIOS
         </button>
       </div>
     </>
