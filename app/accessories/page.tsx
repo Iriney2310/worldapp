@@ -99,7 +99,6 @@ export default function AccessoriesPage() {
             <button onClick={() => setStore('all')} style={sideBtn}>Todas</button>
             <button onClick={() => setStore('Amazon')} style={sideBtn}>Amazon</button>
             <button onClick={() => setStore('MercadoLibre')} style={sideBtn}>Mercado Libre</button>
-            <button onClick={() => setStore('New Era')} style={sideBtn}>New Era</button>
           </div>
         )}
 
