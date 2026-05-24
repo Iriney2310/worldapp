@@ -147,13 +147,37 @@ export default function AccessoriesPage() {
             <p>{item.brand}</p>
 
             <p style={{ fontWeight: 'bold' }}>
-              {convert(item.price)}
-            </p>
-          </div>
-        ))}
-      </div>
-    </main>
-  )
+  {convert(item.price)}
+</p>
+
+<div
+  style={{
+    width: 90,
+    height: 28,
+    marginTop: 10,
+  }}
+>
+  <img
+    src={
+      item.store === 'Amazon'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
+        : item.store === 'MercadoLibre'
+        ? 'https://www.elcohetealaluna.com/wp-content/uploads/2019/07/Mercado-Libre..png'
+        : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/New_Era_Cap_Company_logo.svg/2560px-New_Era_Cap_Company_logo.svg.png'
+    }
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'contain',
+    }}
+  />
+</div>
+
+</div>
+))}
+</div>
+</main>
+)
 }
 
 /* ================= STYLES ================= */
