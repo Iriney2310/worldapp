@@ -195,7 +195,7 @@ const card: CSSProperties = {
   cursor: 'pointer',
   transition: '0.25s ease',
   position: 'relative',
-  top: 10,
+  top: 0,
 }
 
 const img: CSSProperties = {

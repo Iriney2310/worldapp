@@ -82,7 +82,7 @@ const main: CSSProperties = {
 
 const title: CSSProperties = {
   textAlign: 'center',
-  marginBottom: 15,
+  marginBottom: 10,
 }
 
 const img: CSSProperties = {
