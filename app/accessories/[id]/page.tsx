@@ -24,7 +24,25 @@ export default function AccessoryDetail() {
         ← Volver
       </button>
 
-      <h1 style={title}>{item.name}</h1>
+      <h1
+  style={{
+    marginTop: 40,
+    fontSize: 36,
+    fontWeight: 900,
+
+    textAlign: 'center',
+
+    background:
+      'linear-gradient(90deg, var(--text), rgba(255,255,255,0.6))',
+
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+
+    letterSpacing: '-1px',
+  }}
+>
+  {item.name}
+</h1>
 
       <img src={item.image} style={img} />
 

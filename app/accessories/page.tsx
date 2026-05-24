@@ -131,7 +131,17 @@ export default function AccessoriesPage() {
 
             <img src={item.image} style={img} />
 
-            <h3>{item.name}</h3>
+           <h3
+           style={{
+            marginTop: 12,
+            fontSize: 20,
+            fontWeight: 700,
+            color: 'var(--text)',
+          }}
+          >
+         {item.name}
+        </h3>
+
             <p>{item.brand}</p>
 
             <p style={{ fontWeight: 'bold' }}>
@@ -154,8 +164,21 @@ const main: CSSProperties = {
 }
 
 const title: CSSProperties = {
+  marginTop: 20,
+  marginBottom: 35,
+
+  fontSize: 34,
+  fontWeight: 800,
+
+  letterSpacing: '-0.5px',
+
   textAlign: 'center',
-  marginBottom: 30,
+
+  background:
+    'linear-gradient(90deg, var(--text), rgba(255,255,255,0.6))',
+
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
 }
 
 const grid: CSSProperties = {
