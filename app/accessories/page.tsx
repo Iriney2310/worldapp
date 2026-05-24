@@ -34,14 +34,12 @@ export default function AccessoriesPage() {
     <main style={main}>
 
       {/* TOP FAVORITOS */}
-      <div style={favTop}>
-        <button
-          onClick={() => (window.location.href = '/accessories/favorites')}
-          style={favBtn}
-        >
-          ❤️ {favorites.length}
-        </button>
-      </div>
+      <button
+  onClick={() => (window.location.href = '/accessories/favorites')}
+  style={favBtn}
+>
+  ❤️ {favorites.length}
+</button>
 
       {/* TOP BAR */}
       <div style={{ textAlign: 'center', position: 'relative' }}>
@@ -246,18 +244,6 @@ const overlay: CSSProperties = {
 }
 
 const favBtn: CSSProperties = {
-  background: 'var(--card)',
-  border: '1px solid var(--border)',
-  padding: '6px 12px',
-  borderRadius: 10,
-  cursor: 'pointer',
-  fontWeight: 'bold',
-}
-
-const favTop: CSSProperties = {
-  position: 'absolute',
-  top: 10,
-  right: 10,
   background: 'var(--card)',
   border: '1px solid var(--border)',
   padding: '6px 12px',
