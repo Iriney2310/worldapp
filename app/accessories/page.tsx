@@ -58,7 +58,7 @@ export default function AccessoriesPage() {
       {/* TOP BAR */}
       <div style={{ position: 'absolute', top: 10, right: 10 }}>
   <button
-    onClick={() => (window.location.href = '/favorites')}
+    onClick={() => (window.location.href = 'accessories/favorites')}
     style={favBtn}
   >
     ❤️ {favorites.length}
