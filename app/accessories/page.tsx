@@ -134,7 +134,7 @@ export default function AccessoriesPage() {
            <h3
            style={{
             marginTop: 12,
-            fontSize: 20,
+            fontSize: 10,
             fontWeight: 700,
             color: 'var(--text)',
           }}
@@ -268,8 +268,8 @@ const overlay: CSSProperties = {
 
 const favBtn: CSSProperties = {
   position: 'absolute',
-  top: 30,
-  right: 30,
+  top: 40,
+  right: 25,
 
   background: 'var(--card)',
   color: 'var(--text)',

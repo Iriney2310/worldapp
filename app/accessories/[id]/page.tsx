@@ -26,8 +26,8 @@ export default function AccessoryDetail() {
 
       <h1
   style={{
-    marginTop: 5,
-    fontSize: 25,
+    marginTop: 0,
+    fontSize: 30,
     fontWeight: 900,
 
     textAlign: 'center',
