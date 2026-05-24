@@ -145,11 +145,11 @@ export default function Perfil() {
     background: 'var(--card)',
     border: '1px solid var(--border)',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 18,
     opacity: 0.9,
   }}
 >
-  🆕 ¡Actualizamos la app cada día con nuevas zapatillas y accesorios! Vuelve para ver novedades.✨  
+  🆕 ¡Actualizamos la app cada día con nuevas zapatillas y accesorios!✨  
 </div>
 
       {/* 💰 SELECTOR DE MONEDA */}
