@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
   ReactNode,
+  useEffect,
 } from 'react'
 
 type FavoritesContextType = {
@@ -18,15 +18,11 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [favorites, setFavorites] = useState<number[]>([])
 
-  /* LOAD */
   useEffect(() => {
     const data = localStorage.getItem('favorites')
-    if (data) {
-      setFavorites(JSON.parse(data))
-    }
+    if (data) setFavorites(JSON.parse(data))
   }, [])
 
-  /* SAVE */
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites))
   }, [favorites])

@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { accessories } from '../data/accessories'
 import type { CSSProperties } from 'react'
 import { useCurrency } from '../context/CurrencyContext'
+import { useFavorites } from '../context/FavoritesContext'
 
 export default function AccessoriesPage() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -15,39 +16,16 @@ export default function AccessoriesPage() {
   const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
   const [search, setSearch] = useState('')
 
-  const [favorites, setFavorites] = useState<number[]>([])
-
   const { convert } = useCurrency()
 
-  /* ================= LOAD FAVORITOS ================= */
-  useEffect(() => {
-    const data = localStorage.getItem('favorites_accessories')
-    if (data) {
-      setFavorites(JSON.parse(data))
-    }
-  }, [])
+  /* ================= FAVORITOS (CONTEXTO) ================= */
+  const { favorites, toggleFavorite } = useFavorites()
 
-  /* ================= SAVE FAVORITOS ================= */
-  useEffect(() => {
-    localStorage.setItem(
-      'favorites_accessories',
-      JSON.stringify(favorites)
-    )
-  }, [favorites])
-
-  const toggleFavorite = (id: number) => {
-    setFavorites((prev) =>
-      prev.includes(id)
-        ? prev.filter((f) => f !== id)
-        : [...prev, id]
-    )
-  }
-
+  /* ================= FILTRO ================= */
   const filtered = accessories.filter((item) => {
     const matchBrand = brand === 'all' || item.brand === brand
     const matchStore = store === 'all' || item.store === store
-    const matchSearch =
-      item.name.toLowerCase().includes(search.toLowerCase())
+    const matchSearch = item.name.toLowerCase().includes(search.toLowerCase())
 
     return matchBrand && matchStore && matchSearch
   })
@@ -55,16 +33,17 @@ export default function AccessoriesPage() {
   return (
     <main style={main}>
 
-      {/* TOP BAR */}
-      <div style={{ position: 'absolute', top: 10, right: 10 }}>
-  <button
-    onClick={() => (window.location.href = 'accessories/favorites')}
-    style={favBtn}
-  >
-    ❤️ {favorites.length}
-  </button>
-</div>
+      {/* TOP FAVORITOS */}
+      <div style={favTop}>
+        <button
+          onClick={() => (window.location.href = '/accessories/favorites')}
+          style={favBtn}
+        >
+          ❤️ {favorites.length}
+        </button>
+      </div>
 
+      {/* TOP BAR */}
       <div style={{ textAlign: 'center', position: 'relative' }}>
         <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
           ☰
@@ -83,7 +62,7 @@ export default function AccessoriesPage() {
         style={{
           ...sidebar,
           transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
-          transition: '0.35s ease',
+          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
         }}
       >
         <button onClick={() => setMenuOpen(false)} style={sideBtn}>
@@ -127,7 +106,7 @@ export default function AccessoriesPage() {
           onClick={() => (window.location.href = '/')}
           style={sideBtn}
         >
-          👟 Sneakers
+          👟 SNEAKERS
         </button>
       </div>
 
@@ -141,7 +120,6 @@ export default function AccessoriesPage() {
               (window.location.href = `/accessories/${item.id}`)
             }
           >
-
             {/* ❤️ FAVORITO */}
             <div
               onClick={(e) => {
@@ -167,6 +145,7 @@ export default function AccessoriesPage() {
     </main>
   )
 }
+
 /* ================= STYLES ================= */
 
 const main: CSSProperties = {
@@ -267,6 +246,18 @@ const overlay: CSSProperties = {
 }
 
 const favBtn: CSSProperties = {
+  background: 'var(--card)',
+  border: '1px solid var(--border)',
+  padding: '6px 12px',
+  borderRadius: 10,
+  cursor: 'pointer',
+  fontWeight: 'bold',
+}
+
+const favTop: CSSProperties = {
+  position: 'absolute',
+  top: 10,
+  right: 10,
   background: 'var(--card)',
   border: '1px solid var(--border)',
   padding: '6px 12px',
