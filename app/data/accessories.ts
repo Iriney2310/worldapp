@@ -44,13 +44,13 @@ export const accessories: Accessory[] = [
 
   {
     id: 4,
-    name: "WalletIcon AirMax 1",
+    name: "Gorra Dri-FIT Club",
     brand: "Nike",
-    price: 27.13,
+    price: 21.25,
     image:
-      "https://www.bing.com/images/blob?bcid=RH3U1vu.iOoJim3KLwR2rScZYoME.....4w",
-    link: "https://meli.la/2UdsTmM",
-    store: "MercadoLibre"
+      "https://www.nike.ae/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw50e0ce14/nk/237/2/7/9/9/e/2372799e_7c0c_4ae0_87e0_5c07f932cb27.jpg?sw=700&sh=700&sm=fit&q=100&strip=false",
+    link: "https://amzn.to/4tPt7XB",
+    store: "Amazon"
   },
 ]
 
