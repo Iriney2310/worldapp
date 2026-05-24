@@ -47,7 +47,7 @@ export default function AccessoriesPage() {
           ☰
         </button>
 
-        <h1 style={title}>🧢 ACCESORIOS</h1>
+        <h1 style={title}>ACCESORIOS</h1>
       </div>
 
       {/* OVERLAY */}
