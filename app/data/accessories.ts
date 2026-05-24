@@ -55,7 +55,7 @@ export const accessories: Accessory[] = [
 
   {
     id: 5,
-    name: "Mochila Stadium Backpack",
+    name: "Mochila Stadium",
     brand: "New Era",
     price: 24.95,
     image:
