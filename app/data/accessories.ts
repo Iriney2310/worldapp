@@ -11,7 +11,7 @@ export type Accessory = {
 export const accessories: Accessory[] = [
   {
     id: 1,
-    name: "Billetera Icon AF1",
+    name: "Wallet Icon AF1",
     brand: "Nike",
     price: 23.69,
     image:
@@ -22,12 +22,12 @@ export const accessories: Accessory[] = [
 
   {
     id: 2,
-    name: "Adidas Backpack",
+    name: "WalletIcon AirMax 1",
     brand: "Nike",
-    price: 39.99,
+    price: 24.67,
     image:
-      "https://assets.adidas.com/images/backpack.png",
-    link: "https://adidas.com",
+      "https://assets.solesense.com/en/images/products/500/nike-icon-air-max-90-card-wallet-smoke-grey-black-hf3717-076_1.jpg",
+    link: "https://meli.la/19WCXRZ",
     store: "MercadoLibre"
   },
 ]

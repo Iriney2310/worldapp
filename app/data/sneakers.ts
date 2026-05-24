@@ -76,7 +76,7 @@ export const sneakers: Sneaker[] = [
       "https://dimarsa.vtexassets.com/arquivos/ids/241640/img-2.jpg?v=638902566333500000",
     link: "https://meli.la/2Z1RVmc",
     rating: "4.7 / 5",
-    badge: "BESTSELLER",
+    badge: "OFFER",
     tags: ["-40%"],
     usage: "Skate / Urbano",
     stock: "En Stock",
