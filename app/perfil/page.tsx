@@ -54,23 +54,7 @@ export default function Perfil() {
     border: "1px solid var(--border)",
   }}
 >
-{/* AVISO DE ACTUALIZACIÓN */}
-<div
-  style={{
-    marginTop: 12,
-    padding: 15,
-    borderRadius: 12,
-    background: "var(--card)",
-    border: "1px solid var(--border)",
-    textAlign: "center",
-    fontSize: 14,
-    opacity: 0.9,
-  }}
->
-  🆕 Esta página se actualiza diariamente con nuevos modelos de zapatillas y accesorios.  
-  Vuelve cada día para descubrir lanzamientos y novedades exclusivas.
-</div>
-
+  
   {/* AVATAR */}
   <div
     style={{
@@ -152,6 +136,22 @@ export default function Perfil() {
     </button>
   </div>
 )}
+
+<div
+  style={{
+    marginTop: 30,
+    padding: 15,
+    borderRadius: 12,
+    background: 'var(--card)',
+    border: '1px solid var(--border)',
+    textAlign: 'center',
+    fontSize: 14,
+    opacity: 0.9,
+  }}
+>
+  🆕 Esta página se actualiza diariamente con nuevos modelos de zapatillas y accesorios.  
+  Vuelve cada día para descubrir lanzamientos y novedades exclusivas.
+</div>
 
       {/* 💰 SELECTOR DE MONEDA */}
       <div style={{
