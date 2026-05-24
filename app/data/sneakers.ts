@@ -65,9 +65,25 @@ export const sneakers: Sneaker[] = [
     usage: "Daily",
     stock: "Pocas Unidades",
   },
+{
+    id: 4,
+    name: "Killshot 2",
+    brand: "Nike",
+    price: "73.83",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://dimarsa.vtexassets.com/arquivos/ids/241640/img-2.jpg?v=638902566333500000",
+    link: "https://meli.la/2Z1RVmc",
+    rating: "4.7 / 5",
+    badge: "BESTSELLER",
+    tags: ["-40%"],
+    usage: "Skate / Urbano",
+    stock: "En Stock",
+  },
 
   {
-    id: 4,
+    id: 5,
     name: "Court Vision Low",
     brand: "Nike",
     price: "53.99",
@@ -82,7 +98,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 5,
+    id: 6,
     name: "Grand Court Base 00s",
     brand: "Adidas",
     price: "39.99",
@@ -98,7 +114,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 6,
+    id: 7,
     name: "Court Vision Low",
     brand: "Nike",
     price: "72.67",
@@ -113,7 +129,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 7,
+    id: 8,
     name: "VL Court 3.0",
     brand: "Adidas",
     price: "41.99",
@@ -128,7 +144,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 8,
+    id: 9,
     name: "Terra Manta",
     brand: "Nike",
     price: "64.45",
@@ -145,7 +161,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 8,
+    id: 9,
     name: "Revolution 8",
     brand: "Nike",
     price: "79.98",
