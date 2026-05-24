@@ -26,8 +26,8 @@ export default function AccessoryDetail() {
 
       <h1
   style={{
-    marginTop: 20,
-    fontSize: 30,
+    marginTop: 5,
+    fontSize: 25,
     fontWeight: 900,
 
     textAlign: 'center',
@@ -48,7 +48,7 @@ export default function AccessoryDetail() {
 
       <p><b>Marca:</b> {item.brand}</p>
 
-      <p style={{ fontWeight: 'bold', fontSize: 18 }}>
+      <p style={{ fontWeight: 'bold', fontSize: 20 }}>
         €{item.price}
       </p>
 

@@ -268,8 +268,8 @@ const overlay: CSSProperties = {
 
 const favBtn: CSSProperties = {
   position: 'absolute',
-  top: 15,
-  right: 15,
+  top: 0,
+  right: 0,
 
   background: 'var(--card)',
   color: 'var(--text)',
