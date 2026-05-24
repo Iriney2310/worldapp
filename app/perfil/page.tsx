@@ -54,14 +54,15 @@ export default function Perfil() {
     border: "1px solid var(--border)",
   }}
 >
-  <div
+{/* AVISO DE ACTUALIZACIÓN */}
+<div
   style={{
-    marginTop: 30,
+    marginTop: 12,
     padding: 15,
     borderRadius: 12,
-    background: 'var(--card)',
-    border: '1px solid var(--border)',
-    textAlign: 'center',
+    background: "var(--card)",
+    border: "1px solid var(--border)",
+    textAlign: "center",
     fontSize: 14,
     opacity: 0.9,
   }}
