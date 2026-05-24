@@ -48,7 +48,7 @@ export default function AccessoryDetail() {
 
       <p
   style={{
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 600,
     color: 'var(--text)',
     opacity: 0.85,
@@ -82,7 +82,7 @@ const main: CSSProperties = {
 
 const title: CSSProperties = {
   textAlign: 'center',
-  marginBottom: 20,
+  marginBottom: 15,
 }
 
 const img: CSSProperties = {

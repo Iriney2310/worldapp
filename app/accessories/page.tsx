@@ -167,7 +167,7 @@ const title: CSSProperties = {
   marginTop: 20,
   marginBottom: 35,
 
-  fontSize: 34,
+  fontSize: 30,
   fontWeight: 800,
 
   letterSpacing: '-0.5px',
@@ -195,6 +195,7 @@ const card: CSSProperties = {
   cursor: 'pointer',
   transition: '0.25s ease',
   position: 'relative',
+  top: 10,
 }
 
 const img: CSSProperties = {
@@ -277,7 +278,7 @@ const favBtn: CSSProperties = {
   border: '1px solid var(--border)',
   borderRadius: 12,
 
-  padding: '6px 10px',
+  padding: '8px 10px',
 
   cursor: 'pointer',
   fontWeight: 'bold',
