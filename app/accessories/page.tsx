@@ -150,27 +150,43 @@ export default function AccessoriesPage() {
   {convert(item.price)}
 </p>
 
+{/* PRECIO + LOGO EN LA MISMA FILA */}
 <div
   style={{
-    width: 90,
-    height: 28,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 10,
   }}
 >
-  <img
-    src={
-      item.store === 'Amazon'
-        ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
-        : item.store === 'MercadoLibre'
-        ? 'https://www.elcohetealaluna.com/wp-content/uploads/2019/07/Mercado-Libre..png'
-        : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/New_Era_Cap_Company_logo.svg/2560px-New_Era_Cap_Company_logo.svg.png'
-    }
+  <p
     style={{
-      width: '100%',
-      height: '100%',
-      objectFit: 'contain',
+      fontWeight: 'bold',
+      margin: 0,
     }}
-  />
+  >
+    {convert(item.price)}
+  </p>
+
+  <div
+    style={{
+      width: 90,
+      height: 28,
+    }}
+  >
+    <img
+      src={
+        item.store === 'Amazon'
+          ? 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg'
+          : 'https://www.elcohetealaluna.com/wp-content/uploads/2019/07/Mercado-Libre..png'
+      }
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'contain',
+      }}
+    />
+  </div>
 </div>
 
 </div>
