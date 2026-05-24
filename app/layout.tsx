@@ -5,6 +5,7 @@ import "./globals.css"
 import BottomNav from "./bottomnav"
 import { ThemeProvider } from "./context/ThemeContext"
 import { CurrencyProvider } from "./context/CurrencyContext"
+import { FavoritesProvider } from "./context/FavoritesContext"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,18 +35,20 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <CurrencyProvider>
+            <FavoritesProvider>
 
-            <div
-              style={{
-                minHeight: "100vh",
-                paddingBottom: 90,
-              }}
-            >
-              {children}
-            </div>
+              <div
+                style={{
+                  minHeight: "100vh",
+                  paddingBottom: 90,
+                }}
+              >
+                {children}
+              </div>
 
-            <BottomNav />
+              <BottomNav />
 
+            </FavoritesProvider>
           </CurrencyProvider>
         </ThemeProvider>
       </body>

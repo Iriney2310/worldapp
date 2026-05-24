@@ -6,7 +6,6 @@ import type { CSSProperties } from 'react'
 import { useCurrency } from '../context/CurrencyContext'
 
 export default function AccessoriesPage() {
-  const [favorites, setFavorites] = useState<number[]>([])
   const [menuOpen, setMenuOpen] = useState(false)
 
   const [openBrands, setOpenBrands] = useState(false)
@@ -16,15 +15,19 @@ export default function AccessoriesPage() {
   const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre'>('all')
   const [search, setSearch] = useState('')
 
+  const [favorites, setFavorites] = useState<number[]>([])
+
   const { convert } = useCurrency()
 
-  /* ================= FAVORITOS (LOAD) ================= */
+  /* ================= LOAD FAVORITOS ================= */
   useEffect(() => {
     const data = localStorage.getItem('favorites_accessories')
-    if (data) setFavorites(JSON.parse(data))
+    if (data) {
+      setFavorites(JSON.parse(data))
+    }
   }, [])
 
-  /* ================= FAVORITOS (SAVE) ================= */
+  /* ================= SAVE FAVORITOS ================= */
   useEffect(() => {
     localStorage.setItem(
       'favorites_accessories',
@@ -63,10 +66,7 @@ export default function AccessoriesPage() {
 
       {/* OVERLAY */}
       {menuOpen && (
-        <div
-          onClick={() => setMenuOpen(false)}
-          style={overlay}
-        />
+        <div onClick={() => setMenuOpen(false)} style={overlay} />
       )}
 
       {/* SIDEBAR */}
@@ -74,10 +74,9 @@ export default function AccessoriesPage() {
         style={{
           ...sidebar,
           transform: menuOpen ? 'translateX(0)' : 'translateX(-110%)',
-          transition: '0.35s cubic-bezier(0.2,0.8,0.2,1)',
+          transition: '0.35s ease',
         }}
       >
-
         <button onClick={() => setMenuOpen(false)} style={sideBtn}>
           ✕ Cerrar
         </button>
@@ -121,7 +120,6 @@ export default function AccessoriesPage() {
         >
           👟 Sneakers
         </button>
-
       </div>
 
       {/* GRID */}
@@ -133,15 +131,6 @@ export default function AccessoriesPage() {
             onClick={() =>
               (window.location.href = `/accessories/${item.id}`)
             }
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-10px) scale(1.03)'
-              e.currentTarget.style.boxShadow =
-                '0 20px 50px rgba(0,0,0,0.4)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
           >
 
             {/* ❤️ FAVORITO */}
@@ -169,7 +158,6 @@ export default function AccessoriesPage() {
     </main>
   )
 }
-
 /* ================= STYLES ================= */
 
 const main: CSSProperties = {
