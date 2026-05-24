@@ -145,7 +145,7 @@ export default function Perfil() {
     background: 'var(--card)',
     border: '1px solid var(--border)',
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 16,
     opacity: 0.9,
   }}
 >
