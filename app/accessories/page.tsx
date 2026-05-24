@@ -167,7 +167,7 @@ const title: CSSProperties = {
   marginTop: 20,
   marginBottom: 35,
 
-  fontSize: 30,
+  fontSize: 34,
   fontWeight: 800,
 
   letterSpacing: '-0.5px',
@@ -269,7 +269,7 @@ const overlay: CSSProperties = {
 
 const favBtn: CSSProperties = {
   position: 'absolute',
-  top: 42,
+  top: 38,
   right: 20,
 
   background: 'var(--card)',
