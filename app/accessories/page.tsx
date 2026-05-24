@@ -134,7 +134,7 @@ export default function AccessoriesPage() {
            <h3
            style={{
             marginTop: 12,
-            fontSize: 20,
+            fontSize: 14,
             fontWeight: 700,
             color: 'var(--text)',
           }}

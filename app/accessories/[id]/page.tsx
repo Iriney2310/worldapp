@@ -46,7 +46,17 @@ export default function AccessoryDetail() {
 
       <img src={item.image} style={img} />
 
-      <p><b>Marca:</b> {item.brand}</p>
+      <p
+  style={{
+    fontSize: 15,
+    fontWeight: 600,
+    color: 'var(--text)',
+    opacity: 0.85,
+    marginTop: 6,
+  }}
+>
+  <span style={{ fontWeight: 800 }}>Marca:</span> {item.brand}
+</p>
 
       <p style={{ fontWeight: 'bold', fontSize: 20 }}>
         €{item.price}
