@@ -59,12 +59,12 @@ export const accessories: Accessory[] = [
     brand: "New Era",
     price: 16.99,
     image:
-      "https://neweraco.vtexassets.com/arquivos/ids/155991/12650334_1.png?v=638024838599900000",
+      "https://www.billioncreation.com/wp-content/uploads/2021/02/New-Era-New-York-Yankees-The-League-Game-Dark-Navy-9Forty-hat-Left-Front-478x478.jpg",
     link: "https://amzn.to/4utU5VV",
     store: "Amazon"
   },
 
-{
+  {
     id: 6,
     name: "Gorra Boston Red Sox",
     brand: "New Era",
@@ -86,6 +86,28 @@ export const accessories: Accessory[] = [
     store: "Amazon"
   },
   
+  {
+    id: 8,
+    name: "Gorra Kansas City Royals",
+    brand: "New Era",
+    price: 18.99,
+    image:
+      "https://feeds.frgimages.com/ss4/https://feeds.frgimages.com/ss4/altimages/ss4/p-11880091_u-1hk52bkwkoouq1bjykm5_v-da25b6eb7e3b4636a438f91c81c7c0d6.jpg?_hv=3",
+    link: "https://amzn.to/4v4WTsr",
+    store: "Amazon"
+  },
+  
+  {
+    id: 9,
+    name: "Gorra Houston Astros",
+    brand: "New Era",
+    price: 18.99,
+    image:
+      "https://www.innovasport.com/medias/1200Wx1200H-NEW-media-gallery-000000000000401503-01-20251125121212.jpg?context=bWFzdGVyfGltYWdlc3wxMDg3ODh8aW1hZ2UvanBlZ3xhREkxTDJnME9DOHhOVGd6TVRBek9EUTVNamN3TWk4eE1qQXdWM2d4TWpBd1NGOU9SVmRmYldWa2FXRmZaMkZzYkdWeWVWOHdNREF3TURBd01EQXdNREEwTURFMU1ETmZNREZmTWpBeU5URXhNalV4TWpFeU1USXVhbkJufDY2ZTBiMjc0N2FkN2NhYjE5ZWQ1ZTE5MjUzNjRmOTM1NjJiOGVhNzZlZGQ1ZWMyMzU4NTA2ODQ0NWE1YmQ1ZjI",
+    link: "https://amzn.to/4usWnol",
+    store: "Amazon"
+  },
+
 ]
 
 
