@@ -44,17 +44,6 @@ export const accessories: Accessory[] = [
 
   {
     id: 4,
-    name: "Gorra Dri-FIT Club",
-    brand: "Nike",
-    price: 21.25,
-    image:
-      "https://www.nike.ae/dw/image/v2/BDVB_PRD/on/demandware.static/-/Sites-akeneo-master-catalog/default/dw50e0ce14/nk/237/2/7/9/9/e/2372799e_7c0c_4ae0_87e0_5c07f932cb27.jpg?sw=700&sh=700&sm=fit&q=100&strip=false",
-    link: "https://amzn.to/4tPt7XB",
-    store: "Amazon"
-  },
-
-  {
-    id: 5,
     name: "Mochila Stadium",
     brand: "New Era",
     price: 24.95,
@@ -62,6 +51,17 @@ export const accessories: Accessory[] = [
       "https://i.pinimg.com/736x/ae/cb/16/aecb16f4b63e7abde0e71741811d2868.jpg",
     link: "https://amzn.to/49Rv6DH",
     store: "Amazon"
+  },
+
+  {
+    id: 5,
+    name: "Gorra Aframe Dodgers",
+    brand: "New Era",
+    price: 70.51,
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_926978-MLA110739752894_052026-F.webp",
+    link: "https://meli.la/31JKjGW",
+    store: "MercadoLibre"
   },
 ]
 
