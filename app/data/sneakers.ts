@@ -129,22 +129,7 @@ export const sneakers: Sneaker[] = [
     stock: "En Stock",
   },
 
-  {
-    id: 7,
-    name: "Terra Manta",
-    brand: "Nike",
-    price: "64.45",
-    currency: "EUR",
-    store: "MercadoLibre",
-    image:
-      "https://cdn.store-assets.com/s/234724/i/87840137.jpeg",
-    link: "https://meli.la/22aBd6a",
-    rating: "4.8 / 5",
-    badge: "OFFER",
-    tags: ["-41%"],
-    usage: "Casual / Urbano",
-    stock: "En Stock",
-  },
+  
 
   {
     id: 8,

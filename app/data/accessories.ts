@@ -108,6 +108,61 @@ export const accessories: Accessory[] = [
     store: "Amazon"
   },
 
+  {
+    id: 10,
+    name: "Gorra Los Angeles Dodgers",
+    brand: "New Era",
+    price: 24.95,
+    image:
+      "https://www.sportbuffshop.com/cms_files/products/phpgmomKl.jpg",
+    link: "https://amzn.to/4vgqS0V",
+    store: "Amazon"
+  },
+
+  {
+    id: 11,
+    name: "Gorra Maiami Marlins",
+    brand: "New Era",
+    price: 29.90,
+    image:
+      "https://i.pinimg.com/736x/f6/6b/16/f66b16074dcc0da0cfaee4c5f607c52a.jpg",
+    link: "https://amzn.to/49j7uYv",
+    store: "Amazon"
+  },
+
+  {
+    id: 12,
+    name: "Gorra New York Mets",
+    brand: "New Era",
+    price: 26.66,
+    image:
+      "https://www.sportbuffshop.com/cms_files/products/phpz4KyF6.jpg",
+    link: "https://amzn.to/4uwylbU",
+    store: "Amazon"
+  },
+
+  {
+    id: 13,
+    name: "Gorra Baltimore Orioles",
+    brand: "New Era",
+    price: 24.90,
+    image:
+      "https://academy.scene7.com/is/image/academy/headwear/new-era-/-baltimore-orioles-mlb-team-classic-39thirty-flex-hat-10975838-white/og-image/6f66f8038ceb452083a6c4fd443f67b2",
+    link: "https://amzn.to/3RuJICJ",
+    store: "Amazon"
+  },
+
+  {
+    id: 14,
+    name: "Gorra Arizona Diamondbacks",
+    brand: "New Era",
+    price: 25.94,
+    image:
+      "https://static.caphunters.es/33889-large_default/gorra-curva-negra-ajustable-9forty-the-league-de-arizona-diamondbacks-mlb-de-new-era.webp",
+    link: "https://amzn.to/4nS7e8Q",
+    store: "Amazon"
+  },
+
 ]
 
 
