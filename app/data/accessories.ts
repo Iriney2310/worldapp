@@ -66,6 +66,17 @@ export const accessories: Accessory[] = [
 
   {
     id: 6,
+    name: "Gorra Los Angeles Dodgers",
+    brand: "New Era",
+    price: 14.99,
+    image:
+      "https://static.caphunters.es/52906-large_default/gorra-curva-azul-ajustable-9twenty-league-essential-de-los-angeles-dodgers-mlb-de-new-era.webp",
+    link: "https://amzn.to/3RrLMLS",
+    store: "Amazon"
+  },
+
+  {
+    id: 7,
     name: "Gorra Boston Red Sox",
     brand: "New Era",
     price: 18.99,
@@ -76,7 +87,7 @@ export const accessories: Accessory[] = [
   },
   
  {
-    id: 7,
+    id: 8,
     name: "Gorra Chicago White Sox",
     brand: "New Era",
     price: 24.90,
@@ -87,7 +98,7 @@ export const accessories: Accessory[] = [
   },
   
   {
-    id: 8,
+    id: 9,
     name: "Gorra Kansas City Royals",
     brand: "New Era",
     price: 18.99,
@@ -98,7 +109,7 @@ export const accessories: Accessory[] = [
   },
   
   {
-    id: 9,
+    id: 10,
     name: "Gorra Houston Astros",
     brand: "New Era",
     price: 18.99,
@@ -109,7 +120,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 10,
+    id: 11,
     name: "Gorra Los Angeles Dodgers",
     brand: "New Era",
     price: 24.95,
@@ -120,7 +131,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 11,
+    id: 12,
     name: "Gorra Maiami Marlins",
     brand: "New Era",
     price: 29.90,
@@ -131,7 +142,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 12,
+    id: 13,
     name: "Gorra New York Mets",
     brand: "New Era",
     price: 26.66,
@@ -142,7 +153,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 13,
+    id: 14,
     name: "Gorra Baltimore Orioles",
     brand: "New Era",
     price: 24.90,
@@ -153,7 +164,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 14,
+    id: 15,
     name: "Gorra Arizona Diamondbacks",
     brand: "New Era",
     price: 25.94,
@@ -164,7 +175,7 @@ export const accessories: Accessory[] = [
   },
 
   {
-    id: 15,
+    id: 16,
     name: "Gorra NY Yankees Black",
     brand: "New Era",
     price: 22.69,
