@@ -163,6 +163,17 @@ export const accessories: Accessory[] = [
     store: "Amazon"
   },
 
+  {
+    id: 15,
+    name: "Gorra NY Yankees Black",
+    brand: "New Era",
+    price: 22.69,
+    image:
+      "https://th.bing.com/th/id/R.3d57def8fb951308226d70a9ee6c43c0?rik=vNXFmyGTP2ZH%2fA&riu=http%3a%2f%2fchildrensfootball.com%2fcdn%2fshop%2ffiles%2f60284898.png%3fv%3d1712786010&ehk=PQVeRmeCk%2fDsma8OCwU7jc7zZmIz%2bLx0BKs01jijhBA%3d&risl=&pid=ImgRaw&r=0",
+    link: "https://amzn.to/3PsosNr",
+    store: "Amazon"
+  },
+
 ]
 
 
