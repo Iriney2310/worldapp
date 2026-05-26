@@ -17,6 +17,23 @@ export interface Sneaker {
 }
 
 export const sneakers: Sneaker[] = [
+
+{
+    id: 9,
+    name: "Revolution 8",
+    brand: "Nike",
+    price: "79.98",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_934161-MLA110084335065_042026-F.webp",
+    link: "https://meli.la/2SXBeBz",
+    rating: "4.7 / 5",
+    badge: "BESTSELLER",
+    usage: "Running",
+    stock: "En Stock",
+  },
+
   {
     id: 2,
     name: "Air Force 1 '07",
@@ -128,19 +145,4 @@ export const sneakers: Sneaker[] = [
     stock: "En Stock",
   },
 
-  {
-    id: 9,
-    name: "Revolution 8",
-    brand: "Nike",
-    price: "79.98",
-    currency: "EUR",
-    store: "MercadoLibre",
-    image:
-      "https://http2.mlstatic.com/D_NQ_NP_2X_934161-MLA110084335065_042026-F.webp",
-    link: "https://meli.la/2SXBeBz",
-    rating: "4.7 / 5",
-    badge: "BESTSELLER",
-    usage: "Running",
-    stock: "En Stock",
-  },
 ]
