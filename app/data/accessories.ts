@@ -70,7 +70,7 @@ export const accessories: Accessory[] = [
     brand: "New Era",
     price: 14.99,
     image:
-      "https://static.caphunters.es/52906-large_default/gorra-curva-azul-ajustable-9twenty-league-essential-de-los-angeles-dodgers-mlb-de-new-era.webp",
+      "https://www.bing.com/images/search?view=detailV2&ccid=JejaJ%2FD3&id=4CC845BCBB8344DFD14DA2D27BFAE2EBAFDF4A12&thid=OIP.JejaJ_D3vRq1_52LM8tHSgHaHa&mediaurl=https%3A%2F%2Fi.pinimg.com%2F736x%2Fd7%2F6f%2F28%2Fd76f28e0bdfe2e64ab330a8a92a8facc.jpg&cdnurl=https%3A%2F%2Fth.bing.com%2Fth%2Fid%2FR.25e8da27f0f7bd1ab5ff9d8b33cb474a%3Frik%3DEkrfr%252bvi%252bnvSog%26pid%3DImgRaw%26r%3D0&exph=736&expw=736&q=gorra+los+angeles+dodgers+azul&form=IRPRST&ck=38DBECE5C4BC22281BCD0A1D1EEEA212&selectedindex=17&itb=0&ajaxhist=0&ajaxserp=0&cit=ccid_CJVaMLmR*cp_3CD04CD5596C70D8B0854D4374E29403*mid_3A4F2E4020686B288D890100B751EF09ACC015DE*thid_OIP.CJVaMLmRWsevzoO5-jm49QHaHa&vt=2",
     link: "https://amzn.to/3RrLMLS",
     store: "Amazon"
   },
