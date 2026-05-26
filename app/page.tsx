@@ -49,7 +49,7 @@ useEffect(() => {
 }, [favorites])
 
   const filtered = useMemo(() => {
-  const base = sneakers.filter(s => {
+  return sneakers.filter(s => {
     const matchBrand = brand === 'all' || s.brand === brand
 
     const matchSearch =
@@ -60,24 +60,6 @@ useEffect(() => {
 
     return matchBrand && matchSearch && matchStore
   })
-
-
-  
-const featuredId = 1 // 👈 cambia esto cuando quieras
-
-const featured = filtered.find(s => s.id === featuredId)
-
-const rest = filtered.filter(s => s.id !== featuredId)
-
-const shuffled = useMemo(() => {
-  return [...rest].sort(() => Math.random() - 0.5)
-}, [rest])
-
-const finalSneakers = featured
-  ? [featured, ...shuffled]
-  : shuffled
-
-  return base
 }, [brand, search, store])
 
   const toggleFavorite = (shoe: Sneaker) => {
@@ -163,7 +145,7 @@ const finalSneakers = featured
           {/* GRID */}
 {!selected && (
   <div style={grid}>
-    {sneakers.map((s) => (
+    {filtered.map((s) => (
       <div
         key={s.id}
         style={card}
