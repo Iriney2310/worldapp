@@ -163,7 +163,7 @@ const finalSneakers = featured
           {/* GRID */}
 {!selected && (
   <div style={grid}>
-    {finalSneakers.map((s) => (
+    {sneakers.map((s) => (
       <div
         key={s.id}
         style={card}
