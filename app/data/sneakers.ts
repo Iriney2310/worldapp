@@ -18,7 +18,7 @@ export interface Sneaker {
 
 export const sneakers: Sneaker[] = [
   {
-    id: 1,
+    id: 2,
     name: "Air Force 1 '07",
     brand: "Nike",
     price: "95.95",
@@ -32,8 +32,6 @@ export const sneakers: Sneaker[] = [
     usage: "Daily",
     stock: "Ultimas Unidades",
   },
-
-
 
   {
     id: 3,
@@ -52,10 +50,8 @@ export const sneakers: Sneaker[] = [
     stock: "Pocas Unidades",
   },
 
-  
-
   {
-    id: 5,
+    id: 4,
     name: "Court Vision Low",
     brand: "Nike",
     price: "53.99",
@@ -70,7 +66,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 6,
+    id: 5,
     name: "Grand Court Base 00s",
     brand: "Adidas",
     price: "39.99",
@@ -86,7 +82,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 7,
+    id: 6,
     name: "Court Vision Low",
     brand: "Nike",
     price: "72.67",
@@ -101,7 +97,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 8,
+    id: 7,
     name: "VL Court 3.0",
     brand: "Adidas",
     price: "41.99",
@@ -116,7 +112,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 9,
+    id: 1,
     name: "Terra Manta",
     brand: "Nike",
     price: "64.45",
