@@ -33,21 +33,7 @@ export const sneakers: Sneaker[] = [
     stock: "Ultimas Unidades",
   },
 
-{
-    id: 2,
-    name: "Air Max Torch 4",
-    brand: "NIKE",
-    price: "105.55",
-    currency: "EUR",
-    store: "MercadoLibre",
-    image:
-      "https://cms-cdn.thesolesupplier.co.uk/2020/07/Nike-Air-Max-Torch-4-Atmosphere-Grey-Black-CI2202-001_w672_h672_pad_.jpg.webp",
-    link: "https://meli.la/1tTiWWx",
-    badge: "HOT",
-    rating: "5 / 5",
-    usage: "Running / Lifestyle",
-    stock: "En Stock",
-  },
+
 
   {
     id: 3,
@@ -65,22 +51,8 @@ export const sneakers: Sneaker[] = [
     usage: "Daily",
     stock: "Pocas Unidades",
   },
-{
-    id: 4,
-    name: "Killshot 2",
-    brand: "Nike",
-    price: "73.83",
-    currency: "EUR",
-    store: "MercadoLibre",
-    image:
-      "https://dimarsa.vtexassets.com/arquivos/ids/241640/img-2.jpg?v=638902566333500000",
-    link: "https://meli.la/2Z1RVmc",
-    rating: "4.7 / 5",
-    badge: "OFFER",
-    tags: ["-40%"],
-    usage: "Skate / Urbano",
-    stock: "En Stock",
-  },
+
+  
 
   {
     id: 5,

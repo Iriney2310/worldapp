@@ -9,72 +9,96 @@ import Sidebar from './componentes/Sidebar'
 
 export default function Home() {
   const { currency, convert } = useCurrency()
+
   const [selected, setSelected] = useState<Sneaker | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [favOpen, setFavOpen] = useState(false)
   const [openBrands, setOpenBrands] = useState(false)
-  const [store, setStore] = useState<'all' | 'Amazon' | 'MercadoLibre' | 'NewEra'>('all')
+
+  const [store, setStore] = useState<
+    'all' | 'Amazon' | 'MercadoLibre' | 'NewEra'
+  >('all')
+
   const [openStores, setOpenStores] = useState(false)
-  const [brand, setBrand] = useState<'all' | 'Nike' | 'Adidas' | 'New Era'>('all')
+
+  const [brand, setBrand] = useState<
+    'all' | 'Nike' | 'Adidas' | 'New Era'
+  >('all')
+
   const [search, setSearch] = useState('')
   const [favorites, setFavorites] = useState<Sneaker[]>([])
   const [closing, setClosing] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-const searchParams = typeof window !== 'undefined'
-  ? useSearchParams()
-  : null
+  const searchParams =
+    typeof window !== 'undefined' ? useSearchParams() : null
 
-useEffect(() => {
-  if (!mounted || !searchParams) return
+  useEffect(() => {
+    if (!mounted || !searchParams) return
 
-  const id = searchParams.get("id")
+    const id = searchParams.get('id')
 
-  if (id) {
-    const shoe = sneakers.find(s => s.id === Number(id))
-    if (shoe) setSelected(shoe)
-  }
-}, [mounted, searchParams])
+    if (id) {
+      const shoe = sneakers.find((s) => s.id === Number(id))
+      if (shoe) setSelected(shoe)
+    }
+  }, [mounted, searchParams])
 
-useEffect(() => {
-  const data = localStorage.getItem('favorites')
+  useEffect(() => {
+    const data = localStorage.getItem('favorites')
+    if (data) setFavorites(JSON.parse(data))
+  }, [])
 
-  if (data) {
-    setFavorites(JSON.parse(data))
-  }
-}, [])
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites))
+  }, [favorites])
 
-useEffect(() => {
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-}, [favorites])
-
+  // ================= FILTER =================
   const filtered = useMemo(() => {
-  return sneakers.filter(s => {
-    const matchBrand = brand === 'all' || s.brand === brand
+    return sneakers.filter((s) => {
+      const matchBrand = brand === 'all' || s.brand === brand
 
-    const matchSearch =
-      s.name.toLowerCase().includes(search.toLowerCase()) ||
-      s.brand.toLowerCase().includes(search.toLowerCase())
+      const matchSearch =
+        s.name.toLowerCase().includes(search.toLowerCase()) ||
+        s.brand.toLowerCase().includes(search.toLowerCase())
 
-    const matchStore = store === 'all' || s.store === store
+      const matchStore = store === 'all' || s.store === store
 
-    return matchBrand && matchSearch && matchStore
-  })
-}, [brand, search, store])
+      return matchBrand && matchSearch && matchStore
+    })
+  }, [brand, search, store])
 
+  // ================= FEATURED SYSTEM =================
+  const featuredId = 4 // 👈 cambia aquí la sneaker destacada
+
+  const featured = filtered.find((s) => s.id === featuredId)
+
+  const rest = filtered.filter((s) => s.id !== featuredId)
+
+  const shuffled = useMemo(() => {
+    return [...rest].sort(() => Math.random() - 0.5)
+  }, [rest])
+
+  const finalSneakers = featured
+    ? [featured, ...shuffled]
+    : shuffled
+
+  // ================= FAVORITES =================
   const toggleFavorite = (shoe: Sneaker) => {
-  setFavorites(prev => {
-    const exists = prev.some(item => item.id === shoe.id)
+    setFavorites((prev) => {
+      const exists = prev.some((item) => item.id === shoe.id)
 
-    const updated = exists
-      ? prev.filter(item => item.id !== shoe.id)
-      : [...prev, shoe]
+      const updated = exists
+        ? prev.filter((item) => item.id !== shoe.id)
+        : [...prev, shoe]
 
-    return updated
-  })
-}
+      return updated
+    })
+  }
 
-  const favItems = sneakers.filter(s => favorites.some(fav => fav.id === s.id))
+  const favItems = sneakers.filter((s) =>
+    favorites.some((fav) => fav.id === s.id)
+  )
 
   const closeDetail = () => {
     setClosing(true)
@@ -85,67 +109,12 @@ useEffect(() => {
   }
 
   return (
-    <main style={main}>
-<div style={overlayBg} />
-{/* BANNER */}
-{!selected && (
-  <div style={banner}>
-    ¡SNEAKERS!
-  </div>
-)}
-      {/* TOP BAR */}
-      {!selected && (
-        <div style={{ textAlign: 'center' }}>
-          
-          <p style={{ opacity: 0.8, marginTop: 15 }}>
-            ¡TUS SNEAKERS AL MEJOR PRECIO!
-          </p>
-
-          <button onClick={() => setMenuOpen(true)} style={topLeftBtn}>
-            ☰
-          </button>
-        </div>
-      )}
-
-      {/* OVERLAY */}
-      {(menuOpen || favOpen) && (
-        <div
-          onClick={() => {
-            setMenuOpen(false)
-            setFavOpen(false)
-          }}
-          style={{
-            ...overlay,
-            opacity: 1,
-            transition: '0.25s ease',
-          }}
-        />
-      )}
-
-<Sidebar
-  menuOpen={menuOpen}
-  setMenuOpen={setMenuOpen}
-  search={search}
-  setSearch={setSearch}
-  brand={brand}
-  setBrand={setBrand}
-  store={store}
-  setStore={setStore}
-  openBrands={openBrands}
-  setOpenBrands={setOpenBrands}
-  openStores={openStores}
-  setOpenStores={setOpenStores}
-  goHome={() => (window.location.href = '/')}
-  goAccessories={() => {
-    window.location.href = '/accessories'
-    setMenuOpen(false)
-  }}
-/>
+    <main>
 
           {/* GRID */}
 {!selected && (
   <div style={grid}>
-    {filtered.map((s) => (
+    {finalSneakers.map((s) => (
       <div
         key={s.id}
         style={card}
