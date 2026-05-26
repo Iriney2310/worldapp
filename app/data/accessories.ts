@@ -55,14 +55,37 @@ export const accessories: Accessory[] = [
 
   {
     id: 5,
-    name: "Gorra Aframe Dodgers",
+    name: "Gorra New York Yankees",
     brand: "New Era",
-    price: 70.51,
+    price: 16.99,
     image:
-      "https://http2.mlstatic.com/D_NQ_NP_2X_926978-MLA110739752894_052026-F.webp",
-    link: "https://meli.la/31JKjGW",
-    store: "MercadoLibre"
+      "https://neweraco.vtexassets.com/arquivos/ids/155991/12650334_1.png?v=638024838599900000",
+    link: "https://amzn.to/4utU5VV",
+    store: "Amazon"
   },
+
+{
+    id: 6,
+    name: "Gorra Boston Red Sox",
+    brand: "New Era",
+    price: 18.99,
+    image:
+      "https://www.sportbuffshop.com/cms_files/products/phprHSLnf.jpg",
+    link: "https://amzn.to/3PYrsBj",
+    store: "Amazon"
+  },
+  
+ {
+    id: 7,
+    name: "Gorra Chicago White Sox",
+    brand: "New Era",
+    price: 24.90,
+    image:
+      "https://th.bing.com/th/id/R.67fc1b5c493ee462edb3971d6996197d?rik=G3bcChHYFuZRqg&riu=http%3a%2f%2fwww.hueteundmuetzen.de%2fcdn%2fshop%2fproducts%2f210380.jpg%3fv%3d1661397435&ehk=GRq0A2jRGrcs6M9i5arH8NRzXRJdriaLgVWa9nok8X8%3d&risl=&pid=ImgRaw&r=0",
+    link: "https://amzn.to/4tX3xjK",
+    store: "Amazon"
+  },
+  
 ]
 
 
