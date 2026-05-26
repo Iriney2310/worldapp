@@ -84,18 +84,6 @@ useEffect(() => {
     }, 80)
   }
 
-const rest = sneakers
-  .filter((s) => s.id !== featuredId)
-  .sort(() => Math.random() - 0.5)
-
-const featuredId = 1 // 👈 aquí eliges la sneaker
-
-const featured = sneakers.find((s) => s.id === featuredId)
-
-const finalSneakers = featured
-  ? [featured, ...rest]
-  : rest
-
   return (
     <main style={main}>
 <div style={overlayBg} />
