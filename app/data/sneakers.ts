@@ -18,24 +18,25 @@ export interface Sneaker {
 
 export const sneakers: Sneaker[] = [
 
-{
-    id: 9,
-    name: "Revolution 8",
+ {
+    id: 7,
+    name: "Terra Manta",
     brand: "Nike",
-    price: "79.98",
+    price: "64.45",
     currency: "EUR",
     store: "MercadoLibre",
     image:
-      "https://http2.mlstatic.com/D_NQ_NP_2X_934161-MLA110084335065_042026-F.webp",
-    link: "https://meli.la/2SXBeBz",
-    rating: "4.7 / 5",
-    badge: "BESTSELLER",
-    usage: "Running",
+      "https://cdn.store-assets.com/s/234724/i/87840137.jpeg",
+    link: "https://meli.la/22aBd6a",
+    rating: "4.8 / 5",
+    badge: "OFFER",
+    tags: ["-41%"],
+    usage: "Casual / Urbano",
     stock: "En Stock",
   },
 
   {
-    id: 2,
+    id: 1,
     name: "Air Force 1 '07",
     brand: "Nike",
     price: "95.95",
@@ -51,7 +52,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 3,
+    id: 2,
     name: "Air Max Ltd 3",
     brand: "Nike",
     price: "90.99",
@@ -68,7 +69,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 4,
+    id: 3,
     name: "Court Vision Low",
     brand: "Nike",
     price: "53.99",
@@ -83,7 +84,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 5,
+    id: 4,
     name: "Grand Court Base 00s",
     brand: "Adidas",
     price: "39.99",
@@ -99,7 +100,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 6,
+    id: 5,
     name: "Court Vision Low",
     brand: "Nike",
     price: "72.67",
@@ -114,7 +115,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 7,
+    id: 6,
     name: "VL Court 3.0",
     brand: "Adidas",
     price: "41.99",
@@ -129,7 +130,7 @@ export const sneakers: Sneaker[] = [
   },
 
   {
-    id: 1,
+    id: 7,
     name: "Terra Manta",
     brand: "Nike",
     price: "64.45",
@@ -145,4 +146,19 @@ export const sneakers: Sneaker[] = [
     stock: "En Stock",
   },
 
+  {
+    id: 8,
+    name: "Revolution 8",
+    brand: "Nike",
+    price: "79.98",
+    currency: "EUR",
+    store: "MercadoLibre",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_934161-MLA110084335065_042026-F.webp",
+    link: "https://meli.la/2SXBeBz",
+    rating: "4.7 / 5",
+    badge: "BESTSELLER",
+    usage: "Running",
+    stock: "En Stock",
+  },
 ]
